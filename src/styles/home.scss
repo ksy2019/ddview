@@ -1,0 +1,533 @@
+@import 'allVar.scss';
+.container {
+  position: relative;
+  width: 100%;
+  height: 100%;
+}
+
+//抽屉窗口的顶部
+.drawer-header{
+    height: 32px;
+    background: $dark;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    color: #fff;
+    padding: 0 12px;
+}
+.header{
+  height: $headerHeight;
+  background: $dark;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  color: #fff;
+  padding: 0 12px;
+  .logo{
+      letter-spacing: 2px;
+      font-weight: 600;
+  }
+  .el-button--text{
+      color: $headerToolColor;  
+  }
+}
+.tabs-con{
+  padding: 0 12px;
+  box-sizing: border-box;
+  background: $activeBackGround;
+  .el-tabs__item{
+      padding: 0 !important;
+  }
+  .center-tabs .el-tabs__header{
+      height: $activeHeight;
+      line-height: $activeHeight;
+      background: $activeBackGround;
+  }
+}
+.set-row{
+  color: $rightSetColor;
+  padding: 10px 12px;
+  box-sizing: border-box;
+  border-bottom: 1px solid #ededed;
+}
+.set-row-between{
+  color: $rightSetColor;
+  padding: 10px 12px;
+  box-sizing: border-box;
+  border-bottom: 1px solid #ededed;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.main-body{
+  position: relative;
+  height: calc(100vh - #{$headerHeight});
+}
+@keyframes filpin{
+  from{
+              transform: rotateY(90deg);
+  }to{
+              transform: rotateY(0deg);
+  }
+}
+.filpin{
+  animation: filpin .82s;
+}
+.filpout{
+
+}
+.showColl{
+   & > i{
+          color:#fff;
+          font-size: 1.2rem;
+          transition: transform .68s;
+  }
+  position: fixed;
+  z-index: 999;
+  top: 50%;
+  margin-top: -70px;
+  left: -8px;
+  background: #409EFF;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 8px;
+  height: 36px;
+  width: 30px;
+}
+.clickColl{
+  & >span{
+          color: #fff;
+          margin-right: 3px;
+  }
+  & > i{
+          color:#fff;
+          font-size: 1.2rem;
+          transition: transform .68s;
+  }
+  position: fixed;
+  z-index: 999;
+  bottom: 10px;
+  left: 50px;
+  background: #409EFF;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 8px;
+  height: 36px;
+  width: 110px;
+}
+$inputt: 24px;
+.input-t{
+  .el-input__inner{
+    height: $inputt !important;
+    line-height: $inputt !important;
+  }
+  .el-input--small .el-input__inner{
+    height: $inputt !important;
+    line-height: $inputt !important;
+  }
+  .el-input--small .el-input__icon{
+    line-height: 24px !important;
+  }
+}
+// 老的===================================================
+$selectedColor: #f6f7ff;
+$lighterBlue: #409EFF;
+.components-list {
+  padding: 8px;
+  box-sizing: border-box;
+  height: calc(100vh - 100px);
+  .components-item {
+    display: inline-block;
+    width: 48%;
+    margin: 1%;
+    transition: transform 0ms !important;
+  }
+}
+.components-draggable{
+  padding-bottom: 20px;
+}
+.components-title{
+  font-size: 14px;
+  color: #222;
+  margin: 6px 2px;
+  .svg-icon{
+    color: #666;
+    font-size: 18px;
+  }
+}
+
+.components-body {
+  padding: 8px 10px;
+  background: $selectedColor;
+  font-size: 12px;
+  cursor: move;
+  border: 1px dashed $selectedColor;
+  border-radius: 3px;
+  .svg-icon{
+    color: #777;
+    font-size: 15px;
+  }
+  &:hover {
+    border: 1px dashed #787be8;
+    color: #787be8;
+    .svg-icon {
+      color: #787be8;
+    }
+  }
+}
+.left-board {
+  width: 260px;
+  position: absolute;
+  left: 0;
+  top: 0;
+  height: 100%;
+}
+.left-scrollbar{
+  height: 100%;
+  overflow: hidden;
+  background-color: $gray;
+}
+.right-scrollbar{
+  background-color: $gray;
+  height: 100%;
+  box-sizing: border-box;
+}
+.center-scrollbar {
+  position: relative;
+  top: $conentBarHeight;
+  height: calc(100% - #{$conentBarHeight}); 
+  overflow: hidden;
+  box-sizing: border-box;
+} 
+.center-board {
+  height: 100%;
+  width: auto;
+  position: relative;
+  margin: 0 320px 0 260px;
+  box-sizing: border-box;
+}
+.empty-info{
+  position: absolute;
+  top: 42%;
+  left: 0;
+  right: 0;
+  text-align: center;
+  font-size: 18px;
+  color: #474747;
+  letter-spacing: 4px;
+}
+.action-bar{
+  width: 100%;
+  position: absolute;
+  height: $conentBarHeight;
+  text-align: right;
+  padding: 0 15px;
+  box-sizing: border-box;
+  border-top: none;
+  border-left: none;
+  background: $activeBackGround;
+  box-shadow: $tinyShadow;
+  top: 0;
+  left: 0;
+  height: 33px;
+  padding: 0 15px;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  box-sizing: border-box;
+  .delete-btn{
+    color: #F56C6C;
+  }
+  & .el-button+.el-button {
+    margin-left: 12px;
+  }
+  .el-button {
+    margin-left: 15px;
+    padding: 4px;
+    &:hover{
+        background: #dedede;
+    }
+  } 
+  & i {
+    font-size: 13px;
+    vertical-align: middle;
+    position: relative;
+    top: -1px;
+  }
+  .bar-btn {
+    display: inline-block;
+    padding: 0 6px;
+    line-height: 32px;
+    color: #8285f5;
+    cursor: pointer;
+    font-size: 14px;
+    user-select: none;
+    & i {
+      font-size: 20px;
+    }
+    &:hover {
+      color: #4348d4;
+    }
+  }
+  .bar-btn + .bar-btn {
+    margin-left: 8px;
+  }
+  .delete-btn {
+    color: #f56c6c;
+    &:hover {
+      color: #ea0b30;
+    }
+  }
+}
+.nodata-empty{
+  background: $activeBackGround;
+  min-height: calc(100vh - #{$headerHeight} - #{$activeHeight});
+}
+.center-board-row {
+  box-sizing: border-box;
+  & > .el-form {
+    height: calc(100vh - 102px);
+  }
+}
+.drawing-board {
+  min-height: calc(100vh - #{$headerHeight} - #{$activeHeight});
+  position: relative;
+  .components-body {
+    padding: 0;
+    margin: 0;
+    font-size: 0;
+  }
+  .sortable-ghost {
+    position: relative;
+    display: block;
+    overflow: hidden;
+    &::before {
+      content: " ";
+      position: absolute;
+      left: 0;
+      right: 0;
+      top: 0;
+      height: 3px;
+      background: rgb(89, 89, 223);
+      z-index: 2;
+    }
+  }
+  .components-item.sortable-ghost {
+    width: 100%;
+    height: 60px;
+    background-color: $selectedColor;
+  }
+  .active-from-item {
+    & > .el-form-item{
+      background: $selectedColor;
+      border-radius: 6px;
+    }
+    & > .drawing-item-copy, & > .drawing-item-delete{
+      display: initial;
+    }
+    & > .component-name{
+      color: $lighterBlue;
+    }
+  }
+  .el-form-item{
+    margin-bottom: 15px;
+  }
+}
+.drawing-item{
+  position: relative;
+  cursor: move;
+  &.unfocus-bordered:not(.active-from-item) > div:first-child {
+    border: 1px dashed #ccc;
+  }
+  .el-form-item{
+    padding: 12px 10px;
+  }
+}
+.drawing-row-item{
+  position: relative;
+  cursor: move;
+  box-sizing: border-box;
+  border: 1px dashed #ccc;
+  border-radius: 3px;
+  padding: 0 2px;
+  margin-bottom: 15px;
+  .drawing-row-item {
+    margin-bottom: 2px;
+  }
+  .el-col{
+    margin-top: 22px;
+  }
+  .el-form-item{
+    margin-bottom: 0;
+  }
+  .drag-wrapper{
+    min-height: 80px;
+  }
+  &.active-from-item{
+    border: 1px dashed $lighterBlue;
+  }
+  .component-name{
+    position: absolute;
+    top: 0;
+    left: 0;
+    font-size: 12px;
+    color: #bbb;
+    display: inline-block;
+    padding: 0 6px;
+  }
+}
+.drawing-item , .drawing-row-item,.drawing-item-con{
+  position: relative;
+  &:hover {
+    & > .el-form-item{
+      background: $selectedColor;
+      border-radius: 6px;
+    }
+    & > .drawing-item-copy, & > .drawing-item-delete{
+      display: initial;
+    }
+  }
+  & > .drawing-item-copy, & > .drawing-item-delete{
+    display: none;
+    position: absolute;
+    top: -10px;
+    width: 22px;
+    height: 22px;
+    line-height: 22px;
+    text-align: center;
+    border-radius: 50%;
+    font-size: 12px;
+    border: 1px solid;
+    cursor: pointer;
+    z-index: 999;
+  }
+  & > .drawing-item-copy{
+    right: 56px;
+    border-color: $lighterBlue;
+    color: $lighterBlue;
+    background: #fff;
+    &:hover{
+      background: $lighterBlue;
+      color: #fff;
+    }
+  }
+  & > .drawing-item-delete{
+    right: 24px;
+    border-color: #F56C6C;
+    color: #F56C6C;
+    background: #fff;
+    &:hover{
+      background: #F56C6C;
+      color: #fff;
+    }
+  }
+}
+
+.right-board {
+  width: 320px;
+  position: absolute;
+  right: 0;
+  top: 0;
+  .el-tabs__nav{
+    background: $activeBackGround; 
+  }
+  .field-box {
+    position: relative;
+    height:  calc(100vh - #{$headerHeight} - #{$activeHeight});
+    box-sizing: border-box;
+    overflow: hidden;
+  }
+  .el-scrollbar {
+    height: 100%;
+  }
+}
+.right-set-body{
+    box-sizing: border-box;
+    min-height: calc(100vh - #{$activeHeight} - #{$headerHeight});
+}
+.select-item {
+  display: flex;
+  border: 1px dashed #fff;
+  box-sizing: border-box;
+  & .close-btn {
+    cursor: pointer;
+    color: #f56c6c;
+  }
+  & .el-input + .el-input {
+    margin-left: 4px;
+  }
+}
+.select-item + .select-item {
+  margin-top: 4px;
+}
+.select-item.sortable-chosen {
+  border: 1px dashed #409eff;
+}
+.select-line-icon {
+  line-height: 32px;
+  font-size: 22px;
+  padding: 0 4px;
+  color: #777;
+}
+.option-drag {
+  cursor: move;
+}
+.time-range {
+  .el-date-editor {
+    width: 227px;
+  }
+  ::v-deep .el-icon-time {
+    display: none;
+  }
+}
+.document-link {
+  position: absolute;
+  display: block;
+  width: 26px;
+  height: 26px;
+  top: 0;
+  left: 0;
+  cursor: pointer;
+  background: #409eff;
+  z-index: 1;
+  border-radius: 0 0 6px 0;
+  text-align: center;
+  line-height: 26px;
+  color: #fff;
+  font-size: 18px;
+}
+.node-label{
+  font-size: 14px;
+}
+.node-icon{
+  color: #bebfc3;
+}
+.myevent-btn{
+    width: 100%;
+    display: inline-block;
+    border: 1px solid #DCDFE6;
+    border-radius: 4px;
+    padding: 0 15px;
+    box-sizing: border-box;
+    cursor: pointer;
+    user-select: none;
+    text-align: left;
+    color: #606266;
+    font-size: 13px;
+}
+.myevent-btn-two{
+    width: calc(50% - 20px);
+    display: inline-block;
+    margin: 0 10px;
+    border: 1px solid #DCDFE6;
+    border-radius: 4px;
+    padding: 0 10px;
+    box-sizing: border-box;
+    cursor: pointer;
+    user-select: none;
+    text-align: center;
+    color: #606266;
+    font-size: 13px;
+}

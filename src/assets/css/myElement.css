@@ -1,0 +1,257 @@
+
+/* //自定义标签页样式 */
+.el-tabs__item{
+    height: 26px  !important;
+    line-height: 26px !important;
+}
+*{
+    margin: 0;
+    padding: 0;
+    font-size: 9pt;
+}
+/* .el-tabs__nav>div:first-child>span{
+    visibility: hidden;
+} */
+/* //自定义进度条 */
+.textover{
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+.is-process{
+    color: #C0C4CC;
+    border-color: #C0C4CC ;
+}
+.el-step__head.is-finish{
+    font-weight: 600;
+}
+.el-step__head.is-finish{
+    font-weight: normal;
+}
+.el-step__title.is-finish{
+    font-weight: 600;
+}
+.sh-steps{
+    width: 126%;
+    margin-left: -13%;
+}
+
+
+/* //自定义菜单页 */
+.el-menu-item.is-active{
+    position: relative;
+    background: #eaf4ff;
+    
+}
+.el-menu-item.is-active::before{
+    content: '';
+    display: inline-block;
+    width: 5px;
+    height: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+    background: #0080ff;
+}
+
+/* //更改element表头组件 */
+ .el-table--small td, .el-table--small th {
+    padding: 0 !important;
+}
+.el-table th {
+	display: table-cell!important; 
+}
+
+/* .el-table__footer .cell{
+    border-bottom: 1px solid red;
+} */
+
+.table-body{
+    border-bottom: 1px solid #e0e0e0;    
+}
+
+
+/* 更改dialog */
+.el-dialog__body{
+    padding-top: 0 !important;
+}
+
+.el-dialog__headerbtn > .el-dialog__close{
+    font-weight: 500;
+    font-size: 32px;
+}
+
+/* //自定义进度条--steps */
+.el-step__title.is-process{
+    font-weight: unset !important;
+}
+
+  .el-dialog__body::-webkit-scrollbar {
+    width : 5px;  /*高宽分别对应横竖滚动条的尺寸*/
+    height: 1px;
+  } 
+    
+  .el-dialog__body::-webkit-scrollbar-thumb { /*滚动条里面小方块*/
+    border-radius: 10px;
+    box-shadow   : inset 0 0 5px rgba(0, 0, 0, 0.2);
+    background   : #7b7b7b;
+  }
+    
+  .el-dialog__body::-webkit-scrollbar-track { /*滚动条里面轨道*/
+    box-shadow   : inset 0 0 5px rgba(0, 0, 0, 0.2);
+    border-radius: 10px;
+    background   : #ededed;
+  }
+  .el-dialog{
+      border-radius: 4px;
+  }
+
+
+  .el-tabs__header{
+      margin-bottom: 0 !important;
+  }
+
+  /* 表格自定义 */
+  
+.el-table .cell{
+    padding: 3px 5px;
+}
+.el-table td, .el-table th{
+    border-color: #e0e0e0 !important;
+}
+
+
+.el-table th{
+    background-color: rgb(240, 240, 240) !important;
+    text-align: center;
+    color: rgb(85, 85, 85) !important;
+    font-weight: 600;
+}
+
+.el-table{
+    border: 1px solid #e0e0e0;
+    border-bottom: none !important;
+}
+.el-table, .el-table__expanded-cell{
+    background-color: unset !important;
+}
+.el-table--border{
+    border: 1px solid #e0e0e0;
+}
+
+
+/* 自定义时间选择器 取消显示当月文字高亮 */
+.el-month-table td.today .cell{
+    color: unset !important;
+    font-weight: unset !important;
+}
+/* //自定义时间选择器的当前日期 */
+.el-month-table td.current:not(.disabled) .cell{
+    color: #fff !important;
+    background: #6b7d92;
+}
+.el-year-table td .cell:hover, .el-year-table td.current:not(.disabled) .cell {
+    color: #fff !important;
+    background: #6b7d92;
+    border-radius: 16px;
+}
+
+
+
+/* tab的边框 */
+.el-tabs__nav{
+    border-left: none !important;
+}
+
+
+
+/* 过渡动画 */
+
+@keyframes scla{
+    0% {
+            transform: translate3d(0,0,0) scale(1.385);
+            opacity: 0;
+    }
+    100%{
+            transform: translate3d(0,0,0) scale(1);
+            opacity: 1;
+    }
+}
+@keyframes leaver{
+    0% {
+            opacity: 1;
+    }
+    100%{
+            transform: translate3d(0,0,0) scale(1);
+            opacity: 0;
+    }
+}
+.alert-anim{
+    animation: scla 450ms;
+}
+.anim-out{
+    animation: leaver 450ms;
+}
+
+.el-tabs__nav-wrap::after {
+    height: 1px !important;
+}
+.el-message{
+    width: unset !important;
+    min-width: unset !important;
+    border-radius: 8px; 
+    padding-right: 22px !important;
+}
+/* //解决表格头部对不齐 */
+thead .el-checkbox:last-of-type{
+    margin-left: -3px;
+}
+
+
+.el-dropdown .el-button-group {
+    white-space: nowrap;
+}
+
+.el-checkbox__inner{
+    transition: none;
+}
+ 
+
+/* //el-table合计溢出 */
+.has-gutter>tr>td>.cell{
+    white-space: nowrap !important;
+}
+
+.el-table__body tr.hover-row.current-row>td, .el-table__body tr.hover-row.el-table__row--striped.current-row>td, .el-table__body tr.hover-row.el-table__row--striped>td, .el-table__body tr.hover-row>td{
+    background-color: #d9e1eb !important;
+}
+
+.vxe-table--render-default .vxe-body--column:not(.col--ellipsis), .vxe-table--render-default .vxe-footer--column:not(.col--ellipsis), .vxe-table--render-default .vxe-header--column:not(.col--ellipsis){
+    padding: 3px  !important;
+    font-size: 9pt;
+}
+.vxe-table--render-default .vxe-body--column.col--ellipsis, .vxe-table--render-default.vxe-editable .vxe-body--column, .vxe-table--render-default .vxe-footer--column.col--ellipsis, .vxe-table--render-default .vxe-header--column.col--ellipsis{
+    height: 29px !important;
+    font-size: 9pt !important;
+}
+.vxe-body--row{
+    transform: all .32s;
+}
+.vxe-table--render-default .vxe-body--row.row--hover, .vxe-table--render-default .vxe-body--row.row--hover.row--stripe{
+    background-color: #d9e1eb !important;
+}
+
+
+.dsdpmc input{ 
+            padding-left: 0px !important; 
+            padding-right: 22px !important; 
+            text-align: center;
+}
+.dsdpmc .el-input__suffix{
+    right: 0 !important;
+}
+.el-select-dropdown__item{
+    padding: 0 15px !important;
+}
+.el-dialog{
+    border-radius: 8px !important;
+}

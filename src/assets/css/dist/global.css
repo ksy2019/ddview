@@ -1,0 +1,252 @@
+.danger-color {
+  color: red;
+}
+.main-color {
+  color: #409EFF;
+}
+.sec-color {
+  color: #FF8400;
+}
+.suc-color {
+  color: #0e910e;
+}
+.flex-bet {
+  display: flex;
+  align-items: center;
+  flex-direction: row;
+  justify-content: space-between;
+}
+.flex {
+  display: flex;
+  align-items: center;
+  flex-direction: row;
+  justify-content: flex-start;
+}
+.pd12 {
+  padding: 12px 15px;
+}
+.nos {
+  user-select: none;
+  cursor: pointer;
+}
+.nowarp {
+  white-space: nowrap;
+}
+.m1215 {
+  margin: 12px  15px;
+}
+.mtb15 {
+  margin: 15px 0;
+}
+.mr5 {
+  margin-right: 5px;
+}
+.mr10 {
+  margin-right: 10px;
+}
+.mr15 {
+  margin-right: 15px;
+}
+.mr20 {
+  margin-right: 20px;
+}
+.mr25 {
+  margin-right: 25px;
+}
+.mr30 {
+  margin-right: 30px;
+}
+.ml5 {
+  margin-left: 5px !important;
+}
+.ml10 {
+  margin-left: 10px !important;
+}
+.ml15 {
+  margin-left: 15px !important;
+}
+.ml20 {
+  margin-left: 20px !important;
+}
+.ml25 {
+  margin-left: 25px !important;
+}
+.ml30 {
+  margin-left: 30px !important;
+}
+.mb5 {
+  margin-bottom: 5px;
+}
+.mb10 {
+  margin-bottom: 10px;
+}
+.mb15 {
+  margin-bottom: 15px;
+}
+.mb20 {
+  margin-bottom: 20px;
+}
+.mb25 {
+  margin-bottom: 25px;
+}
+.mb30 {
+  margin-bottom: 30px;
+}
+.mt5 {
+  margin-top: 5px;
+}
+.mt10 {
+  margin-top: 10px;
+}
+.mt15 {
+  margin-top: 15px;
+}
+.mt20 {
+  margin-top: 20px;
+}
+.mt25 {
+  margin-top: 25px;
+}
+.mt30 {
+  margin-top: 25px;
+}
+.font15 {
+  font-size: 15pt;
+}
+.font14 {
+  font-size: 14pt;
+}
+.font13 {
+  font-size: 13pt;
+}
+.font12 {
+  font-size: 12pt;
+}
+.font10 {
+  font-size: 10pt;
+}
+.font9 {
+  font-size: 9pt;
+}
+.pd12 {
+  padding: 10px 12px;
+}
+.pd15 {
+  padding: 15px 19px;
+}
+.pd20 {
+  padding: 20px 30px;
+}
+.pd30 {
+  padding: 30px 35px;
+}
+.ptb10 {
+  padding: 10px 0;
+}
+.ptb15 {
+  padding: 15px 0;
+}
+.ptb20 {
+  padding: 20px 0;
+}
+.doubleW {
+  font-weight: 600;
+}
+.sh-border {
+  border: 1px solid #DCDFE6;
+}
+.ac {
+  text-align: center;
+}
+.ar {
+  text-align: right;
+}
+.al {
+  text-align: left;
+}
+.posr {
+  position: relative;
+}
+.head-span-mini {
+  width: 10px;
+  height: 10px;
+  margin-right: 9px;
+  display: inline-block;
+  background: #409EFF;
+}
+.sht-hover {
+  transition: all 0.22s;
+}
+.sht-hover:hover {
+  opacity: 0.65;
+}
+.sh-hover {
+  transition: all 0.22s;
+}
+.textflow {
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+@keyframes tool-anim {
+  0% {
+    transform: scale(0.75);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+.tooltip-enter {
+  animation: tool-anim 0.32s;
+}
+.scrollbar::-webkit-scrollbar {
+  width: 8px;
+  /*高宽分别对应横竖滚动条的尺寸*/
+  height: 8px;
+}
+.scrollbar::-webkit-scrollbar-thumb {
+  /*滚动条里面小方块*/
+  border-radius: 4px;
+  background: #d3d3d3c7;
+}
+.scrollbar::-webkit-scrollbar-track {
+  /*滚动条里面轨道*/
+  background: #ededed00;
+  background: rgba(240, 240, 240, 0.877);
+}
+.noscrollbar::-webkit-scrollbar {
+  width: 0px;
+  /*高宽分别对应横竖滚动条的尺寸*/
+  height: 0px;
+  display: none;
+}
+.noscrollbar::-webkit-scrollbar-thumb {
+  /*滚动条里面小方块*/
+  border-radius: 0px;
+  background: #ffffffc7;
+}
+.noscrollbar::-webkit-scrollbar-track {
+  /*滚动条里面轨道*/
+  background: #ffffff00;
+  background: rgba(240, 240, 240, 0.877);
+}
+.table-pager {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+}
+.noclick {
+  cursor: not-allowed;
+}
+.update-btn-con {
+  height: 45px;
+  line-height: 45px;
+  text-align: right;
+}
+.update-btn-con .update-btn {
+  padding: 10px 16px;
+  background: blue;
+  border-radius: 4px;
+  color: #fff;
+  font-weight: 600;
+  cursor: pointer;
+}

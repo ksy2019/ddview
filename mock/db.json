@@ -1,0 +1,295 @@
+{
+  "data": [
+    {
+      "date": "2016-05-02",
+      "name": "王小虎",
+      "province": "上海",
+      "city": "普陀区",
+      "address": "上海市普陀区金沙江路 1518 弄 ",
+      "zip": 200333,
+      "tag ": "家"
+    },
+    {
+      "date": "2016-05-02",
+      "name": "王小虎",
+      "province": "上海",
+      "city": "普陀区",
+      "address": "上海市普陀区金沙江路 1518 弄 ",
+      "zip": 200333,
+      "tag ": "家"
+    },
+    {
+      "date": "2016-05-02",
+      "name": "王小虎",
+      "province": "上海",
+      "city": "普陀区",
+      "address": "上海市普陀区金沙江路 1518 弄 ",
+      "zip": 200333,
+      "tag ": "家"
+    }
+  ],
+  "config": [
+    {
+      "__config__": {
+        "label": "税航按钮组",
+        "tag": "sh-btn-group",
+        "tagIcon": "input",
+        "layout": "raw",
+        "span": 24,
+        "regList": [],
+        "formId": 103,
+        "renderKey": "1031618912903607"
+      },
+      "__event__": {
+        "onload": ""
+      },
+      "propConfig": {
+        "size": "small",
+        "list": [
+          {
+            "id": "123",
+            "label": "propConfigTEST",
+            "event": "dGhhdC4kbWVzc2FnZSgibmloYW8iKQ==",
+            "type": "primary",
+            "icon": ""
+          },
+          {
+            "label": "213",
+            "icon": "213",
+            "type": "success",
+            "event": "YWxlcnQoIjIxMyIp"
+          }
+        ]
+      }
+    },
+    {
+      "__config__": {
+        "label": "税航表格组",
+        "tag": "sh-table-group",
+        "tagIcon": "input",
+        "layout": "raw",
+        "showLabel": true,
+        "span": 24,
+        "regList": [],
+        "formId": 102,
+        "renderKey": "1021618912728519"
+      },
+      "__event__": {
+        "onload": ""
+      },
+      "ref": "",
+      "propConfig": {
+        "list": [
+          {
+            "prop": "name",
+            "label": "测试表头",
+            "event": "dGhhdC4kbWVzc2FnZSgi5L2g5aW9Iik=",
+            "class": "main-color",
+            "fixed": "left",
+            "width": "200",
+            "align": "left"
+          },
+          {
+            "prop": "date",
+            "label": "上传日期",
+            "event": "dGhhdC4kbWVzc2FnZSgi5L2g5aW9Iik=",
+            "class": "main-color",
+            "fixed": "left"
+          },
+          {
+            "label": "姓名",
+            "prop": "name",
+            "color": "",
+            "event": "YWxlcnQoJ3N1Yycp"
+          }
+        ],
+        "pagination": {
+          "pageSizes": [
+            100,
+            200,
+            300,
+            400
+          ],
+          "pageSize": 100
+        },
+        "url": "http://localhost:3000/data",
+        "headerColor": "red",
+        "headerBgColor": "blue",
+        "height": "300px",
+        "stripe": true,
+        "hadSelect": true
+      }
+    }
+  ],
+  "SAVEPAGEJSON": [
+    {
+      "__config__": {
+        "label": "税航搜索组",
+        "tag": "sh-search-group",
+        "tagIcon": "input",
+        "layout": "raw",
+        "span": 20,
+        "regList": [],
+        "formId": 113,
+        "renderKey": "1131619078892102"
+      },
+      "ref": "",
+      "__event__": {
+        "onload": ""
+      },
+      "propConfig": {
+        "size": "mini",
+        "list": [
+          {
+            "id": "123",
+            "gjzd": "STARTTIME",
+            "type": "date-picker",
+            "label": "扫描日期"
+          },
+          {
+            "id": "123321",
+            "gjzd": [
+              "start",
+              "end"
+            ],
+            "type": "two-date",
+            "label": "双排日期"
+          },
+          {
+            "id": "1233211",
+            "gjzd": "ENDTIME",
+            "type": "date-picker",
+            "label": "结束日期"
+          },
+          {
+            "id": "123311",
+            "gjzd": "FPHM",
+            "type": "input",
+            "label": "发票号码"
+          },
+          {
+            "id": "123123311",
+            "gjzd": "XFMC",
+            "type": "input",
+            "label": "销方名称"
+          },
+          {
+            "id": "12331133",
+            "gjzd": "SJLY",
+            "type": "select",
+            "label": "数据来源",
+            "options": [
+              {
+                "value": "",
+                "label": "全部"
+              },
+              {
+                "value": "扫描",
+                "label": "扫描"
+              },
+              {
+                "value": "文件上传",
+                "label": "文件上传"
+              },
+              {
+                "value": "邮箱读取",
+                "label": "邮箱读取"
+              },
+              {
+                "value": "手工录入",
+                "label": "手工录入"
+              },
+              {
+                "value": "手机上传",
+                "label": "手机上传"
+              },
+              {
+                "value": "api文件上传",
+                "label": "api文件上传"
+              }
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "__config__": {
+        "label": "税航按钮组",
+        "tag": "sh-btn-group",
+        "tagIcon": "input",
+        "layout": "raw",
+        "span": 4,
+        "regList": [],
+        "formId": 107,
+        "renderKey": "1071619076612365"
+      },
+      "__event__": {
+        "onload": ""
+      },
+      "propConfig": {
+        "size": "mini",
+        "list": [
+          {
+            "id": "123",
+            "label": "propConfigTEST",
+            "event": "dGhhdC4kbWVzc2FnZSgibmloYW8iKQ==",
+            "type": "primary",
+            "icon": ""
+          }
+        ]
+      }
+    },
+    {
+      "__config__": {
+        "label": "税航表格组",
+        "tag": "sh-table-group",
+        "tagIcon": "input",
+        "layout": "raw",
+        "showLabel": true,
+        "span": 24,
+        "regList": [],
+        "formId": 111,
+        "renderKey": "1111619078862806"
+      },
+      "__event__": {
+        "onload": ""
+      },
+      "ref": "",
+      "propConfig": {
+        "list": [
+          {
+            "prop": "name",
+            "label": "测试表头",
+            "event": "dGhhdC4kbWVzc2FnZSgi5L2g5aW9Iik=",
+            "class": "main-color",
+            "fixed": "left",
+            "width": "200",
+            "align": "left"
+          },
+          {
+            "prop": "date",
+            "label": "上传日期",
+            "event": "dGhhdC4kbWVzc2FnZSgi5L2g5aW9Iik=",
+            "class": "main-color",
+            "fixed": "left"
+          }
+        ],
+        "pagination": {
+          "pageSizes": [
+            100,
+            200,
+            300,
+            400
+          ],
+          "pageSize": 100
+        },
+        "url": "http://localhost:3000/data",
+        "headerColor": "red",
+        "headerBgColor": "blue",
+        "height": "300px",
+        "stripe": true,
+        "hadSelect": true
+      }
+    }
+  ]
+}
