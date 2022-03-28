@@ -1,6 +1,6 @@
 {
   "name": "tuotuo",
-  "version": "1.0",
+  "version": "1.0.1",
   "private": true,
   "scripts": {
     "build": "vue-cli-service build",
@@ -19,6 +19,7 @@
     "core-js": "^3.6.5",
     "cross-env": "^7.0.3",
     "echarts": "^5.2.1",
+    "element-ui": "^2.15.7",
     "file-saver": "^2.0.2",
     "js-base64": "^3.6.0",
     "moment": "^2.29.1",

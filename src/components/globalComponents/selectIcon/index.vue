@@ -1,15 +1,15 @@
 <!--
  * @Author: BlueStar
  * @Date: 2022-03-18 16:12:33
- * @LastEditTime: 2022-03-21 18:49:12
+ * @LastEditTime: 2022-03-28 16:31:28
  * @Description: 选择icon图标组件
 -->
 <template>
-    <div class="select-icon-container">
+    <div v-clickoutside="closehandler" class="select-icon-container">
         <div @click="open" ref="popcorn" :style="{height: size,width: size}" class="index-icon">
             <i :class="indexIcon"></i>
         </div>
-        <div ref="tooltip"  v-show="showDialog" class="tooltip-con tooltip">
+        <div ref="tooltip"  v-if="showDialog" class="tooltip-con tooltip">
             <div class="arrow" data-popper-arrow></div>
             <div class="scroll-con">
                 <el-scrollbar  wrap-class="select-con"  view-class=""  :native="false">
@@ -23,9 +23,11 @@
 </template>
 
 <script>
+import Clickoutside from 'element-ui/src/utils/clickoutside'
 import { createPopper } from '@popperjs/core';
 export default {
     name: 'select-icon',
+    directives: { Clickoutside },
     props: {
         icon: {
             type: String,
@@ -337,9 +339,20 @@ export default {
             this.showDialog = true;
             this.$nextTick(()=>{
                 createPopper(this.$refs.popcorn, this.$refs.tooltip, {
-                    placement: 'right-start',
-                });
+                    placement: 'right',
+                    modifiers: [
+                        {
+                          name: 'offset',
+                          options: {
+                            offset: [7, 7],
+                          },
+                        },
+                    ],
+                })
             })
+        },
+        closehandler(){
+            this.showDialog = false;
         },
         mounted(){ 
         }
@@ -374,13 +387,15 @@ export default {
 .scroll-con{
     max-height: 360px;
     z-index: 99;
+    border-radius: 8px;
+    overflow: hidden;
 }
 .tooltip-con{
     border-radius: 8px;
     width: 233px;
     z-index: 99;
     box-shadow: 0 2px 12px 0 rgb(0 0 0 / 10%);
-    overflow: hidden;
+    // overflow: hidden;
 }
 ::v-deep .select-con{
     max-height: 360px;
