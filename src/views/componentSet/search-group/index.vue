@@ -86,6 +86,7 @@
                 :data="config.items"
                 style="width: 100%"
                 stripe
+                height="500px"
                 >
                 <vxe-table-column
                 type="checkbox"
@@ -265,7 +266,7 @@
         :visible.sync="showOtherSet"
         :show-close="false"
         :withHeader="false"
-        size="38%"
+        size="62%"
         >
             <div class="drawer-header">
                 <div>
@@ -283,6 +284,7 @@
                 style="width: 100%"
                 :checkbox-config="{highlight: true,range: true}"
                 stripe
+                height="500px"
                 >
                 <vxe-table-column
                 type="checkbox"

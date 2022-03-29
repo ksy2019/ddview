@@ -99,7 +99,7 @@
         <javascript-drawer  size="60%" :visible.sync="showJavaScriptEdit" v-model="javascript.ob[javascript.key]"/>
         <!-- //单个按钮的属性编辑器 -->
         <el-dialog v-dialogDrag title="按钮设置"  :close-on-click-modal="false" width="320px" top="16vh"  custom-class="item-set-dialog" :visible.sync="showBtnSet">
-                <div class="form-con" v-if="indexBtn.label " style="margin-top: 38px;">
+                <div class="form-con"  style="margin-top: 38px;">
                         <el-form ref="form" label-position="left" :model="indexBtn" label-width="86px">
                                 <el-form-item  label="按钮名称">
                                         <el-input v-model="indexBtn.label"></el-input>
@@ -131,7 +131,7 @@
                         </div>
                 </div>
         </el-dialog>
-        <!-- //子节点设置 --> <!-- //节点设置窗口 -->
+        <!-- //子节点设置 -->
         <el-drawer
         :visible.sync="showSelectBtn"
         :show-close="false"

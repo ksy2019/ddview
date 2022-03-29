@@ -1,6 +1,6 @@
 <template>
   <div class="router-con">
-    <router-view />
+    <router-view /> 
   </div>
 </template>
 
@@ -11,8 +11,8 @@ export default {
     const preLoader = document.querySelector('#pre-loader')
     preLoader.style.display = 'none'
     document.body.ondrop = event => {
-      event.preventDefault()
-      event.stopPropagation()
+      event.preventDefault();
+      event.stopPropagation();
     }
   }
 }
