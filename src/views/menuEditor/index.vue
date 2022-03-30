@@ -1,7 +1,7 @@
 <!--
  * @Author: BlueStar
  * @Date: 2022-03-29 09:15:18
- * @LastEditTime: 2022-03-29 16:33:15
+ * @LastEditTime: 2022-03-30 18:16:29
  * @Description: 菜单编辑页面
 -->
 <template>
@@ -9,39 +9,66 @@
         <!-- //主页的主要内容 -->
         <div class="top-tool">
                 <div class="left">
-                      页面编辑工具
+                      页面框架设置
                 </div>
                 <div class="right">
-                      修改当前页面
+                        <div>
+                              <span class="nos">选择板式</span>
+                        </div>
+                        <div class="user-avatar">
+                            凯    
+                        </div>
+                        <div class="run-btn">
+                                <i class="el-icon-caret-right"></i>
+                        </div>
+                </div>
+        </div>
+        <div class="tool-bar">
+                <div class="left-tool">
+
+                </div>
+                <div class="right-tool">
+
                 </div>
         </div>
         <div class="editor-body">
                 <div  class="home-body">
                               <!-- //左边菜单 -->
-                              <div class="home-left-container" :style="isCollpse?'margin-right:10px;width:190px;':'margin-right:0;width:0px;'">
+                              <div class="home-left-container">
                                         <div class="home-body-left scrollbar">
+                                                <div class="edith-bar bbr1">
+                                                          <div class="title">
+                                                                  菜单栏
+                                                          </div>
+                                                          <div class="btn-bar">
+                                                                  <div @click="clickAdditem" class="item-btn">
+                                                                        <i class="el-icon-document-add"></i>
+                                                                  </div>
+                                                                  <div @click="clickAddfold" class="item-btn">
+                                                                        <i class="el-icon-folder-add"></i>
+                                                                  </div>
+                                                          </div>
+                                                </div>
                                                 <el-menu
+                                                class="br1"
                                                 unique-opened
                                                 :default-active="tabsData.indexTab"
                                                 router
                                                 >
-                                                          <el-menu-item  index="home"><i style="color:#2360ff;" class="el-icon-house"></i> 首页</el-menu-item>
+                                                          <el-menu-item  index="home"><i style="color:#000000e6;" class="el-icon-house"></i> 首页</el-menu-item>
                                                           <el-submenu v-for="(i,index) in menuData" :key="index" :index="i.router">
                                                                   <template slot="title">
-                                                                          <i :class="i.icon" style="color: #2360ff;"></i>
+                                                                          <i :class="i.icon" style="color: #000000e6;"></i>
                                                                           <span>{{i.label}}</span>
                                                                   </template>
                                                                   <el-menu-item v-for="(item,index1) in i.children" :key="index1" :index="item.router">{{item.label}}</el-menu-item>
                                                           </el-submenu>
                                                 </el-menu>
-                                                <div  @click="isCollpse=!isCollpse" v-show="isCollpse" class="sq-btn nos">
-                                                        <span type="primary"><i class="el-icon-caret-left"></i> 收起</span>
-                                                </div>
                                         </div>
                               </div>
                               <!-- //右边主体内容 -->
                               <div v-loading="!loadingOk" class="home-body-right">
-                                      <div v-show="showTabs" class="sh-tabs-container">
+                                      <div  class="sh-tabs-container bbr1">
                                               <transition name="el-zoom-in-center">
                                               <div v-show="scrollIcon" @click="scrollTo('left')" class="scroll-btn scroll-btn-left"><i class="el-icon-arrow-left"></i></div>
                                               </transition>
@@ -58,7 +85,7 @@
                                               </transition>
                                       </div>
                                       <!-- //路由容器组件 -->
-                                      <div  v-if="loadingOk" class="router-con" :style="{'height': showTabs? 'calc(100% - 36px )':'100%'}">
+                                      <div  v-if="loadingOk" class="router-con"  >
                                                 <keep-alive> 
                                                         <router-view  :key="$route.path.replace('/menueditor/','')"></router-view> 
                                                 </keep-alive>
@@ -66,12 +93,57 @@
                               </div>
                 </div>
                 <div class="right-con">
-
+                        <div class="row-btn">全局axios设置</div>
+                        <div class="row-btn">全局页面配置</div>
+                        <div class="row-btn">生命周期-页面载入</div>
+                        <div class="row-btn">生命周期-加载完成</div>
+                        <div class="row-btn">生命周期-销毁页面</div>
                 </div>
         </div>
-        <div class="bottom-tool">
-                这是页脚部分数据
-        </div>
+        <!-- 增加节点的窗口 -->
+        <el-dialog title="节点信息" width="460px" append-to-body top="26vh" custom-class="update-dialog brdialog"  :close-on-click-modal="false" :visible.sync="additem.visible">
+                <div class="form-con">
+                <el-form :model="additem"  label-width="68px" label-position="left">
+                        <el-form-item label="节点名称" >
+                                <el-input v-model="additem.label" placeholder="请输入节点名称"></el-input>
+                        </el-form-item>
+                        <el-form-item label="组图标" >
+                                <select-icon v-model="additem.icon"></select-icon>
+                        </el-form-item>
+                        <el-form-item label="路由名称" >
+                                <el-input v-model="additem.router" placeholder="请输入路由名称"></el-input>
+                        </el-form-item>
+                        <el-form-item>
+                                <div style="text-align:right;">
+                                <el-button @click="additem.visible = false">取消</el-button>
+                                <el-button type="primary" @click="submitAdditem">提交</el-button>
+                                </div>
+                        </el-form-item>
+                </el-form>
+                </div>
+        </el-dialog>
+        <!-- 增加文件夹的窗口 -->
+        <el-dialog title="组名称" width="460px" append-to-body top="26vh" custom-class="update-dialog brdialog"  :close-on-click-modal="false" :visible.sync="addfold.visible">
+                <div>
+                <el-form :model="addfold"  label-width="68px" label-position="left">
+                        <el-form-item label="节点名称" >
+                                <el-input v-model="addfold.label" placeholder="请输入节点名称"></el-input>
+                        </el-form-item>
+                        <el-form-item label="组图标" >
+                                <select-icon v-model="addfold.icon"></select-icon>
+                        </el-form-item>
+                        <el-form-item label="路由名称" >
+                                <el-input v-model="addfold.router" placeholder="请输入路由名称"></el-input>
+                        </el-form-item>
+                        <el-form-item>
+                                <div style="text-align:right;">
+                                <el-button @click="addfold.visible = false;">取消</el-button>
+                                <el-button type="primary" @click="submitAddfold">提交</el-button>
+                                </div>
+                        </el-form-item> 
+                </el-form>
+                </div>
+        </el-dialog>
   </div>
 </template>
 
@@ -81,6 +153,18 @@ import {mapState} from 'vuex';
 export default {
                 data(){
                         return{
+                                additem: {
+                                        visible: false,
+                                        label: '',
+                                        router: '',
+                                        icon: 'el-icon-connection',
+                                },
+                                addfold: {
+                                        visible: false,     
+                                        label: '',
+                                        router: '',
+                                        icon: 'el-icon-connection',
+                                },
                                 menuData: [                          //菜单list
                                     {
                                             label: "基础管理"
@@ -104,9 +188,7 @@ export default {
                                     }
                                 ],
                                 menuListEP:[], 
-                                isCollpse: true,             //是否折叠左侧
                                 loadingOk: true,            //是否加载完成;加载完成之后再载入界面     
-                                showTabs: true,
                                 tabsData: {
                                         indexTab: 'home',
                                         list: [
@@ -121,9 +203,6 @@ export default {
                         }
                 },
                 watch: {
-                        isCollpse(){            //将收缩状态放入localstorage
-                                localStorage.setItem('wdsk-isCollpseGS',this.isCollpse)
-                        },
                         tabsData: {
                                 handler(){
                                         localStorage.setItem("wdsk-mytabs",JSON.stringify(this.tabsData))
@@ -133,7 +212,6 @@ export default {
                         $route:{
                                 handler(data){
                                         //监听当前路由绑定id
-                                        if(!this.showTabs)return;
                                         if(this.tabsData.list.filter(tab=>{
                                                 if(tab.router==data.path.replace('/home/dashboard/','')){
                                                         return  tab
@@ -176,6 +254,18 @@ export default {
                         ...mapState([])
                 },
                 methods: {
+                        submitAdditem(){           //提交增加节点
+
+                        },
+                        submitAddfold(){           //提交增加文件
+
+                        },
+                        clickAdditem(){            //增加节点
+                                this.additem.visible = true;
+                        },
+                        clickAddfold(){            //增加菜单
+                                this.addfold.visible = true;
+                        },
                         closeTab(tab){             //关闭tab 
                                 this.tabsData.list=this.tabsData.list.filter(item=>item.router!=tab.router)
                                 if(this.tabsData.list[this.tabsData.list.length-1].router!==this.$route.path.replace('/','')){
@@ -253,250 +343,9 @@ export default {
                         }
                 },
                 mounted(){
-                }, 
+                },
 }
 </script>
-
-<style lang="less" scoped>
-.top-tool{
-        display: flex;
-        align-items: center;
-        justify-content: space-between;
-        padding: 0 12px;
-        height: 60px;
-        line-height: 60px;
-        background: #2995ff;
-        color: #fff;
-        div{
-                font-size: 1.5rem;
-                font-weight: 500;
-        }
-}
-.editor-body{
-        display: flex;
-        align-items: center;
-        justify-content: flex-start;
-        height: calc(100vh - 110px);
-        .home-body{
-                width: 500px;
-                flex: 1;
-                // padding: 12px;
-                box-sizing: border-box;
-        }
-        .right-con{
-                background: #f1f1f1;
-                height: 100%;
-                width: 300px;
-        }
-}
-.bottom-tool{
-        font-size: .9rem;
-        height: 50px;
-        padding: 12px 6px;
-        box-sizing: border-box;
-        background: #252525;
-        color: #fff;
-}
-.router-leaver{
-        // animation: fadeOutDown .32s;
-}
-.router-enter{
-        animation: fadeInRight .32s;
-}  
-.sh-tabs-container{
-        height: 36px;
-        line-height: 36px;
-        background-color: #fff;
-        overflow: auto;
-        display: flex;
-        align-items: center;
-        #scroll-con{
-                width: calc(100% - 34px);
-                display: inline-block;
-                overflow: auto;
-                white-space: nowrap;
-        }
-        .scroll-btn-right{
-                margin-left: 5px;
-                margin-right: 0px  !important;
-        }
-        .scroll-btn{
-                display: inline-block;
-                cursor: pointer;
-                height: 30px;
-                line-height: 30px;
-                padding: 0 1px;
-                background-color: #f2f0ff9c;
-                margin-right: 5px;
-                box-shadow: 0 0 1px #7c84ff;
-                transition: all .32s;
-                &:hover{
-                        color: #fff;
-                        background: #1e78ff;
-                }
-        } 
-        .sh-tabs-item{
-                background-color: #fff;
-                display: inline-block;
-                padding: 0 12px;
-                margin-right: 5px;
-                height: 30px;
-                line-height: 30px;
-                cursor: pointer;
-                user-select: none;
-                color: gray; 
-                box-shadow: 0 0 5px -2px #858cf3;
-                .tab-close{
-                        margin-left: 3px;
-                        color: #FFF;
-                        cursor: pointer; 
-                        transition: all .22s;
-                        &:hover{
-                                color: red;
-                        }
-                }
-                &:first-child{
-                        margin-left: 1px;
-                }
-                &:last-child{
-                        margin-right: 1px;
-                }
-        } 
-}
-.index-tab{
-    background: #1e78ff !important;
-    color: #FFE !important;
-    box-shadow: 0 0 5px -2px #293551 !important;
-} 
-*{
-        font-size: 9pt;
-}
-.blue{
-        color: blue;
-} 
-.home-container{
-        //     height: 100vh;
-            background: #efefef;
-           .home-top{
-                        display: flex;
-                        align-items: center;
-                        justify-content: space-between;
-                        background: #fff;
-                        margin-bottom: 10px;
-                        .home-top-left{
-                                        display: flex;
-                                        align-items: center;
-                                        justify-content: center;
-                                        .span-sqc{
-                                                display: inline-block;
-                                                width: 5px;
-                                                height: 32px;
-                                                background: #1088ff;
-                                                margin-right: 12px;
-                                                border-radius: 20px;
-                                        }
-                                        .logo{
-                                                height: 30px;
-                                                margin-right: 12px;
-                                                & img{
-                                                        height: inherit;
-                                                }
-                                        }
-                                        .logo-title{
-                                                font-weight: 600;
-                                                font-size: 12pt;
-                                        }
-                        }
-                        .home-top-right{ 
-                                        &>span:first-child{
-                                                margin-right: 12px;
-                                        }
-                                        .el-icon-user-solid{
-                                                margin-left: 12px;
-                                                position: relative; 
-                                        }
-                                        .user-name{
-                                                margin-left: 3px;
-                                                font-size: 0.86rem;
-                                                font-weight: 600;
-                                        }
-                                        & .exit{
-                                                margin-left: 12px;
-                                                font-weight: 600;
-                                                font-size: 11pt;
-                                        }
-                        }
-           }     
-           .home-body{
-                        height: 100%;
-                        display: flex;
-                        .home-left-container{
-                                        height: 100%;
-                                        background: #fff;
-                                        margin-right: 10px;
-                        .home-body-left{
-                                        height: calc(100% - 65px) ;
-                                        width: inherit;
-                                        background: #fff;
-                                        overflow-x: hidden;
-                                        overflow-y: auto;
-                                        position: relative;
-                                        /deep/ .el-submenu .el-menu-item{
-                                                        padding-left: 58px !important;
-                                        }
-                                        .sq-btn{
-                                                position: fixed;
-                                                bottom: 62px;
-                                                left: 34px;
-                                                width: 90px;
-                                                background: rgb(30, 120, 255);
-                                                padding: 8px 5px;
-                                                color: #fff;
-                                                border-radius: 8px;
-                                                text-align: center;
-                                        }
-                        }
-                        }
-                        .home-body-right{
-                                width: 200px;
-                                flex: 1;
-                                background: #fff;
-                                position: relative;
-                                .router-con{
-                                        overflow: auto;
-                                }
-                        }
-           }
-}
- 
-@keyframes filpin{
-        from{
-                    transform: rotateY(90deg);
-        }to{
-                    transform: rotateY(0deg);
-        }
-}
-.filpin{
-        animation: filpin .82s;
-}
-.filpout{
-
-}
-.outline{
-        color: #b4b4b4;
-} 
-.fontse14{
-        font-size: 14px;
-}
-@keyframes rotate{
-        from {
-                transform: rotate(0deg);       
-        }
-        to{
-                transform: rotate(360deg);      
-        }
-}
-.roateanm{
-        animation: rotate 1300ms infinite;
-}
-</style>      
+<style lang="scss" scoped>
+@import './style/index.scss'
+</style>

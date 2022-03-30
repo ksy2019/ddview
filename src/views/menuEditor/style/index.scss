@@ -1,0 +1,327 @@
+@import '@/styles/global.scss';
+@import '@/styles/allVar.scss';
+
+$tool-height: 42px;
+$font-color: #000000e6;
+$bg-color: #efefef;
+.top-tool{
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding: 0 12px;
+        height: 60px;
+        line-height: 60px;
+        background: #fff;
+        color: #000000e6;
+        box-shadow: inset 0 -1px 0 $bg-color;
+        .left{
+                font-size: 1.5rem;
+                font-weight: 500;
+        }
+        .right{
+            display: flex;
+            align-items: center;
+            justify-content: flex-end;
+            .user-avatar{
+                margin-left: 12px;
+                color: #fff;
+                background-color: $main-color;
+                font-size: 1.25rem;
+                font-weight: 600;
+                height: 36px;
+                line-height: 36px;
+                text-align: center;
+                width: 36px;
+                border-radius: 50%;
+                @extend .nos;
+            }
+            .run-btn{
+                margin-left: 12px;
+                color: $font-color;
+                background-color: $bg-color;
+                height: 36px;
+                text-align: center;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                width: 36px;
+                border-radius: 50%;
+                @extend .btn;
+                i{
+                    font-size: 1.8rem;
+                }
+            }
+        }
+}
+.form-con{
+    padding: 15px 20px;
+}
+.edith-bar{
+    height: $tool-height;
+    line-height: $tool-height;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 12px;
+    box-sizing: border-box;
+    .btn-bar{
+        display: flex;
+        align-items: center;
+        justify-content: flex-end;
+        .item-btn{
+            height: 28px;
+            width: 28px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            border-radius: 6px;
+            font-size: 16px;
+            color: $font-color;
+            &:hover{
+                background: $bg-color;
+            }
+        }
+    }
+}
+.editor-body{
+        display: flex;
+        align-items: center;
+        justify-content: flex-start;
+        height: calc(100vh - 62px);
+        .home-body{
+                width: 500px;
+                flex: 1;
+                // padding: 12px;
+                box-sizing: border-box;
+        }
+        .right-con{
+                background: #fff;
+                height: 100%;
+                width: 300px;
+                padding: 12px;
+                box-sizing: border-box;
+                .row-btn{
+                    height: 35px;
+                    display: flex;
+                    align-items: center;
+                    justify-content: flex-start;
+                    background: $bg-color;
+                    color: $font-color;
+                    padding: 0 12px;
+                    border-radius: 6px;
+                    @extend .btn;
+                }
+                .row-btn+.row-btn{
+                    margin-top: 12px;
+                }
+        }
+}
+.bottom-tool{
+        font-size: .9rem;
+        height: 50px;
+        padding: 12px 6px;
+        box-sizing: border-box;
+        background: #252525;
+        color: #fff;
+}
+.router-leaver{
+        // animation: fadeOutDown .32s;
+}
+.router-enter{
+        animation: fadeInRight .32s;
+}  
+.sh-tabs-container{
+        height:  $tool-height;
+        line-height:  $tool-height;
+        background-color: #fff;
+        overflow: auto;
+        display: flex;
+        align-items: center;
+        padding: 0 5px; 
+        #scroll-con{
+                width: calc(100% - 34px);
+                display: inline-block;
+                overflow: auto;
+                white-space: nowrap;
+        }
+        .scroll-btn-right{
+                margin-left: 5px;
+                margin-right: 0px  !important;
+        }
+        .scroll-btn{
+                display: inline-block;
+                cursor: pointer;
+                height: 30px;
+                line-height: 30px;
+                padding: 0 1px;
+                background-color: #f2f0ff9c;
+                margin-right: 5px;
+                box-shadow: 0 0 1px #7c84ff;
+                transition: all .32s;
+                &:hover{
+                        color: #fff;
+                        background: #1e78ff;
+                }
+        } 
+        .sh-tabs-item{
+                background-color: $bg-color;
+                display: inline-block;
+                padding: 0 12px;
+                margin-right: 5px;
+                height: 30px;
+                line-height: 30px;
+                cursor: pointer;
+                user-select: none;
+                border-radius: 6px;
+                color: gray;
+                transition: all .22s;
+                &:hover{ 
+                    background: #7b7b7b;
+                    color: #fff;
+                }
+                .tab-close{
+                        margin-left: 3px;
+                        color: #FFF;
+                        cursor: pointer; 
+                        transition: all .22s;
+                        &:hover{
+                                color: red;
+                        }
+                }
+                &:first-child{
+                        margin-left: 1px;
+                }
+                &:last-child{
+                        margin-right: 1px;
+                }
+        } 
+}
+.index-tab{
+    background: $main-color !important;
+    color: #fff !important;
+} 
+*{
+        font-size: 9pt;
+}
+.blue{
+        color: blue;
+} 
+::v-deep .el-menu{
+    border-right: none !important;
+}
+.home-container{
+        //     height: 100vh;
+            background: $bg-color;
+           .home-top{
+                        display: flex;
+                        align-items: center;
+                        justify-content: space-between;
+                        background: #fff;
+                        margin-bottom: 10px;
+                        .home-top-left{
+                                        display: flex;
+                                        align-items: center;
+                                        justify-content: center;
+                                        .span-sqc{
+                                                display: inline-block;
+                                                width: 5px;
+                                                height: 32px;
+                                                background: #1088ff;
+                                                margin-right: 12px;
+                                                border-radius: 20px;
+                                        }
+                                        .logo{
+                                                height: 30px;
+                                                margin-right: 12px;
+                                                & img{
+                                                        height: inherit;
+                                                }
+                                        }
+                                        .logo-title{
+                                                font-weight: 600;
+                                                font-size: 12pt;
+                                        }
+                        }
+                        .home-top-right{ 
+                                        &>span:first-child{
+                                                margin-right: 12px;
+                                        }
+                                        .el-icon-user-solid{
+                                                margin-left: 12px;
+                                                position: relative; 
+                                        }
+                                        .user-name{
+                                                margin-left: 3px;
+                                                font-size: 0.86rem;
+                                                font-weight: 600;
+                                        }
+                                        & .exit{
+                                                margin-left: 12px;
+                                                font-weight: 600;
+                                                font-size: 11pt;
+                                        }
+                        }
+           }     
+           .home-body{
+                        height: 100%;
+                        display: flex;
+                        .home-left-container{
+                                        width:250px;
+                                        height: 100%;
+                                        background: #fff;
+                        .home-body-left{
+                                        height: calc(100% - 65px) ;
+                                        width: inherit;
+                                        background: #fff;
+                                        overflow-x: hidden;
+                                        overflow-y: auto;
+                                        position: relative;
+                                        ::v-deep .el-submenu .el-menu-item{
+                                                        padding-left: 58px !important;
+                                        } 
+                        }
+                        }
+                        .home-body-right{
+                                width: 200px;
+                                flex: 1;
+                                background: $bg-color;
+                                position: relative;
+                                .router-con{
+                                        overflow: auto;
+                                        height: calc(100% - $tool-height);
+                                }
+                        }
+           }
+}
+ 
+@keyframes filpin{
+        from{
+                    transform: rotateY(90deg);
+        }to{
+                    transform: rotateY(0deg);
+        }
+}
+.filpin{
+        animation: filpin .82s;
+}
+.filpout{
+
+}
+.outline{
+        color: #b4b4b4;
+} 
+.fontse14{
+        font-size: 14px;
+}
+@keyframes rotate{
+        from {
+                transform: rotate(0deg);       
+        }
+        to{
+                transform: rotate(360deg);      
+        }
+}
+.roateanm{
+        animation: rotate 1300ms infinite;
+}

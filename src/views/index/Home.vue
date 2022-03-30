@@ -334,5 +334,5 @@ export default {
 </script>
 
 <style lang='scss'>
-@import '@/styles/home';
+@import '@/styles/home.scss';
 </style>

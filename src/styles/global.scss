@@ -1,3 +1,4 @@
+@import './allVar.scss';
 
 $inputWidth:202px;
 ::v-deep .el-input .el-input__inner{
@@ -8,4 +9,39 @@ $inputWidth:202px;
 }
 ::v-deep .el-input-number{
     width: $inputWidth;
+}
+.br1{
+    box-shadow: inset -1px 0px 0 #efefef;
+}
+.bbl1{
+    box-shadow: inset 1px -1px 0 #efefef;
+}
+.bbr1{
+    box-shadow: inset -1px -1px 0 #efefef;
+}
+.btl1{
+    box-shadow: inset 1px 1px 0 #efefef;
+}
+.btr1{
+    box-shadow: inset -1px 1px 0 #efefef;
+}
+.bl1{
+    box-shadow: inset 1px 0 0 #efefef;
+}
+.bt1{
+    box-shadow: inset 0px 1px 0 #efefef;
+}
+.bb1{
+    box-shadow: inset 0px -1px 0 #efefef;
+}
+.nos{
+    cursor: pointer;
+    user-select: none;
+}
+.btn{
+    @extend .nos;
+    &:hover{ 
+        background: #7b7b7b;
+        color: #fff;
+    }
 }

@@ -1,7 +1,7 @@
 <!--
  * @Author: BlueStar
  * @Date: 2021-10-27 09:01:53
- * @LastEditTime: 2022-03-18 15:55:20
+ * @LastEditTime: 2022-03-30 18:47:53
  * @Description: JSON代码编辑器
 -->
 <template>
@@ -144,7 +144,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-@import url("../../styles/global.scss");
+@import "@/styles/global.scss";
 ::v-deep .el-drawer__header {
   display: none;
 }
