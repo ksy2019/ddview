@@ -1,7 +1,7 @@
 <!--
  * @Author: BlueStar
  * @Date: 2022-03-29 09:15:18
- * @LastEditTime: 2022-03-30 18:16:29
+ * @LastEditTime: 2022-03-31 17:09:41
  * @Description: 菜单编辑页面
 -->
 <template>
@@ -57,10 +57,13 @@
                                                 >
                                                           <el-menu-item  index="home"><i style="color:#000000e6;" class="el-icon-house"></i> 首页</el-menu-item>
                                                           <el-submenu v-for="(i,index) in menuData" :key="index" :index="i.router">
-                                                                  <template slot="title">
+                                                                  <div slot="title" class="menu-item">
                                                                           <i :class="i.icon" style="color: #000000e6;"></i>
                                                                           <span>{{i.label}}</span>
-                                                                  </template>
+                                                                          <span @click.stop="clickAdditem(i)" class="add-btn-menu">
+                                                                                  <i class="el-icon-circle-plus-outline"></i>
+                                                                          </span>
+                                                                  </div>
                                                                   <el-menu-item v-for="(item,index1) in i.children" :key="index1" :index="item.router">{{item.label}}</el-menu-item>
                                                           </el-submenu>
                                                 </el-menu>

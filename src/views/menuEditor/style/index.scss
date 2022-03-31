@@ -53,6 +53,30 @@ $bg-color: #efefef;
             }
         }
 }
+::v-deep .menu-item{
+        &:hover{
+                .add-btn-menu{
+                       margin-left: 82px;
+                       visibility: unset;
+                }
+        }
+        .add-btn-menu{
+            display: inline-block;
+            margin-left: 82px;
+            visibility: hidden;
+            height: 26px;
+            width: 26px;
+            line-height: 26px;
+            text-align: center;
+            border-radius: 6px;
+            &:hover{
+                        background-color: $bg-color;
+            }
+            i{
+                        margin-right: 0;
+            }
+        }
+}
 .form-con{
     padding: 15px 20px;
 }
