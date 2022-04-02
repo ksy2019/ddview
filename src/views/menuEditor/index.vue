@@ -1,7 +1,7 @@
 <!--
  * @Author: BlueStar
  * @Date: 2022-03-29 09:15:18
- * @LastEditTime: 2022-03-31 17:09:41
+ * @LastEditTime: 2022-04-02 14:43:51
  * @Description: 菜单编辑页面
 -->
 <template>
@@ -9,26 +9,19 @@
         <!-- //主页的主要内容 -->
         <div class="top-tool">
                 <div class="left">
-                      页面框架设置
+                      项目框架
+                      <span class="text-con">设置</span>
                 </div>
                 <div class="right">
                         <div>
                               <span class="nos">选择板式</span>
                         </div>
                         <div class="user-avatar">
-                            凯    
+                            凯
                         </div>
                         <div class="run-btn">
                                 <i class="el-icon-caret-right"></i>
                         </div>
-                </div>
-        </div>
-        <div class="tool-bar">
-                <div class="left-tool">
-
-                </div>
-                <div class="right-tool">
-
                 </div>
         </div>
         <div class="editor-body">

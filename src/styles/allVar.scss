@@ -1,3 +1,7 @@
+:root{
+    --bg-color: #efefef;
+}
+
 
 $dark: #4c4c53;                  //重色
 $deepGary: #bfbfbf;                   //深色
@@ -26,4 +30,7 @@ $main-color: #3662ec;
 }   
 .fff{
     color: #fff !important;
-}   
+}
+.nous{
+    user-select: none;
+}

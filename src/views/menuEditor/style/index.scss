@@ -1,9 +1,8 @@
 @import '@/styles/global.scss';
 @import '@/styles/allVar.scss';
-
 $tool-height: 42px;
 $font-color: #000000e6;
-$bg-color: #efefef;
+$bg-color: var(--bg-color);
 .top-tool{
         display: flex;
         align-items: center;
@@ -15,8 +14,13 @@ $bg-color: #efefef;
         color: #000000e6;
         box-shadow: inset 0 -1px 0 $bg-color;
         .left{
+                @extend .nous;
                 font-size: 1.5rem;
                 font-weight: 500;
+                letter-spacing: 2px;
+                .text-con{
+                    font-size: 12px;
+                }
         }
         .right{
             display: flex;
@@ -88,6 +92,7 @@ $bg-color: #efefef;
     justify-content: space-between;
     padding: 0 12px;
     box-sizing: border-box;
+    @extend .nous;
     .btn-bar{
         display: flex;
         align-items: center;
