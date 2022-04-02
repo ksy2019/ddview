@@ -1,7 +1,7 @@
 <!--
  * @Author: BlueStar
  * @Date: 2021-11-05 15:52:38
- * @LastEditTime: 2022-03-18 16:04:51
+ * @LastEditTime: 2022-04-02 16:18:35
  * @Description: 组件的css样
 -->
 <template>
@@ -134,6 +134,7 @@ export default {
 
 <style lang="scss" scoped>
 @import "@/styles/global.scss";
+@import  '@/styles/globalCompontSet.scss';
 .bxdm-con{
     margin-top: 10px;
     letter-spacing: 2px;

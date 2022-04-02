@@ -1,7 +1,7 @@
 <!--
  * @Author: BlueStar
  * @Date: 2021-11-05 15:52:38
- * @LastEditTime: 2022-03-18 14:34:10
+ * @LastEditTime: 2022-04-02 16:20:18
  * @Description: 组件的css样
 -->
 <template>
@@ -125,5 +125,6 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-@import "@/styles/global.scss"
+@import "@/styles/global.scss";
+@import  '@/styles/globalCompontSet.scss';
 </style>
