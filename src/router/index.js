@@ -3,8 +3,8 @@ import Vue from 'vue'
 Vue.use(VueRouter)
 const routes = [
   {
-    path: '/',
-    name: 'home',
+    path: '/pageeditor',
+    name: 'pageeditor',
     component: ()=>import('@/views/index/Home.vue' )
   },
   {

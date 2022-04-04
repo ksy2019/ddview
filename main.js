@@ -29,6 +29,10 @@ Vue.prototype.$XPrint = VXETable.print
 Vue.prototype.$XModal = VXETable.modal
 Vue.prototype.$moment = moment
 Vue.prototype.$base=Vue.prototype.$mybase;
+//设置接口地址
+Vue.prototype.$config = {
+  urlh: 'https://51dzfp.cn',
+}
 Vue.use(dirctives)
 new Vue({
   router,

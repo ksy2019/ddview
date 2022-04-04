@@ -72,7 +72,7 @@ $bg-color: var(--bg-color);
             width: 26px;
             line-height: 26px;
             text-align: center;
-            border-radius: 6px;
+            border-radius:  $radius;
             &:hover{
                         background-color: $bg-color;
             }
@@ -104,7 +104,7 @@ $bg-color: var(--bg-color);
             align-items: center;
             justify-content: center;
             cursor: pointer;
-            border-radius: 6px;
+            border-radius: $radius;
             font-size: 16px;
             color: $font-color;
             &:hover{
@@ -130,6 +130,40 @@ $bg-color: var(--bg-color);
                 width: 300px;
                 padding: 12px;
                 box-sizing: border-box;
+                .editpage-btn{
+                    height: 76px;
+                    background: $bg-color;
+                    border-radius: $radius;
+                    padding: 12px;
+                    box-sizing: border-box;
+                    margin-bottom: 12px;
+                    display: flex;
+                    align-items: center;
+                    justify-items: flex-start;
+                    @extend .btn;
+                    .left{
+                        img{
+                                height: 46px;
+                        }
+                        margin-right: 12px;
+                    }
+                    .right{
+                        display: flex;
+                        flex-wrap: wrap;
+                        height: 52px;
+                        align-items: center;
+                        .top{
+                                font-size: 1.2rem;
+                                font-weight: 600;
+                                letter-spacing: 1px;
+                                color: $font-color;
+                        }
+                        .bottom{
+                                height: 20px;
+                                color: $deepGary;
+                        }
+                    }
+                }
                 .row-btn{
                     height: 35px;
                     display: flex;
@@ -138,7 +172,7 @@ $bg-color: var(--bg-color);
                     background: $bg-color;
                     color: $font-color;
                     padding: 0 12px;
-                    border-radius: 6px;
+                    border-radius: $radius;
                     @extend .btn;
                 }
                 .row-btn+.row-btn{
@@ -202,7 +236,7 @@ $bg-color: var(--bg-color);
                 line-height: 30px;
                 cursor: pointer;
                 user-select: none;
-                border-radius: 6px;
+                border-radius: $radius;
                 color: gray;
                 transition: all .22s;
                 &:hover{ 
