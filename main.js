@@ -7,6 +7,7 @@ import svgIcon from '@/components/SvgIcon'
 import '@/assets/css/global.less'
 import '@/assets/css/myElement.css'
 import '@/assets/theme/index.css'
+import { Loading } from 'element-ui';
 import store from '@/store'
 Vue.use(ELEMENT,{size: 'small'})
 Vue.component('svg-icon', svgIcon)
@@ -29,6 +30,7 @@ Vue.prototype.$XPrint = VXETable.print
 Vue.prototype.$XModal = VXETable.modal
 Vue.prototype.$moment = moment
 Vue.prototype.$base=Vue.prototype.$mybase;
+Vue.prototype.$loading = Loading;
 //设置接口地址
 Vue.prototype.$config = {
   urlh: 'https://51dzfp.cn',

@@ -1,16 +1,16 @@
 <template>
-  <div class="container">
+  <div  class="container">
     <!-- 最顶端头部 --> 
     <div class="header">
         <div class="logo">
             ⚡SuperCode
         </div>
         <div class="tool-bar">
-           <el-button icon="el-icon-video-play" type="text" @click="run">
-              运行
-            </el-button>
             <el-button class="delete-btn" icon="el-icon-delete" type="text" @click="empty">
               清空
+            </el-button>
+           <el-button icon="el-icon-circle-check" type="text" @click="saveToService">
+              保存页面
             </el-button>
         </div>
     </div>
@@ -118,8 +118,8 @@ import CodeTypeDialog from './CodeTypeDialog'
 import myDraggable from './myDraggable'
 import {getDrawingList, saveDrawingList} from '@/utils/db'
 import loadBeautifier from '@/utils/loadBeautifier'
+import { Base64 } from 'js-base64'
 const drawingListInDB = getDrawingList()
-
 export default {
   name: 'home',
   components: {                     //可使用组件
@@ -164,6 +164,10 @@ export default {
       deep: true
     },
   },
+  created(){
+    this.pageid = this.$route.query.pageid;
+    this.initPage();
+  },
   mounted() {
     Vue.prototype.$activeFormItem = this.activeFormItem;
     if (Array.isArray(drawingListInDB) && drawingListInDB.length > 0) {
@@ -192,6 +196,22 @@ export default {
     })
   },
   methods: {
+    async initPage(){                 //获取页面数据 
+      setTimeout(()=>{
+          this.mloading = this.$loading.service({
+              lock: true,
+              text: '正在处理数据',
+              spinner: 'el-icon-loading',
+              background: 'rgba(0, 0, 0, 0.7)'
+          })
+      },320)
+      let res = await axios.post(this.$config.urlh + '/NEWKP/DEV/GetPage','id='+this.pageid);
+      this.mloading.close();
+      if(res.PAGEJSON){
+        this.drawingList = JSON.parse(Base64.decode(res.PAGEJSON.replace(/ /g,'+')))
+      }
+      console.log(res);
+    },
     saveJson(item){                //保存json
         this.drawingList = item ;
     },
@@ -293,8 +313,13 @@ export default {
       this.dialogVisible = true
       this.operationType = 'run'
     },
-    saveToService(){    //将JSON保存到服务器
-          this.$axios.post('http://localhost:3000/SAVEPAGEJSON',this.drawingList)
+    async saveToService(){    //将JSON保存到服务器
+        let res = await axios.post(this.$config.urlh + '/NEWKP/DEV/SavePage','id='+this.pageid+'&pagejson=['+Base64.encode(JSON.stringify(this.drawingList))+']');
+        if(res.Result=='1'){
+          this.$message.success(res.Message)
+        }else{
+          this.$message.warning(res.Message)
+        }
     },
     tagChange(newTag) {
       newTag = this.cloneComponent(newTag)
