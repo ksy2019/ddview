@@ -1,7 +1,7 @@
 <!--
  * @Author: BlueStar
  * @Date: 2022-03-29 09:15:18
- * @LastEditTime: 2022-04-04 14:42:18
+ * @LastEditTime: 2022-04-05 20:21:00
  * @Description: 菜单编辑页面
 -->
 <template>
@@ -10,7 +10,7 @@
         <div class="top-tool">
                 <div class="left">
                       项目框架
-                      <span @click="editIndexPage" class="text-con">设置</span>
+                      <span class="text-con">设置</span>
                 </div>
                 <div class="right">
                         <div>
@@ -46,19 +46,42 @@
                                                 class="br1"
                                                 unique-opened
                                                 :default-active="tabsData.indexTab"
-                                                router
                                                 >
-                                                        <el-menu-item  index="home"><i style="color:#000000e6;" class="el-icon-house"></i> 首页</el-menu-item>
-                                                        <el-submenu v-for="(i,index) in menuData" :key="index" :index="i.router">
+                                                <template v-for="(i) in menuData">
+                                                        <el-menu-item @click="clickTab(i)" v-if="i.iscontainer=='0'" :key="i.router" :index="i.router">
+                                                                <div class="menu-item">
+                                                                        <i style="color:#000000e6;" :class="i.icon"></i> {{i.label}}
+                                                                        <span @click.stop="clickAddfold(i)" class="add-btn-menu">
+                                                                                <i class="el-icon-circle-plus-outline"></i>
+                                                                        </span>
+                                                                        <span @click.stop="updateMenuItem(i,'item')" class="add-btn-menu">
+                                                                                <i class="el-icon-edit"></i>
+                                                                        </span>
+                                                                </div>
+                                                        </el-menu-item>
+                                                        <el-submenu v-if="i.iscontainer=='1'"  :key="i.router" :index="i.router">
                                                                 <div slot="title" class="menu-item">
                                                                         <i :class="i.icon" style="color: #000000e6;"></i>
                                                                         <span>{{i.label}}</span>
                                                                         <span @click.stop="clickAddfold(i)" class="add-btn-menu">
                                                                                 <i class="el-icon-circle-plus-outline"></i>
                                                                         </span>
+                                                                        <span @click.stop="updateMenuItem(i,'fold')" class="add-btn-menu">
+                                                                                <i class="el-icon-edit"></i>
+                                                                        </span>
                                                                 </div>
-                                                                <el-menu-item v-for="(item,index1) in i.children" :key="index1" :index="item.router">{{item.label}}</el-menu-item>
+                                                                <!-- //第二层子节点 -->
+                                                                <el-menu-item @click="clickTab(item)"  v-for="(item,index1) in i.children" :key="index1" :index="item.router">
+                                                                        <div slot="title" class="menu-item">
+                                                                                <i :class="item.icon" style="color: #000000e6;"></i>
+                                                                                <span>{{item.label}}</span> 
+                                                                                <span @click.stop="updateMenuItem(item,'item')" class="add-btn-menu">
+                                                                                        <i class="el-icon-edit"></i>
+                                                                                </span>
+                                                                        </div>
+                                                                </el-menu-item>
                                                         </el-submenu>
+                                                </template>
                                                 </el-menu>
                                         </div>
                               </div>
@@ -89,19 +112,21 @@
                               </div>
                 </div>
                 <div class="right-con">
-                        <div class="editpage-btn">
-                                <div class="left">
-                                        <img src="./img/edit.png" alt="">
-                                </div>
-                                <div class="right">
-                                        <div class="top">
-                                                编辑当前页面
+                        <transition enter-active-class="animateflipInX" >
+                                <div @click="editIndexPage" v-show="indexTab.id" class="editpage-btn">
+                                        <div class="left">
+                                                <img src="./img/edit.png" alt="">
                                         </div>
-                                        <div class="bottom">
-                                                在页面编辑器中编辑
+                                        <div class="right">
+                                                <div class="top">
+                                                        编辑当前页面
+                                                </div>
+                                                <div class="bottom">
+                                                        在页面编辑器中编辑
+                                                </div>
                                         </div>
                                 </div>
-                        </div>
+                        </transition>
                         <div class="row-btn">全局axios设置</div>
                         <div class="row-btn">全局页面配置</div>
                         <div class="row-btn">生命周期-页面载入</div>
@@ -110,7 +135,7 @@
                 </div>
         </div>
         <!-- 增加节点的窗口 -->
-        <el-dialog title="节点信息" width="460px" append-to-body top="26vh" custom-class="update-dialog brdialog"  :close-on-click-modal="false" :visible.sync="additem.visible">
+        <el-dialog title="节点信息" width="460px" append-to-body top="26vh" custom-class="update-dialog brdialog"  :close-on-click-modal="false" :visible.sync="additem.visibleitem">
                 <div class="form-con">
                 <el-form :model="additem"  label-width="68px" label-position="left">
                         <el-form-item label="节点名称" >
@@ -124,7 +149,7 @@
                         </el-form-item>
                         <el-form-item>
                                 <div style="text-align:right;">
-                                <el-button @click="additem.visible = false">取消</el-button>
+                                <el-button @click="additem.visibleitem = false">取消</el-button>
                                 <el-button type="primary" @click="submitAdditem({type: '0',id: '',parentid: ''})">提交</el-button>
                                 </div>
                         </el-form-item>
@@ -132,7 +157,7 @@
                 </div>
         </el-dialog>
         <!-- 增加文件夹的窗口 -->
-        <el-dialog title="组名称" width="460px" append-to-body top="26vh" custom-class="update-dialog brdialog"  :close-on-click-modal="false" :visible.sync="additem.visible">
+        <el-dialog title="组名称" width="460px" append-to-body top="26vh" custom-class="update-dialog brdialog"  :close-on-click-modal="false" :visible.sync="additem.visiblefold">
                 <div>
                 <el-form :model="additem"  label-width="68px" label-position="left">
                         <el-form-item label="节点名称" >
@@ -146,7 +171,7 @@
                         </el-form-item>
                         <el-form-item>
                                 <div style="text-align:right;">
-                                <el-button @click="additem.visible = false;">取消</el-button>
+                                <el-button @click="additem.visiblefold = false;">取消</el-button>
                                 <el-button type="primary" @click="submitAdditem({type: '1',id: '',parentid: ''})">提交</el-button>
                                 </div>
                         </el-form-item> 
@@ -163,7 +188,8 @@ export default {
                 data(){
                         return{
                                 additem: {
-                                        visible: false,
+                                        visiblefold: false,
+                                        visibleitem: false,
                                         label: '',
                                         router: '',
                                         icon: 'el-icon-connection',
@@ -204,6 +230,7 @@ export default {
                                                 }
                                         ]
                                 },
+                                indexTab: {},
                                 scrollIcon: false,           //tabs滚动条按钮是否显示
                         }
                 },
@@ -213,21 +240,48 @@ export default {
                         ...mapState([])
                 },
                 methods: {
-                        editIndexPage(item){
-                                this.$router.push('/pageeditor?pageid=')
+                        editIndexPage(){
+                                this.$router.push('/pageeditor?pageid='+this.indexTab.id)
+                        },
+                        initMenuForm(){
+                                this.additem.id='';
+                                this.additem.parentid =''      
+                                this.additem.router =''      
+                                this.additem.label =''     
+                                this.additem.icon ='el-icon-connection'     
                         },
                         async submitAdditem({type}){           //提交增加节点
                                 let res = await axios.post(this.$config.urlh+'/NEWKP/DEV/SaveMenu',
                                         `id=${this.additem.id}&router=${this.additem.router}&iscontainer=${type}&label=${this.additem.label}&icon=${this.additem.icon}&parentid=${this.additem.parentid}`)
                                 console.log(res);
-                                this.additem.visible = false;
+                                await this.initRoutes();
+                                if(type=='0'){
+                                        this.additem.visibleitem = false
+                                }else{
+                                        this.additem.visiblefold = false;
+                                }
                         },
                         clickAdditem(){            //增加节点
-                                this.additem.visible = true;
+                                this.initMenuForm();
+                                this.additem.visibleitem = true;
+                        },
+                        updateMenuItem(item,type){                   //增加节点
+                                for(let i in this.additem){
+                                        if(i!='visiblefold'&&i!='visibleitem'){
+                                                this.additem[i]=this.$base.formatUndefined(item[i]);
+                                        }
+                                }
+                                item.id = item.id
+                                if(type=='item'){
+                                        this.additem.visibleitem = true;
+                                }else{
+                                        this.additem.visibleitem = true;
+                                }
                         },
                         clickAddfold(item){            //增加菜单
+                                this.initMenuForm();
                                 this.additem.parentid = item.id;
-                                this.additem.visible = true;
+                                this.additem.visiblefold = true;
                         },
                         closeTab(tab){             //关闭tab 
                                 this.tabsData.list=this.tabsData.list.filter(item=>item.router!=tab.router)
@@ -255,10 +309,9 @@ export default {
                                         })
                                 }
                         },
-                        clickTab(tab){          //点击tab 
-                                if(this.$route.path.replace('/home/dashboard/home','')==tab.router){
-                                        return
-                                }
+                        clickTab(tab){          //点击tab
+                                this.indexTab = tab;
+                                return
                                 this.$router.push(tab.router)
                         },
                         eventTabContainer(){    //监听就tabsContainer的溢出事件来控制是否显示i滚动按钮
@@ -281,17 +334,24 @@ export default {
                                         }
                                 },220)
                         },
+                        changeZd(row){                         //接口取数完成进行字段的转换
+                                for(let item of row){
+                                        item.id = item.ID;
+                                        item.label = item.CATPTION;
+                                        item.router = item.ROUTER;
+                                        item.icon = item.ICON
+                                        item.iscontainer = item.ISCONTAINER
+                                        item.children = item.CHILD
+                                        item.parentid = item.SJID;
+                                        if(item.CHILD&&item.CHILD.length!=0){
+                                                this.changeZd(item.CHILD);
+                                        }
+                                }
+                        },
                         async initRoutes(){           //初始化路由参数
                                 let res = await axios.post(this.$config.urlh+ '/NEWKP/DEV/GetMenu')
                                 if(res.Result=='1'){
-                                        for(let item of res.Rows){
-                                                item.id = item.ID;
-                                                item.label = item.CATPTION;
-                                                item.router = item.ROUTER;
-                                                item.item = item.ICON
-                                                item.iscontainer = item.ISCONTAINER
-                                                item.children = item.CHILD
-                                        }
+                                        this.changeZd(res.Rows);
                                         this.menuData = res.Rows;
                                 }else{
                                         this.$alert('获取路由信息失败'+ res.Message);
