@@ -395,7 +395,7 @@ export const myComponents=[
                         value: '',            //值
                 }
             ]               
-          }  
+          }
 ]
 
 //容器组件

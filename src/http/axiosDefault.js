@@ -9,7 +9,11 @@ axios.interceptors.request.use(function (config) {
         try{
             config.data.append('token',localStorage.getItem('token'))
         }catch(e){
-            config.data+='&token='+localStorage.getItem("token")
+            if(config.data==''){
+                config.data+='?token='+localStorage.getItem("token")
+            }else{
+                config.data+='&token='+localStorage.getItem("token")
+            }
         }
         return config;
   }, function (error) {

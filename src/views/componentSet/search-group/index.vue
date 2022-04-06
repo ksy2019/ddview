@@ -501,8 +501,9 @@ export default {
             this.config.other = list.filter(item=>!arr.includes(item.id));
         },
         editGetSet(row){                       //编辑获取值的方式
+            console.log(row)
             if(row.type==='js'){
-                this.showJavaScriptEdit = true;
+                this.editJs(row,'value')
             }else{
                 this.$prompt('请输入key对应的值', '提示', {
                     confirmButtonText: '确定',

@@ -7,7 +7,7 @@
         </div>
         <div class="set-row-between nos">
             <span class="nos color1">点击搜索</span>
-            <span @click="editJs" class="primary">编辑功能</span>
+            <span @click="editJs(config,'onSearch')" class="primary">编辑功能</span>
         </div> 
         <!-- 初始化编辑器 -->
         <javascript-drawer  size="60%" :visible.sync="showJavaScriptEdit" v-model="javascript.ob[javascript.key]"/>
@@ -47,6 +47,7 @@ export default {
     },
     methods: {
         editJs(ob,key){                   //点击编辑js代码
+                console.log(arguments)
                 this.javascript.ob=ob;
                 this.javascript.key=key;
                 this.showJavaScriptEdit=true;

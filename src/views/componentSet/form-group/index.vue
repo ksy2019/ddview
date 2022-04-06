@@ -309,7 +309,7 @@ export default {
         },
         editGetSet(row){                    //编辑获取其他值的方式
             if(row.type==='js'){
-                this.showJavaScriptEdit = false;
+                this.editJs(row,'value')
             }else{
                 this.$prompt('请输入key对应的值', '提示', {
                     confirmButtonText: '确定',
