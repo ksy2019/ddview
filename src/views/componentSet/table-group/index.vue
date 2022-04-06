@@ -109,7 +109,7 @@
                 field="main"
                 header-align="center"
                 align="center"
-                width="85"
+                min-width="85"
                 title="子节点">
                     <div slot-scope="slot" @click="openChildren(slot.row)" :class="slot.row.children&&slot.row.children.length!=0?'main-color':''" class="nos">设置</div>
                 </vxe-table-column>
@@ -117,7 +117,7 @@
                 field="main"
                 header-align="center"
                 align="center"
-                width="85"
+                min-width="85"
                 title="操作">
                     <div slot-scope="slot" @click="openColSet(slot.row)" class="main-color nos">修改</div>
                 </vxe-table-column>

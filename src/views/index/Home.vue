@@ -299,13 +299,22 @@ export default {
          ...deepClone(this.drawingList),
       }
     },
-    empty() {               //清空表单事件
-      this.$confirm('确定要清空所有组件吗？', '提示', { type: 'warning' }).then(
-        () => {
+    clearChildren(arr){            //删除节点下的数据
+          for(let item of arr){
+              delete Vue.prototype['$'+item.id]
+              if(item.children&&item.children.length1==0){
+                  this.clearChildren(item.children)
+              }
+          }
+    },
+    clearAll(){       //清空所有组件
+          this.clearChildren(this.drawingList.children)
           this.drawingList.children = [];
-          //删除组件
-        }
-      )
+    },
+    empty() {               //清空表单事件
+      this.$confirm('确定要清空所有组件吗？', '提示', { type: 'warning' }).then(() => {
+          this.clearAll();
+      })
     },
     showJson() {      //展示JSON
       this.editJsonType = '';
