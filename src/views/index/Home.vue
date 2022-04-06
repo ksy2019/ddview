@@ -206,7 +206,9 @@ export default {
           })
       },320)
       let res = await axios.post(this.$config.urlh + '/NEWKP/DEV/GetPage','id='+this.pageid);
-      this.mloading.close();
+      setTimeout(()=>{
+        this.mloading.close();
+      },320)
       if(res.PAGEJSON){
         this.drawingList = JSON.parse(Base64.decode(res.PAGEJSON.replace(/ /g,'+')))
       }

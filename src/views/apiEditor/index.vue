@@ -1,7 +1,7 @@
 <!--
  * @Author: BlueStar
  * @Date: 2022-03-31 18:12:54
- * @LastEditTime: 2022-04-06 10:09:15
+ * @LastEditTime: 2022-04-06 10:34:04
  * @Description: api编辑页面
 -->
 <template>
@@ -104,7 +104,7 @@
         </div>
         <!-- 增加文件夹的窗口 -->
         <el-dialog title="查询条件" width="460px" append-to-body top="16vh" custom-class="update-dialog brdialog"  :close-on-click-modal="false" :visible.sync="cxtj.visible">
-                <div>
+                <div class="mt20">
                 <el-form :model="cxtj"  label-width="68px" label-position="left">
                         <el-form-item label="查询名称" >
                                 <el-input v-model="cxtj.name" placeholder="请输入查询名称"></el-input>
@@ -116,16 +116,16 @@
                                 <el-input v-model="cxtj.key" placeholder="请输入对应字段"></el-input>
                         </el-form-item>
                         <el-form-item label="默认值" >
-                                <el-input v-model="cxtj.name" placeholder="请输入默认值"></el-input>
+                                <el-input v-model="cxtj.default" placeholder="请输入默认值"></el-input>
                         </el-form-item>
                         <el-form-item label="sql语句" >
                                 <el-input v-model="cxtj.sql" type="textarea" :rows="5" placeholder="请输入sql语句"></el-input>
                         </el-form-item>
                         <el-form-item>
-                                <div style="text-align:right;">
+                            <div style="text-align:right;">
                                 <el-button @click="cxtj.visible = false;">取消</el-button>
                                 <el-button type="primary" @click="submitAddCxtj">提交</el-button>
-                                </div>
+                            </div>
                         </el-form-item> 
                 </el-form>
                 </div>

@@ -1,7 +1,7 @@
 <!--
  * @Author: BlueStar
  * @Date: 2022-03-29 09:15:18
- * @LastEditTime: 2022-04-05 20:21:00
+ * @LastEditTime: 2022-04-06 10:31:59
  * @Description: 菜单编辑页面
 -->
 <template>
@@ -26,90 +26,88 @@
         </div>
         <div class="editor-body">
                 <div  class="home-body">
-                              <!-- //左边菜单 -->
-                              <div class="home-left-container">
-                                        <div class="home-body-left scrollbar">
-                                                <div class="edith-bar bbr1">
-                                                        <div class="title">
-                                                                菜单栏
+                        <!-- //左边菜单 -->
+                        <div class="home-left-container">
+                                  <div class="home-body-left scrollbar">
+                                        <div class="edith-bar bbr1">
+                                                <div class="title">
+                                                      菜单栏
+                                                </div>
+                                                <div class="btn-bar">
+                                                        <div @click="clickAdditem" class="item-btn">
+                                                              <i class="el-icon-document-add"></i>
                                                         </div>
-                                                        <div class="btn-bar">
-                                                                <div @click="clickAdditem" class="item-btn">
-                                                                      <i class="el-icon-document-add"></i>
-                                                                </div>
-                                                                <div @click="clickAddfold" class="item-btn">
-                                                                      <i class="el-icon-folder-add"></i>
-                                                                </div>
+                                                        <div @click="clickAddfold" class="item-btn">
+                                                              <i class="el-icon-folder-add"></i>
                                                         </div>
                                                 </div>
-                                                <el-menu
-                                                class="br1"
-                                                unique-opened
-                                                :default-active="tabsData.indexTab"
-                                                >
-                                                <template v-for="(i) in menuData">
-                                                        <el-menu-item @click="clickTab(i)" v-if="i.iscontainer=='0'" :key="i.router" :index="i.router">
-                                                                <div class="menu-item">
-                                                                        <i style="color:#000000e6;" :class="i.icon"></i> {{i.label}}
-                                                                        <span @click.stop="clickAddfold(i)" class="add-btn-menu">
-                                                                                <i class="el-icon-circle-plus-outline"></i>
-                                                                        </span>
-                                                                        <span @click.stop="updateMenuItem(i,'item')" class="add-btn-menu">
+                                        </div>
+                                        <el-menu
+                                        class="br1"
+                                        unique-opened
+                                        :default-active="tabsData.indexTab"
+                                        >
+                                        <template v-for="(i) in menuData">
+                                                <el-menu-item @click="clickTab(i)" v-if="i.iscontainer=='0'" :key="i.router" :index="i.router">
+                                                        <div class="menu-item">
+                                                                <i style="color:#000000e6;" :class="i.icon"></i> {{i.label}}
+                                                               
+                                                                <span @click.stop="updateMenuItem(i,'item')" class="add-btn-menu">
+                                                                        <i class="el-icon-edit"></i>
+                                                                </span>
+                                                        </div>
+                                                </el-menu-item>
+                                                <el-submenu v-if="i.iscontainer=='1'"  :key="i.router" :index="i.router">
+                                                        <div slot="title" class="menu-item">
+                                                                <i :class="i.icon" style="color: #000000e6;"></i>
+                                                                <span>{{i.label}}</span>
+                                                                <span @click.stop="clickAddfold(i)" class="add-btn-menu">
+                                                                        <i class="el-icon-circle-plus-outline"></i>
+                                                                </span>
+                                                                <span @click.stop="updateMenuItem(i,'fold')" class="add-btn-menu">
+                                                                        <i class="el-icon-edit"></i>
+                                                                </span>
+                                                        </div>
+                                                        <!-- //第二层子节点 -->
+                                                        <el-menu-item @click="clickTab(item)"  v-for="(item,index1) in i.children" :key="index1" :index="item.router">
+                                                                <div slot="title" class="menu-item">
+                                                                        <i :class="item.icon" style="color: #000000e6;"></i>
+                                                                        <span>{{item.label}}</span> 
+                                                                        <span @click.stop="updateMenuItem(item,'item')" class="add-btn-menu">
                                                                                 <i class="el-icon-edit"></i>
                                                                         </span>
                                                                 </div>
                                                         </el-menu-item>
-                                                        <el-submenu v-if="i.iscontainer=='1'"  :key="i.router" :index="i.router">
-                                                                <div slot="title" class="menu-item">
-                                                                        <i :class="i.icon" style="color: #000000e6;"></i>
-                                                                        <span>{{i.label}}</span>
-                                                                        <span @click.stop="clickAddfold(i)" class="add-btn-menu">
-                                                                                <i class="el-icon-circle-plus-outline"></i>
-                                                                        </span>
-                                                                        <span @click.stop="updateMenuItem(i,'fold')" class="add-btn-menu">
-                                                                                <i class="el-icon-edit"></i>
-                                                                        </span>
-                                                                </div>
-                                                                <!-- //第二层子节点 -->
-                                                                <el-menu-item @click="clickTab(item)"  v-for="(item,index1) in i.children" :key="index1" :index="item.router">
-                                                                        <div slot="title" class="menu-item">
-                                                                                <i :class="item.icon" style="color: #000000e6;"></i>
-                                                                                <span>{{item.label}}</span> 
-                                                                                <span @click.stop="updateMenuItem(item,'item')" class="add-btn-menu">
-                                                                                        <i class="el-icon-edit"></i>
-                                                                                </span>
-                                                                        </div>
-                                                                </el-menu-item>
-                                                        </el-submenu>
-                                                </template>
-                                                </el-menu>
-                                        </div>
-                              </div>
-                              <!-- //右边主体内容 -->
-                              <div v-loading="!loadingOk" class="home-body-right">
-                                      <div  class="sh-tabs-container bbr1">
-                                                <transition name="el-zoom-in-center">
-                                                <div v-show="scrollIcon" @click="scrollTo('left')" class="scroll-btn scroll-btn-left"><i class="el-icon-arrow-left"></i></div>
-                                                </transition>
-                                                <div id="scroll-con" class="noscrollbar">
-                                                          <transition-group   leave-to-class="router-leaver"   enter-active-class="router-enter">
-                                                          <div @click="clickTab(item)" :ref="item.router" :class="item.router==tabsData.indexTab?'index-tab':''" v-for="item in tabsData.list" :key="item.router" class="sh-tabs-item">
-                                                                  <span><i :class="item.icon"></i> {{item.label}}</span>
-                                                                  <span @click.stop="closeTab(item)" v-show="item.router!='home'" class="el-icon-circle-close tab-close"></span>
-                                                          </div>  
-                                                          </transition-group>
+                                                </el-submenu>
+                                        </template>
+                                        </el-menu>
+                                  </div>
+                        </div>
+                        <!-- //右边主体内容 -->
+                        <div v-loading="!loadingOk" class="home-body-right">
+                                <div  class="sh-tabs-container bbr1">
+                                        <transition name="el-zoom-in-center">
+                                        <div v-show="scrollIcon" @click="scrollTo('left')" class="scroll-btn scroll-btn-left"><i class="el-icon-arrow-left"></i></div>
+                                        </transition>
+                                        <div id="scroll-con" class="noscrollbar">
+                                                <transition-group   leave-to-class="router-leaver"   enter-active-class="router-enter">
+                                                <div @click="clickTab(item)" :ref="item.router" :class="item.router==tabsData.indexTab?'index-tab':''" v-for="item in tabsData.list" :key="item.router" class="sh-tabs-item">
+                                                        <span><i :class="item.icon"></i> {{item.label}}</span>
+                                                        <span @click.stop="closeTab(item)" v-show="item.router!='home'" class="el-icon-circle-close tab-close"></span>
                                                 </div>
-                                                <transition name="el-zoom-in-center">
-                                                <div v-show="scrollIcon" @click="scrollTo('right')" class="scroll-btn scroll-btn-right"><i class="el-icon-arrow-right"></i></div>
-                                                </transition>
-                                      </div>
-                                      <!-- //路由容器组件 -->
-                                      <div  v-if="loadingOk" class="router-con"  >
-                                                <keep-alive> 
-                                                        <router-view  :key="$route.path.replace('/menueditor/','')"></router-view> 
-                                                </keep-alive>
-                                      </div>
-                              </div>
+                                                </transition-group>
+                                        </div>
+                                        <transition name="el-zoom-in-center">
+                                        <div v-show="scrollIcon" @click="scrollTo('right')" class="scroll-btn scroll-btn-right"><i class="el-icon-arrow-right"></i></div>
+                                        </transition>
+                                </div>
+                                <!-- //路由容器组件 -->
+                                <div  v-if="loadingOk" class="router-con"  >
+                                        <keep-alive>
+                                                <router-view  :key="$route.path.replace('/menueditor/','')"></router-view> 
+                                        </keep-alive>
+                                </div>
+                        </div>
                 </div>
                 <div class="right-con">
                         <transition enter-active-class="animateflipInX" >
@@ -119,7 +117,7 @@
                                         </div>
                                         <div class="right">
                                                 <div class="top">
-                                                        编辑当前页面
+                                                        编辑当前界面
                                                 </div>
                                                 <div class="bottom">
                                                         在页面编辑器中编辑
