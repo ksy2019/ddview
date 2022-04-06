@@ -502,7 +502,7 @@ export default {
         },
         editGetSet(row){                       //编辑获取值的方式
             if(row.type==='js'){
-                this.showJavaScriptEdit = ture;
+                this.showJavaScriptEdit = true;
             }else{
                 this.$prompt('请输入key对应的值', '提示', {
                     confirmButtonText: '确定',
@@ -578,7 +578,7 @@ export default {
         getTableList(){                     //获取挂载在vue节点下面的对象;
             let list=[]
             for(let key in Vue.prototype){
-                if(key.indexOf('$table')!==-1){
+                if(key.indexOf('$table')!==-1&&Vue.prototype[key]){
                     list.push(key)
                 }
             }

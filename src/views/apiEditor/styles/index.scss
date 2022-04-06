@@ -1,3 +1,9 @@
+/*
+ * @Author: BlueStar
+ * @Date: 2022-04-02 14:23:17
+ * @LastEditTime: 2022-04-06 12:12:29
+ * @Description: 界面： apiEditor 
+ */
 @import '@/styles/global.scss';
 @import '@/styles/allVar.scss';
 $tool-height: 42px;
@@ -119,5 +125,16 @@ $bg-color: var(--bg-color);
                 }
             }
         }
+    }
+}
+.body-container{
+    .body-tool-bar{
+        padding: 12px;
+        box-sizing: border-box;
+    }
+    .table-container{
+        padding: 0 12px;
+        box-sizing: border-box;
+        height: calc(100vh - 130px);
     }
 }

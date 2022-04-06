@@ -1,7 +1,7 @@
 <!--
  * @Author: BlueStar
  * @Date: 2022-03-31 18:12:54
- * @LastEditTime: 2022-04-06 10:34:04
+ * @LastEditTime: 2022-04-06 13:50:25
  * @Description: api编辑页面
 -->
 <template>
@@ -20,11 +20,65 @@
                         </div>
                 </div>
         </div>
-        <el-tabs type="card">
+        <div class="body-container">
+            <div class="body-tool-bar flex-bet">
+                <div class="body-tool-bar-left flex">
+                    <el-input placeholder="请输入关键字"></el-input>
+                    <el-button style="margin-left:10px" type="warning">搜索</el-button>
+                </div>
+                <div class="body-tool-bar-right">
+                    <el-button @click="clickAddItem" type="primary">新增</el-button>
+                </div>
+            </div>
+            <div class="table-container">
+                <vxe-table 
+                ref="table"
+                border
+                :checkbox-config="{highlight: true,range: true}"
+                :data="dataList"
+                style="width: 100%"
+                stripe
+                height="100%"
+                >
+                <vxe-table-column
+                type="checkbox"
+                align="center"
+                width="55">
+                </vxe-table-column>
+                <vxe-table-column
+                field="label"
+                header-align="center"
+                :formatter="$base.formatter"
+                align="left"
+                title="接口名称"
+                width="100">
+                </vxe-table-column>
+                <vxe-table-column
+                field="label"
+                header-align="center"
+                :formatter="$base.formatter"
+                align="left"
+                title="对应字段"
+                min-width="100">
+                </vxe-table-column>
+                <vxe-table-column
+                field="main"
+                header-align="center"
+                align="center"
+                width="128"
+                title="操作">
+                    <div slot-scope="slot" >
+                        <span  class="main-color nos" @click="clickUpdate(slot.row)">修改</span>
+                    </div>
+                </vxe-table-column>
+                </vxe-table>
+            </div>
+        </div>
+        <el-tabs v-show="true" type="card">
           <el-tab-pane label="API管理" name="first"></el-tab-pane>
           <el-tab-pane label="列管理" name="second"></el-tab-pane> 
         </el-tabs>
-        <div class="editor-body">
+        <div v-show="true" class="editor-body">
             <div class="left br1">
                     <div class="left-top-container">
                         <div class="bb1 flex-bet tool-bar">
@@ -146,7 +200,9 @@ export default {
                     sql: '',
                     default: ''
                 }
-            }
+            },
+            dataList: [],
+
         }
     },
     methods: {
@@ -155,6 +211,9 @@ export default {
         },
         submitAddCxtj(){                //提交查询条件
             this.cxtj.visible = false;
+        },
+        clickAddItem(){
+
         }
     },
     created(){

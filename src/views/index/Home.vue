@@ -303,6 +303,7 @@ export default {
       this.$confirm('确定要清空所有组件吗？', '提示', { type: 'warning' }).then(
         () => {
           this.drawingList.children = [];
+          //删除组件
         }
       )
     },
