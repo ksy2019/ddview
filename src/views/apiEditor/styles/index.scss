@@ -4,6 +4,30 @@ $tool-height: 42px;
 $font-color: #000000e6;
 $bg-color: var(--bg-color);
 
+.tool-bar{
+    height: 42px;
+    padding: 0 12px;
+    box-sizing: border-box;
+    background: $bg-color;
+    img{
+        height: 16px;
+        margin-right: 3px;
+    }
+    .right-btn-con{
+        .item-btn{
+            @extend .btn;
+            height: 28px;
+            width: 28px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 6px;
+            i{
+                font-size: 16px;
+            }
+        }
+    }
+}
 .api-editor{
     .top-tool{
         display: flex;
@@ -69,11 +93,31 @@ $bg-color: var(--bg-color);
             width: 42%;
             min-width: 350px;
             height: 100%;
+            .left-top-container{
+            }
+            .qjsqlsz{
+                padding: 12px;
+                box-sizing: border-box;
+            }
         }
         .right{
             width: 200px;
             flex: 1;
             height: 100%;
+            .api-list-con{
+                .api-list-item{
+                    height: 50px;
+                    padding: 0 12px;
+                    .left{
+                        i{
+                            font-size: 16px;
+                        }
+                        .title{
+                            font-size: 14px;
+                        }
+                    }
+                }
+            }
         }
     }
 }

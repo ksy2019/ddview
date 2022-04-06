@@ -2,7 +2,7 @@
   <div  class="container">
     <!-- 最顶端头部 --> 
     <div class="header">
-        <div class="logo">
+        <div class="logo nous">
             ⚡SuperCode
         </div>
         <div class="tool-bar">
