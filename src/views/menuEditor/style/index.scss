@@ -146,6 +146,16 @@ $bg-color: var(--bg-color);
                     align-items: center;
                     justify-items: flex-start;
                     @extend .btn;
+                    &:hover{
+                        .right{
+                                .top{
+                                        color: #fff;
+                                }
+                                .bottom{
+                                        color: rgb(245, 245, 245);
+                                }    
+                        }
+                    }
                     .left{
                         img{
                                 height: 46px;

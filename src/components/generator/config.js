@@ -233,7 +233,7 @@ export const myComponents=[
                 {
                         name: 'search',
                         info: '搜索事件'
-                } 
+                }
             ]
           },
           // table组件  tablej-group
