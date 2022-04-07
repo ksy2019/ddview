@@ -1,7 +1,7 @@
 <!--
  * @Author: BlueStar
  * @Date: 2022-03-18 16:12:33
- * @LastEditTime: 2022-03-28 16:31:28
+ * @LastEditTime: 2022-04-07 16:54:52
  * @Description: 选择icon图标组件
 -->
 <template>
@@ -13,7 +13,7 @@
             <div class="arrow" data-popper-arrow></div>
             <div class="scroll-con">
                 <el-scrollbar  wrap-class="select-con"  view-class=""  :native="false">
-                        <div @click="selectedIcon(item)" class="item-con" v-for="item in iconList" :key="item">
+                        <div @click="selectedIcon(item)" class="icon-item-con" v-for="item in iconList" :key="item">
                             <i :class="item"></i>
                         </div>
                 </el-scrollbar>
@@ -381,6 +381,7 @@ export default {
 }
 .select-icon-container{
     .index-icon{
+        background: #fff;
         @extend .item-style;
     }
 }
@@ -404,12 +405,13 @@ export default {
     z-index: 99;
     padding: 0 10px 0 9px;
     box-sizing: content-box;
-    .item-con{
+    .icon-item-con{
         @extend .item-style;
         margin: 10px;
         display: inline-block;
         width: 32px;
         height: 32px;
+        line-height: 32px;
         text-align: center;
     }
 }

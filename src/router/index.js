@@ -3,6 +3,13 @@ import Vue from 'vue'
 Vue.use(VueRouter)
 const routes = [
   {
+    path: '*',
+    name: 'all',
+    component: ()=>import('@/views/menuEditor/index.vue' ),
+    children: [
+    ]
+  },
+  {
     path: '/pageeditor',
     name: 'pageeditor',
     component: ()=>import('@/views/index/Home.vue' )

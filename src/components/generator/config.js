@@ -389,6 +389,7 @@ export const myComponents=[
                         label: '收货日期',                  //头部文字
                 },
             ],
+            afterSubmit: '',                     //提交完成之后执行todo:未编写规则
             other: [
                 {
                         key: 'name',
@@ -437,7 +438,7 @@ export const layoutComponents = [
           width: '720px',
           id: guid(),
           type: 'container',                    //容器类容器 
-          modal: true,                            //是否需要遮罩层
+          modal: true,                          //是否需要遮罩层
           title: '这是一个标题',
           top: '22vh',
           children: [

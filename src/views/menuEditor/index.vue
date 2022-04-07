@@ -1,7 +1,7 @@
 <!--
  * @Author: BlueStar
  * @Date: 2022-03-29 09:15:18
- * @LastEditTime: 2022-04-07 10:45:15
+ * @LastEditTime: 2022-04-07 17:08:16
  * @Description: 菜单编辑页面
 -->
 <template>
@@ -355,16 +355,24 @@ export default {
                                         this.$alert('获取路由信息失败'+ res.Message);
                                 }
                                 for(let item of this.menuData){
-                                        if(item.children){
-                                                for(let item of item.children){
+                                        if(item.ISCONTAINER=='1'){
+                                                for(let itemc of item.children){
                                                         const routeObj = {
-                                                            path: '/menueditor/'+item.router, // 这里要把父路由的路径也带上
-                                                            name: item.router,
+                                                            path: '/menueditor/'+itemc.router, // 这里要把父路由的路径也带上
+                                                            name: itemc.router,
                                                             meta: {  },
                                                             component: () =>  import('../templateView/index.vue')
                                                         }
                                                         this.$router.addRoute('menueditor',routeObj)
                                                 }
+                                        }else{
+                                                const routeObj = {
+                                                    path: '/menueditor/'+item.router, // 这里要把父路由的路径也带上
+                                                    name: item.router,
+                                                    meta: {  },
+                                                    component: () =>  import('../templateView/index.vue')
+                                                }
+                                                this.$router.addRoute('menueditor',routeObj)
                                         }
                                 }
                         },

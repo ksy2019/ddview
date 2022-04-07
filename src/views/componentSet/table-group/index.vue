@@ -212,8 +212,9 @@
         <!-- //子节点设置 -->
         <el-dialog v-dialogDrag title="子节点设置"  :close-on-click-modal="false" width="980px" top="12vh"  custom-class="children-set-dialog" :visible.sync="showChildrenSet">
                 <div class="tool-bar">
-                    <el-button type="primary" icon="el-icon-circle-plus-outline">添加</el-button>
-                    <el-button type="primary" icon="el-icon-delete">删除</el-button>
+                    //todo: 未完善
+                    <el-button @click="clickAddChild" type="primary" icon="el-icon-circle-plus-outline">添加</el-button>
+                    <el-button @click="clickReduceChild" type="primary" icon="el-icon-delete">删除</el-button>
                 </div>
                 <div class="table-con">
                     <vxe-table 
@@ -261,7 +262,7 @@
                         min-width="100">
                             <div @click="editJs(slot.row,'onClick')" slot-scope="slot" class="main-color nos">编辑脚本</div>
                         </vxe-table-column>
-                        <vxe-table-column 
+                        <vxe-table-column
                         header-align="center"
                         align="center"
                         :formatter="$base.formatter"
@@ -317,6 +318,12 @@ export default {
         }
     },
     methods: {
+        clickAddChild(){                    //点击增加子节点
+            
+        },
+        clickReduceChild(){                 //点击删除子节点
+
+        },
         saveChildrenItem(){                 //保存单个子节点设置
             for(let key in this.indexChildrenItem){
                 this.indexChildrenItem[key]   = this.itemSet[key]

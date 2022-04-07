@@ -44,7 +44,7 @@
         <div class="set-row-between nos">
             <span class="nos color1">搜索图标</span>
             <div>
-                    <el-input v-model="config.serachIcon"></el-input>
+                    <select-icon v-model="config.serachIcon"></select-icon>
             </div>
         </div>
         <div class="set-row-between nos">
