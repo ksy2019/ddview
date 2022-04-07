@@ -1,7 +1,7 @@
 <!--
  * @Author: BlueStar
  * @Date: 2021-11-05 15:52:38
- * @LastEditTime: 2022-04-02 16:18:35
+ * @LastEditTime: 2022-04-07 18:08:45
  * @Description: 组件的css样
 -->
 <template>
@@ -75,6 +75,15 @@
                         <el-input v-model="cache.css.background"></el-input>
                     </div>
                 </div>
+                <div class="set-row-between nos">
+                    <span class="nos color1">边框模型</span>
+                    <div>
+                        <el-select v-model="cache.css.boxSizing">
+                            <el-option label="border-box" value="border-box"></el-option>
+                            <el-option label="content-box" value="content-box"></el-option>
+                        </el-select>
+                    </div>
+                </div>
                 <div @click="openCssEdit" class="bxdm-con nos">
                     <img  height="15px" src="@/assets/icon/css.svg" alt=""><span>编写css代码</span>
                 </div>
@@ -102,7 +111,8 @@ export default {
                     bottom: '',
                     border: '',
                     'border-radius': '',
-                    background: ''
+                    background: '',
+                    boxSizing: ''
                 }
             }
         }

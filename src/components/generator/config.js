@@ -230,7 +230,10 @@ export const myComponents=[
                     }
             ],
             apis: [
-                    
+                {
+                        name: 'search',
+                        info: '搜索事件'
+                } 
             ]
           },
           // table组件  tablej-group
@@ -239,8 +242,9 @@ export const myComponents=[
             tag: "table-group",
             key: "FPZL,XTLSH",
             css: {
-                    padding: '',
-                    margin: '12px',
+                    padding: '0 12px',
+                    margin: '',
+                    boxSizing: 'border-box'
             },                               //css样式设置
             id: guid(),
             showPage: "1",
@@ -407,8 +411,9 @@ export const layoutComponents = [
           name: '普通容器',
           tag: 'view-m',
           css: {
-                padding: '',
-                margin: '12px',
+                padding: '12px',
+                margin: '',
+                boxSizing: 'border-box'
           },                              //元素的css内联，优先级最高
           id: guid(),
           type: 'container',                    //容器类容器 
@@ -419,8 +424,9 @@ export const layoutComponents = [
           name: '单行容器',
           tag: 'view-between',
           css: {
-                padding: '',
-                margin: '12px',
+                padding: '12px',
+                margin: '',
+                boxSizing: 'border-box'
           },                              //元素的css内联，优先级最高
           id: guid(),
           type: 'container',                    //容器类容器 

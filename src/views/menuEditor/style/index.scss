@@ -353,11 +353,11 @@ $bg-color: var(--bg-color);
                         .home-body-right{
                                 width: 200px;
                                 flex: 1;
-                                background: $bg-color;
+                                background: #fff;
                                 position: relative;
                                 .router-con{
                                         overflow: auto;
-                                        height: calc(100% - $tool-height);
+                                        height: calc(100% - #{$tool-height});
                                 }
                         }
            }

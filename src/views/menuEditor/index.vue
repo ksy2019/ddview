@@ -1,7 +1,7 @@
 <!--
  * @Author: BlueStar
  * @Date: 2022-03-29 09:15:18
- * @LastEditTime: 2022-04-07 17:08:16
+ * @LastEditTime: 2022-04-07 17:16:52
  * @Description: 菜单编辑页面
 -->
 <template>
@@ -378,6 +378,7 @@ export default {
                         },
                 },
                 async created(){
+                        window.mode= 'production'
                         this.initRoutes();
                         ///对menuData进行赋值操作
                         if(localStorage.getItem("wdsk-mytabs")!==null){

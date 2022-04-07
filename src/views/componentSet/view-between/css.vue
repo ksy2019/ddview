@@ -1,7 +1,7 @@
 <!--
  * @Author: BlueStar
  * @Date: 2021-11-05 15:52:38
- * @LastEditTime: 2022-04-02 16:21:05
+ * @LastEditTime: 2022-04-07 18:06:39
  * @Description: 组件的css样
 -->
 <template>
@@ -75,6 +75,15 @@
                         <el-input v-model="cache.css.background"></el-input>
                     </div>
                 </div>
+                <div class="set-row-between nos">
+                    <span class="nos color1">边框模型</span>
+                    <div>
+                        <el-select v-model="cache.css.boxSizing">
+                            <el-option label="border-box" value="border-box"></el-option>
+                            <el-option label="content-box" value="content-box"></el-option>
+                        </el-select>
+                    </div>
+                </div>
             </div>
     </div>
 </template>
@@ -99,7 +108,8 @@ export default {
                     bottom: '',
                     border: '',
                     'border-radius': '',
-                    background: ''
+                    background: '',
+                    'boxSizing': ''
                 }
             }
         }
