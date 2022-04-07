@@ -398,6 +398,7 @@ export default {
 </script>
 <style lang="scss" scoped>
 @import "@/styles/global.scss";
+@import  '@/styles/globalCompontSet.scss';
 .items-show-con{
     padding: 0 12px;
     .item-row{

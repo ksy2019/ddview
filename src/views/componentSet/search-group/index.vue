@@ -162,7 +162,7 @@
                 width="128"
                 title="操作">
                     <div slot-scope="slot" >
-                        <span v-if="slot.row.type==='select'" class="main-color nos mr10" @click="openGetList(slot.row)" >选项设置</span>
+                        <span v-if="slot.row.type==='select'" class="main-color nos mr10" @click="openGetList(slot.row)" >数据设置</span>
                         <span  class="main-color nos" @click="openColSet(slot.row)" >修改</span>
                     </div>
                 </vxe-table-column>
@@ -333,7 +333,7 @@
         <el-dialog v-dialogDrag title="按钮设置"  :close-on-click-modal="false" width="320px" top="14vh"  custom-class="item-set-dialog" :visible.sync="showBtnSet">
                 <div class="form-con" style="margin-top: 38px;">
                         <el-form ref="form" label-position="left" :model="indexOb" label-width="86px" >
-                                 <el-form-item  label="控件类型">
+                                <el-form-item  label="控件类型">
                                         <el-select v-model="indexOb.type">
                                             <el-option v-for="(item,key) in inputType" :key="key" :label="item" :value="key"></el-option>
                                         </el-select>
@@ -395,20 +395,10 @@
                                     </el-select>
                                 </el-form-item>
                             <!-- //固定值取数方式 -->
-                                <div v-if="indexGetListSet.type==='static'" class="getlist-container">
-                                    <div v-for="(item,index) in indexGetListSet.children" :key="index" class="row">
-                                        <span>键名</span> <el-input v-model="indexGetListSet.url"></el-input>
-                                        <span>数值</span><el-input v-model="indexGetListSet.url"></el-input>
+                                <div class="getlist-container">
+                                    <div class="main-color nos">
+                                        修改节点设置
                                     </div>
-                                </div>
-                            <!-- //接口取数方式 -->
-                                <div v-if="indexGetListSet.type==='url'" class="getlist-container">
-                                    <el-form-item  label="接口地址">
-                                            <el-input v-model="indexGetListSet.url"></el-input>
-                                    </el-form-item>
-                                    <el-form-item  label="参数设置">
-                                            <el-input v-model="indexGetListSet.url"></el-input>
-                                    </el-form-item>
                                 </div>
                         </el-form>
                 </div>
@@ -416,8 +406,8 @@
                         <div class="left">
                         </div>
                         <div class="right">
-                                <el-button style="margin-right: 10px;" @click="showBtnSet=false">取消</el-button>
-                                <el-button type="primary" @click="saveBtn">确定</el-button>
+                                <el-button style="margin-right: 10px;" @click="showSelectOption=false">取消</el-button>
+                                <el-button type="primary" @click="saveSelectOption">确定</el-button>
                         </div>
                 </div>
         </el-dialog>
@@ -473,18 +463,19 @@ export default {
         }
     },
     methods: {
-        openGetList(row){                          //获取下拉框的节点设置
+        openGetList(row){                          //点击下拉框
             this.indexOb = row;
+            console.log(this.indexOb)
             this.indexGetListSet = JSON.parse(JSON.stringify(row));
             this.showSelectOption = true;
         },
-        addItemMore(){                          ///新增子节点
+        addItemMore(){                          //新增字节点
             this.addType = 'more';
             this.indexOb = this.$base.deepCopy(this.souceBtn);
             this.indexOb.id = this.$base.guid();
             this.showBtnSet = true;
         },
-        addOtherItem(){                         //新增附加字段
+        addOtherItem(){                         //新增附加节点
             this.config.other.push({
                 key: '',
                 type: 'static',
@@ -537,6 +528,8 @@ export default {
                 this.cacheOb[item]=this.indexOb[item]
             }
             this.showBtnSet=false;
+        },
+        saveSelectOption(){                 //保存下拉框选项
         },
         addEnv(row){                        //点击添加事件
             console.log(row)
@@ -595,6 +588,7 @@ export default {
 </script>
 <style lang="scss" scoped>
 @import "@/styles/global.scss";
+@import  '@/styles/globalCompontSet.scss';
 .items-show-con{
     padding: 0 12px;
     .item-row{

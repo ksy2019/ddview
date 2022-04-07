@@ -364,6 +364,8 @@ export const myComponents=[
                         width: '',                    //宽度， 这个节点可以没有,单位px
                         showLabel: false,                  //是否显示头部提示，优先级大于外层
                         label: '发票种类',                  //头部文字
+                        getDataType: '',
+                        url: '',
                         defaultValue: '026',
                         children: [
                                 {label: '电子发票',value: '026'},
