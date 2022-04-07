@@ -241,69 +241,68 @@ export const myComponents=[
             css: {
                     padding: '',
                     margin: '12px',
-
             },                               //css样式设置
             id: guid(),
             showPage: "1",
             showFooter: true,                      //是否显示页脚,统计和页脚
             columns: [
-                    {
-                            "label": "",
-                            "field": "",
-                            "type": "seq",
-                            "width": "35",
-                            "align": "center",
-                            "headalign": "center",
-                            "color": "",
-                            "id": guid(),
-                            "xh": "00",
-                            "fixed": "left"
-                    },
-                    {
-                            "label": "",
-                            "field": "",
-                            "type": "checkbox",
-                            "width": "55",
-                            "align": "center",
-                            "headalign": "center",
-                            "color": "",
-                            "id": guid(),
-                            "xh": "00",
-                            "fixed": "left"
-                    }, 
-                    {
-                            "label": "名称",
-                            "field": "name",
-                            "width": "100",
-                            "type": "",
-                            "align": "left",
-                            "headalign": "center",
-                            "color": "",
-                            "id": guid(),
-                            "xh": "5",
-                            "sumcol": "",
-                            "fixed": "left"
-                    },
-                    {
-                            "fixed": "right",
-                            "label": "操作",
-                            "width": "60",
-                            "type": "",
-                            "color": "",
-                            id: guid(),
-                            "children": [
-                                {
-                                    "label": "查看",
-                                    "field": "",
-                                    "align": "center",
-                                    "headalign": "center",
-                                    "color": "primary",
-                                    "id": guid(),
-                                    "xh": "4100",
-                                    "onClick": ""
-                                }
-                            ]
-                    }
+                {
+                        "label": "",
+                        "field": "",
+                        "type": "seq",
+                        "width": "35",
+                        "align": "center",
+                        "headalign": "center",
+                        "color": "",
+                        "id": guid(),
+                        "xh": "00",
+                        "fixed": "left"
+                },
+                {
+                        "label": "",
+                        "field": "",
+                        "type": "checkbox",
+                        "width": "55",
+                        "align": "center",
+                        "headalign": "center",
+                        "color": "",
+                        "id": guid(),
+                        "xh": "00",
+                        "fixed": "left"
+                }, 
+                {
+                        "label": "名称",
+                        "field": "name",
+                        "width": "100",
+                        "type": "",
+                        "align": "left",
+                        "headalign": "center",
+                        "color": "",
+                        "id": guid(),
+                        "xh": "5",
+                        "sumcol": "",
+                        "fixed": "left"
+                },
+                {
+                        "fixed": "right",
+                        "label": "操作",
+                        "width": "60",
+                        "type": "",
+                        "color": "",
+                        id: guid(),
+                        "children": [
+                            {
+                                "label": "查看",
+                                "field": "",
+                                "align": "center",
+                                "headalign": "center",
+                                "color": "primary",
+                                "id": guid(),
+                                "xh": "4100",
+                                "onClick": ""
+                            }
+                        ]
+                }
             ],
             props: [
             ],

@@ -154,7 +154,7 @@
                 :formatter="$base.formatter"
                 field="defaultValue"
                 min-width="100">
-                </vxe-table-column> 
+                </vxe-table-column>
                 <vxe-table-column
                 field="main"
                 header-align="center"
@@ -385,24 +385,20 @@
                 </div>
         </el-dialog>
     <!-- //单个按钮的属性编辑器 -->
-        <el-dialog v-dialogDrag title="选项设置"  :close-on-click-modal="false" width="320px" top="14vh"  custom-class="item-set-dialog" :visible.sync="showSelectOption">
-                <div class="form-con" style="margin-top: 38px;">
+        <el-dialog v-dialogDrag title="下拉数据设置"  :close-on-click-modal="false" width="320px" top="14vh"  custom-class="item-set-dialog" :visible.sync="showSelectOption">
+                <div v-if="showSelectOption" class="form-con" style="margin-top: 38px;">
                         <el-form ref="form" label-position="left" :model="indexGetListSet" label-width="86px" >
                                 <el-form-item  label="取数方式">
                                     <el-select v-model="indexGetListSet.getDataType">
                                         <el-option  label="固定值" value="static"></el-option>
-                                        <el-option  label="接口取值" value="url"></el-option>
+                                        <el-option  label="接口取数" value="url"></el-option>
                                     </el-select>
                                 </el-form-item>
-                            <!-- //固定值取数方式 -->
-                                <div class="getlist-container">
-                                    <div class="main-color nos">
-                                        修改节点设置
-                                    </div>
-                                </div>
+                                <el-form-item label="编辑取数方式">
+                                </el-form-item>
                         </el-form>
                 </div>
-                <div class="flex-bet mt20" slot="footer">
+                <div v-if="showSelectOption" class="flex-bet mt20" slot="footer">
                         <div class="left">
                         </div>
                         <div class="right">
@@ -459,7 +455,7 @@ export default {
                 'twoDate': '双排日期',
                 'checkbox': '复选框',
             },
-            tableList:[],                   //数据表哥控件列表
+            tableList:[],                   //数据表格控件列表
         }
     },
     methods: {
@@ -468,8 +464,9 @@ export default {
             console.log(this.indexOb)
             this.indexGetListSet = JSON.parse(JSON.stringify(row));
             this.showSelectOption = true;
+            console.log(row);
         },
-        addItemMore(){                          //新增字节点
+        addItemMore(){                          //新增子节点
             this.addType = 'more';
             this.indexOb = this.$base.deepCopy(this.souceBtn);
             this.indexOb.id = this.$base.guid();

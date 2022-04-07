@@ -29,7 +29,7 @@
         :visible.sync="showItemSet"
         :show-close="false"
         :withHeader="false"
-        size="75%"
+        size="100%"
         >
             <div class="drawer-header">
                 <div>
@@ -104,6 +104,16 @@
                 title="颜色"
                 min-width="100">
                             <div slot-scope="slot">{{$base.isBlank(slot.row.color)?'- - -': $globjs.color[slot.row.color]}}</div>
+                </vxe-table-column>
+                <vxe-table-column 
+                header-align="center"
+                align="center"
+                title="位置"
+                min-width="100">
+                            <div slot-scope="slot">
+                                <span @click="clickSortUP(slot.row)"> <i class="el-icon-caret-top font15 nos"></i></span>
+                                <span @click="clickSortDown(slot.row)"> <i class="el-icon-caret-bottom font15 ml10 nos"></i></span>
+                            </div>
                 </vxe-table-column>
                 <vxe-table-column
                 field="main"
@@ -243,7 +253,7 @@
                         min-width="100">
                             <div slot-scope="slot">{{$globjs.color[slot.row.color]}}</div>
                         </vxe-table-column>
-                        <vxe-table-column 
+                        <vxe-table-column
                         header-align="center" 
                         align="center"
                         :formatter="$base.formatter"
@@ -313,12 +323,12 @@ export default {
             }
             this.showChildrenItem = false;
         },
-        openChildrenItem(item){                 //打开单个节点设置
+        openChildrenItem(item){             //打开单个节点设置
             this.indexChildrenItem = item ;
             this.itemSet = JSON.parse(JSON.stringify(item)) ;
             this.showChildrenItem = true;
         },
-        openChildren(row){                     //打开节点设置
+        openChildren(row){                  //打开节点设置
             this.indexChildren = row.children;
             this.showChildrenSet = true;
         },
@@ -367,6 +377,18 @@ export default {
                 arr.push(item.id);
             }
             this.config.columns = list.filter(item=>!arr.includes(item.id));
+        },
+        clickSortUP(row){                   //点击向上排序
+            console.log(this.config.columns,row)
+            for(let item of this.config.columns){
+                if(row.id==item.id){
+
+                    break;
+                }
+            }
+        },
+        clickSortDown(row){                 //点击向下排序
+            console.log(this.config.columns,row)
         }
     },
     created(){

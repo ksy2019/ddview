@@ -1,7 +1,7 @@
 <!--
  * @Author: BlueStar
  * @Date: 2022-03-29 09:15:18
- * @LastEditTime: 2022-04-06 10:31:59
+ * @LastEditTime: 2022-04-07 10:45:15
  * @Description: 菜单编辑页面
 -->
 <template>
@@ -309,8 +309,8 @@ export default {
                         },
                         clickTab(tab){          //点击tab
                                 this.indexTab = tab;
-                                return
-                                this.$router.push(tab.router)
+                                // return
+                                this.$router.push(tab.router+'?id='+tab.id)
                         },
                         eventTabContainer(){    //监听就tabsContainer的溢出事件来控制是否显示i滚动按钮
                                 setTimeout(() => {
