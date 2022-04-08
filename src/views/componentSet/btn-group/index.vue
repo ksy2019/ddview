@@ -42,6 +42,13 @@
                 :checkbox-config="{highlight: true,range: true}"
                 stripe
                 >
+                <vxe-table-column align="center" title="位置" width="60">
+		        	<template v-slot>
+		        		<div class="drag-btn">
+		        			<i class="vxe-icon--menu"></i>
+		        		</div>
+		        	</template> 
+		        </vxe-table-column>
                 <vxe-table-column
                 type="checkbox"
                 align="center"
@@ -150,11 +157,18 @@
             <vxe-table 
                 border
                 :data="indexChild"
-                ref="table"
+                ref="table2"
                 style="width: 100%"
                 :checkbox-config="{highlight: true,range: true}"
                 stripe
                 >
+                <vxe-table-column align="center" title="位置" width="60">
+		        	<template v-slot>
+		        		<div class="drag-btn2">
+		        			<i class="vxe-icon--menu"></i>
+		        		</div>
+		        	</template> 
+		        </vxe-table-column>
                 <vxe-table-column
                 type="checkbox"
                 align="center"
@@ -206,6 +220,7 @@
 
 <script>
 import javascriptDrawer from '../../index/JavaScriptDrawer.vue';
+import Sortable from 'sortablejs';
 export default {
     props: {
         config: Object,
@@ -245,6 +260,7 @@ export default {
         openchild(row){                //打开子节点设置
             this.indexChild = row.children;
             this.showSelectBtn = true;
+            this.initSortable({className: 'drag-btn2',data: row,key:'children',tableRef: 'table2'});
         },
         clickEdit(row){                //点击按钮的修改事件
             this.indexBtn = row;           
@@ -252,6 +268,7 @@ export default {
         },
         openItemSet(){              //点击全部节点设置
             this.showItemSet=true;
+            this.initSortable({className: 'drag-btn',data: this.config,key:'items',tableRef: 'table'});
         },
         openBtnSet(btn){            //打开按钮设置
             this.addType = '';
@@ -294,6 +311,23 @@ export default {
                 }
             }
             this.config.items=list;
+        },
+        initSortable({className,data,key,tableRef}){            //初始化排序功能
+            this.$nextTick(() => {
+					this.sortable = Sortable.create( this.$refs[tableRef].$el.querySelector('.body--wrapper>.vxe-table--body tbody'), {
+						handle: '.' + className,
+						onEnd: ({
+							newIndex,
+							oldIndex
+						}) => {
+                            let columns = this.$base.deepCopy(data[key]);
+							let currRow = columns.splice(oldIndex, 1)[0]
+						    columns.splice(newIndex, 0, currRow)
+                            Object.assign(data[key],columns)
+                            this.$set(this.config,'lastUpdateTime',new Date().getTime())
+						}
+					})
+				})
         }
     },
     created(){

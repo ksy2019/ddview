@@ -224,12 +224,11 @@
         <!-- //子节点设置 -->
         <el-dialog v-dialogDrag title="子节点设置"  :close-on-click-modal="false" width="980px" top="12vh"  custom-class="children-set-dialog" :visible.sync="showChildrenSet">
                 <div class="tool-bar">
-                    //todo: 未完善
                     <el-button @click="clickAddChild" type="primary" icon="el-icon-circle-plus-outline">添加</el-button>
                     <el-button @click="clickReduceChild" type="primary" icon="el-icon-delete">删除</el-button>
                 </div>
                 <div class="table-con">
-                    <vxe-table 
+                    <vxe-table
                         height="450px"
                         border
                         :data="indexChildren"
