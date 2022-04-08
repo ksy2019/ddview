@@ -60,6 +60,9 @@ $bg-color: var(--bg-color);
 .animateflipInX{
         animation: zoomIn .32s;
 }
+::v-deep .my-elmenu{
+        height: calc(100% - 42px);
+}
 ::v-deep .menu-item{
         &:hover{
                 .add-btn-menu{
@@ -349,7 +352,7 @@ $bg-color: var(--bg-color);
                                         height: 100%;
                                         background: #fff;
                         .home-body-left{
-                                        height: calc(100% - 65px) ;
+                                        height: 100%;
                                         width: inherit;
                                         background: #fff;
                                         overflow-x: hidden;

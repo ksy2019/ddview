@@ -1,7 +1,7 @@
 <!--
  * @Author: BlueStar
  * @Date: 2022-03-29 09:15:18
- * @LastEditTime: 2022-04-07 17:16:52
+ * @LastEditTime: 2022-04-08 10:20:15
  * @Description: 菜单编辑页面
 -->
 <template>
@@ -43,7 +43,7 @@
                                                 </div>
                                         </div>
                                         <el-menu
-                                        class="br1"
+                                        class="br1 my-elmenu"
                                         unique-opened
                                         :default-active="tabsData.indexTab"
                                         >
@@ -51,7 +51,6 @@
                                                 <el-menu-item @click="clickTab(i)" v-if="i.iscontainer=='0'" :key="i.router" :index="i.router">
                                                         <div class="menu-item">
                                                                 <i style="color:#000000e6;" :class="i.icon"></i> {{i.label}}
-                                                               
                                                                 <span @click.stop="updateMenuItem(i,'item')" class="add-btn-menu">
                                                                         <i class="el-icon-edit"></i>
                                                                 </span>
@@ -69,8 +68,8 @@
                                                                 </span>
                                                         </div>
                                                         <!-- //第二层子节点 -->
-                                                        <el-menu-item @click="clickTab(item)"  v-for="(item,index1) in i.children" :key="index1" :index="item.router">
-                                                                <div slot="title" class="menu-item">
+                                                        <el-menu-item @click="clickTab(item)" class="br1"  v-for="(item,index1) in i.children" :key="index1" :index="item.router">
+                                                                <div slot="title" class="menu-item ">
                                                                         <i :class="item.icon" style="color: #000000e6;"></i>
                                                                         <span>{{item.label}}</span> 
                                                                         <span @click.stop="updateMenuItem(item,'item')" class="add-btn-menu">
