@@ -296,7 +296,6 @@
 
 <script>
 import javascriptDrawer from '../../index/JavaScriptDrawer.vue';
-import Sortable from 'sortablejs';
 export default {
     props: {
         config: Object,
@@ -371,11 +370,11 @@ export default {
         openChildren(row){                  //打开节点设置
             this.indexChildren = row.children;
             this.showChildrenSet = true;
-            this.initSortable({className: 'drag-btn2',data: row,key:'children',tableRef: 'table1'});
+            this.$globjs.initSortable.call(this,{className: 'drag-btn2',data: row,key:'children',tableRef: 'table1'});
         },
         openItemSet(){                      //点击全部节点设置
             this.showItemSet=true;
-            this.initSortable({className: 'drag-btn',data: this.config,key:'columns',tableRef: 'table'});
+            this.$globjs.initSortable.call(this,{className: 'drag-btn',data: this.config,key:'columns',tableRef: 'table'});
         },
         openColSet(btn){                    //打开按钮设置
             this.indexOb = this.$base.deepCopy(btn);
@@ -419,24 +418,7 @@ export default {
                 arr.push(item.id);
             }
             this.config.columns = list.filter(item=>!arr.includes(item.id));
-        }, 
-        initSortable({className,data,key,tableRef}){
-            this.$nextTick(() => {
-					this.sortable = Sortable.create( this.$refs[tableRef].$el.querySelector('.body--wrapper>.vxe-table--body tbody'), {
-						handle: '.' + className,
-						onEnd: ({
-							newIndex,
-							oldIndex
-						}) => {
-                            let columns = this.$base.deepCopy(data[key]);
-							let currRow = columns.splice(oldIndex, 1)[0]
-						    columns.splice(newIndex, 0, currRow)
-                            Object.assign(data[key],columns)
-                            this.$set(this.config,'lastUpdateTime',new Date().getTime())
-						}
-					})
-				})
-        }
+        },
     },
     created(){
 

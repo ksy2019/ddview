@@ -88,6 +88,13 @@
                 stripe
                 height="500px"
                 >
+                <vxe-table-column align="center" title="位置" width="60">
+		        	<template v-slot>
+		        		<div class="drag-btn">
+		        			<i class="vxe-icon--menu"></i>
+		        		</div>
+		        	</template> 
+		        </vxe-table-column>
                 <vxe-table-column
                 type="checkbox"
                 align="center"
@@ -507,6 +514,7 @@ export default {
         },
         openItemSet(){                      //点击全部节点设置
             this.showItemSet=true;
+            this.$globjs.initSortable.call(this,{className: 'drag-btn',data: this.config,key:'items',tableRef: 'table'});
         },
         openColSet(btn){                    //打开按钮设置
             this.addType = ''
