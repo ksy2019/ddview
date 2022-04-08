@@ -313,7 +313,10 @@ export default {
         return {
             showChildrenItem: false,
             showChildrenSet: false,         //子节点设置
-            itemSet: {},                    //单个节点设置
+            itemSet: {                      //单个节点设置
+                label: '',
+                color: '',
+            },                    
             indexChildren: [],
             indexChildrenItem: {},
             showItemSet: false,             //是否显示子节点
@@ -339,6 +342,10 @@ export default {
     },
     methods: {
         clickAddChild(){                    //点击增加子节点
+            for(let item in this.itemSet){
+                this.itemSet[item] = ''
+            }
+            this.itemSet.id = ''
             this.addChildren = true;
             this.showChildrenItem = true;
         },
@@ -359,7 +366,7 @@ export default {
             this.addChildren = false;
             item.id = this.$base.guid();
             this.indexChildrenItem = item ;
-            this.itemSet = JSON.parse(JSON.stringify(item)) ;
+            this.itemSet = JSON.parse(JSON.stringify(item));
             this.showChildrenItem = true;
         },
         openChildren(row){                  //打开节点设置
