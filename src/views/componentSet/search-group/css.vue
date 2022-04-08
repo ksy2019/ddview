@@ -1,7 +1,7 @@
 <!--
  * @Author: BlueStar
  * @Date: 2021-11-05 15:52:38
- * @LastEditTime: 2022-04-08 09:37:04
+ * @LastEditTime: 2022-04-08 18:29:38
  * @Description: 组件的css样
 -->
 <template>
@@ -98,7 +98,7 @@ export default {
                     top: '',
                     bottom: '',
                     border: '',
-                    'border-radius': '',
+                    borderRadius: '',
                     background: ''
                 }
             }

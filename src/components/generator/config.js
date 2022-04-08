@@ -20,7 +20,19 @@ export const myComponents=[
           {
             name: "按钮组",
             tag: "btn-group",
-            css: "",                          //元素的css内联，优先级最高
+            css: {               //元素的css内联，优先级最高
+                padding: '',
+                margin: '',
+                position: '',
+                left: '',
+                right: '',
+                top: '',
+                bottom: '',
+                border: '',
+                borderRadius: '',
+                background: '',
+                boxSizing: ''
+            },
             items: [
                     {
                             "label": "批量打印",
@@ -95,7 +107,19 @@ export const myComponents=[
             name: '搜索组',
             tag: 'search-group',
             table: '',                          //关联的table组件
-            css: "",                            //元素的css内联，优先级最高
+            css: {                              //元素的css内联，优先级最高
+                padding: '',
+                margin: '',
+                position: '',
+                left: '',
+                right: '',
+                top: '',
+                bottom: '',
+                border: '',
+                borderRadius: '',
+                background: '',
+                boxSizing: ''
+            },                            
             searchText: '搜索',                     //搜索按钮的文字
             serachIcon: 'el-icon-search',                     //搜索按钮的icon
             url: '/getk',                       //接口地址
@@ -241,9 +265,17 @@ export const myComponents=[
             name: "table组件",
             tag: "table-group",
             key: "FPZL,XTLSH",
-            css: {
+            css: { 
                     padding: '0 12px',
                     margin: '',
+                    position: '',
+                    left: '',
+                    right: '',
+                    top: '',
+                    bottom: '',
+                    border: '',
+                    borderRadius: '',
+                    background: '',
                     boxSizing: 'border-box'
             },                               //css样式设置
             id: guid(),
@@ -328,10 +360,20 @@ export const myComponents=[
             tag: "s-text",
             text: '这是一段普通文本',
             css: {                              //css样式设置 
-                    'margin': '0',
-                    'line-height': '22px',
-                    'padding': '10px',
-                    'font-size': '1.2rem'
+                
+                    lineHeight: '22px',
+                    fontSize: '1.2rem',
+                    padding: '10px',
+                    margin: '',
+                    position: '',
+                    left: '',
+                    right: '',
+                    top: '',
+                    bottom: '',
+                    border: '',
+                    borderRadius: '',
+                    background: '',
+                    boxSizing: ''
             },
             id: guid(),
             props: [
@@ -347,8 +389,17 @@ export const myComponents=[
             tag: "form-group",
             span: 2,
             css: {
-                    padding: '',
-                    margin: '12px 0',
+                padding: '10px',
+                margin: '',
+                position: '',
+                left: '',
+                right: '',
+                top: '',
+                bottom: '',
+                border: '',
+                borderRadius: '',
+                background: '',
+                boxSizing: ''
             },
             url: '/update',                       //接口地址
             method: 'post',                     //请求方式
@@ -410,9 +461,17 @@ export const layoutComponents = [
         {
           name: '普通容器',
           tag: 'view-m',
-          css: {
+          css: { 
                 padding: '12px',
                 margin: '',
+                position: '',
+                left: '',
+                right: '',
+                top: '',
+                bottom: '',
+                border: '',
+                borderRadius: '',
+                background: '',
                 boxSizing: 'border-box'
           },                              //元素的css内联，优先级最高
           id: guid(),
@@ -437,8 +496,17 @@ export const layoutComponents = [
           name: '对话弹窗',
           tag: 's-dialog',
           css: {
-                  padding: '',
-                  margin: '',
+                padding: '',
+                margin: '',
+                position: '',
+                left: '',
+                right: '',
+                top: '',
+                bottom: '',
+                border: '',
+                borderRadius: '',
+                background: '',
+                boxSizing: ''
           },                                    //元素的css内联，优先级最高
           closeOnClickModal: false,             //点击modal关闭窗口
           width: '720px',
