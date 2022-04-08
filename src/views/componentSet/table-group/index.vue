@@ -48,6 +48,13 @@
                 stripe
                 ref="table"
                 >
+                <vxe-table-column align="center" title="位置" width="60">
+		        	<template v-slot>
+		        		<div class="drag-btn">
+		        			<i class="vxe-icon--menu"></i>
+		        		</div>
+		        	</template> 
+		        </vxe-table-column>
                 <vxe-table-column
                 type="checkbox"
                 align="center"
@@ -104,16 +111,6 @@
                 title="颜色"
                 min-width="100">
                             <div slot-scope="slot">{{$base.isBlank(slot.row.color)?'- - -': $globjs.color[slot.row.color]}}</div>
-                </vxe-table-column>
-                <vxe-table-column 
-                header-align="center"
-                align="center"
-                title="位置"
-                min-width="100">
-                            <div slot-scope="slot">
-                                <span @click="clickSortUP(slot.row)"> <i class="el-icon-caret-top font15 nos"></i></span>
-                                <span @click="clickSortDown(slot.row)"> <i class="el-icon-caret-bottom font15 ml10 nos"></i></span>
-                            </div>
                 </vxe-table-column>
                 <vxe-table-column
                 field="main"
@@ -173,6 +170,13 @@
                                             <el-option label="红色" value="danger"></el-option>
                                         </el-select>
                                 </el-form-item> 
+                                 <el-form-item  label="列浮动">
+                                        <el-select v-model="indexOb.fixed">
+                                            <el-option label="left" value="left"></el-option>
+                                            <el-option label="right" value="right"></el-option>
+                                            <el-option label="无浮动" value=""></el-option>
+                                        </el-select>
+                                </el-form-item> 
                         </el-form>
                 </div>
                 <div class="flex-bet mt20" slot="footer">
@@ -224,7 +228,7 @@
                         style="width: 100%"
                         :checkbox-config="{highlight: true,range: true}"
                         stripe
-                        ref="table"
+                        ref="table2"
                         >
                         <vxe-table-column
                         type="checkbox"
@@ -278,13 +282,14 @@
 
 <script>
 import javascriptDrawer from '../../index/JavaScriptDrawer.vue';
+import Sortable from 'sortablejs';
 export default {
     props: {
         config: Object,
     },
     model: {                                //自定义Model
         prop: 'config',
-        event: 'changeConfig'
+        event: 'change'
     },
     components: {
         javascriptDrawer
@@ -341,6 +346,7 @@ export default {
         },
         openItemSet(){                      //点击全部节点设置
             this.showItemSet=true;
+            this.initSortable();
         },
         openColSet(btn){                    //打开按钮设置
             this.indexOb = this.$base.deepCopy(btn);
@@ -384,25 +390,31 @@ export default {
                 arr.push(item.id);
             }
             this.config.columns = list.filter(item=>!arr.includes(item.id));
-        },
-        clickSortUP(row){                   //点击向上排序
-            console.log(this.config.columns,row)
-            for(let item of this.config.columns){
-                if(row.id==item.id){
-
-                    break;
-                }
-            }
-        },
-        clickSortDown(row){                 //点击向下排序
-            console.log(this.config.columns,row)
+        }, 
+        initSortable(){
+            this.$nextTick(() => {
+					const xTable = this.$refs.table
+					this.sortable1 = Sortable.create(xTable.$el.querySelector('.body--wrapper>.vxe-table--body tbody'), {
+						handle: '.drag-btn',
+						onEnd: ({
+							newIndex,
+							oldIndex
+						}) => {
+                            let config = this.$base.deepCopy(this.config);
+							let currRow = config.columns.splice(oldIndex, 1)[0]
+						    config.columns.splice(newIndex, 0, currRow)
+                            config.lastUpdateTime = new Date().getTime()
+                            Object.assign(this.config.columns,config.columns)
+                            this.$set(this.config,'lastUpdateTime',new Date().getTime())
+						}
+					})
+				})
         }
     },
     created(){
 
     },
     mounted(){
-
     }
 }
 </script>
@@ -424,5 +436,8 @@ export default {
 .tool-bar{
     text-align: right;
     margin-bottom: 12px;
+}
+::v-deep .drag-btn{
+    text-align: center;
 }
 </style>

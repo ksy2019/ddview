@@ -1,7 +1,7 @@
 <!--
  * @Author: BlueStar
  * @Date: 2022-03-29 09:15:18
- * @LastEditTime: 2022-04-08 10:20:15
+ * @LastEditTime: 2022-04-08 10:54:19
  * @Description: 菜单编辑页面
 -->
 <template>
@@ -31,7 +31,7 @@
                                   <div class="home-body-left scrollbar">
                                         <div class="edith-bar bbr1">
                                                 <div class="title">
-                                                      菜单栏
+                                                        菜单栏
                                                 </div>
                                                 <div class="btn-bar">
                                                         <div @click="clickAdditem" class="item-btn">
@@ -258,7 +258,7 @@ export default {
                                         this.additem.visiblefold = false;
                                 }
                         },
-                        clickAdditem(){            //增加节点
+                        clickAdditem(){                              //增加节点
                                 this.initMenuForm();
                                 this.additem.visibleitem = true;
                         },
