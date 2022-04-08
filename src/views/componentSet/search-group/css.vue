@@ -1,7 +1,7 @@
 <!--
  * @Author: BlueStar
  * @Date: 2021-11-05 15:52:38
- * @LastEditTime: 2022-04-07 11:35:20
+ * @LastEditTime: 2022-04-08 09:37:04
  * @Description: 组件的css样
 -->
 <template>
@@ -115,8 +115,13 @@ export default {
             deep: true
         }
     },
+    methods: {
+        initParams(){           //初始化参数值
+            this.cache.css = this.config.css
+        },
+    },
     created(){
-
+        this.initParams();
     },
     mounted(){
 

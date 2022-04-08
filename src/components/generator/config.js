@@ -96,8 +96,8 @@ export const myComponents=[
             tag: 'search-group',
             table: '',                          //关联的table组件
             css: "",                            //元素的css内联，优先级最高
-            searchText: '',                     //搜索按钮的文字
-            serachIcon: '',                     //搜索按钮的icon
+            searchText: '搜索',                     //搜索按钮的文字
+            serachIcon: 'el-icon-search',                     //搜索按钮的icon
             url: '/getk',                       //接口地址
             method: 'post',                     //请求方式
             formType: 'form',                   //参数格式     form =form-urlencode  或 json 
