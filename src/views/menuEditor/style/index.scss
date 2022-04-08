@@ -26,6 +26,22 @@ $bg-color: var(--bg-color);
             display: flex;
             align-items: center;
             justify-content: flex-end;
+            .preview-btn{
+                img{
+                        height: 12px;
+                        margin-right: 6px;
+                }
+                color: #fff;
+                padding: 0 15px;
+                border-radius: 6px;
+                background-color: $main-color;
+                font-size: 1.1rem;
+                font-weight: 600;
+                height: 36px;
+                display: flex;
+                align-items: center;
+                @extend .nos;
+            }
             .user-avatar{
                 margin-left: 12px;
                 color: #fff;

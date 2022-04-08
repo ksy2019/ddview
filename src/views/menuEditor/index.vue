@@ -1,7 +1,7 @@
 <!--
  * @Author: BlueStar
  * @Date: 2022-03-29 09:15:18
- * @LastEditTime: 2022-04-08 10:54:19
+ * @LastEditTime: 2022-04-08 16:27:54
  * @Description: 菜单编辑页面
 -->
 <template>
@@ -13,8 +13,9 @@
                       <span class="text-con">设置</span>
                 </div>
                 <div class="right">
-                        <div>
-                              <span class="nos">选择板式</span>
+                        <div class="preview-btn">
+                              <img src="./img/preview.svg" alt="">
+                              预览
                         </div>
                         <div class="user-avatar">
                             凯
@@ -238,7 +239,8 @@ export default {
                 },
                 methods: {
                         editIndexPage(){
-                                this.$router.push('/pageeditor?pageid='+this.indexTab.id)
+                                window.open('/#/pageeditor?pageid='+this.indexTab.id)
+                                // this.$router.push('/pageeditor?pageid='+this.indexTab.id)
                         },
                         initMenuForm(){
                                 this.additem.id='';

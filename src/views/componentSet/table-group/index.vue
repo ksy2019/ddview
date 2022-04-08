@@ -92,7 +92,7 @@
                 <vxe-table-column 
                 header-align="center"
                 align="center"
-                title="头剧中"
+                title="表头对齐"
                 field="headalign"
                 :formatter="$base.formatter"
                 min-width="100">
@@ -102,7 +102,15 @@
                 align="center"
                 field="align"
                 :formatter="$base.formatter"
-                title="行居中"
+                title="内容对齐"
+                min-width="100">
+                </vxe-table-column>
+                <vxe-table-column 
+                header-align="center"
+                align="center"
+                field="fixed"
+                :formatter="$base.formatter"
+                title="浮动方式"
                 min-width="100">
                 </vxe-table-column>
                 <vxe-table-column 
@@ -228,8 +236,15 @@
                         style="width: 100%"
                         :checkbox-config="{highlight: true,range: true}"
                         stripe
-                        ref="table2"
+                        ref="table1"
                         >
+                        <vxe-table-column align="center" title="位置" width="60">
+		                	<template v-slot>
+		                		<div class="drag-btn2">
+		                			<i class="vxe-icon--menu"></i>
+		                		</div>
+		                	</template> 
+		                </vxe-table-column>
                         <vxe-table-column
                         type="checkbox"
                         align="center"
@@ -324,18 +339,25 @@ export default {
     },
     methods: {
         clickAddChild(){                    //点击增加子节点
-            
+            this.addChildren = true;
+            this.showChildrenItem = true;
         },
         clickReduceChild(){                 //点击删除子节点
 
         },
         saveChildrenItem(){                 //保存单个子节点设置
-            for(let key in this.indexChildrenItem){
-                this.indexChildrenItem[key]   = this.itemSet[key]
+            if(this.addChildren){
+                this.indexChildren.push(this.itemSet)
+            }else{
+                for(let key in this.indexChildrenItem){
+                    this.indexChildrenItem[key]   = this.itemSet[key]
+                }
             }
             this.showChildrenItem = false;
         },
         openChildrenItem(item){             //打开单个节点设置
+            this.addChildren = false;
+            item.id = this.$base.guid();
             this.indexChildrenItem = item ;
             this.itemSet = JSON.parse(JSON.stringify(item)) ;
             this.showChildrenItem = true;
@@ -343,10 +365,11 @@ export default {
         openChildren(row){                  //打开节点设置
             this.indexChildren = row.children;
             this.showChildrenSet = true;
+            this.initSortable({className: 'drag-btn2',data: row,key:'children',tableRef: 'table1'});
         },
         openItemSet(){                      //点击全部节点设置
             this.showItemSet=true;
-            this.initSortable();
+            this.initSortable({className: 'drag-btn',data: this.config,key:'columns',tableRef: 'table'});
         },
         openColSet(btn){                    //打开按钮设置
             this.indexOb = this.$base.deepCopy(btn);
@@ -391,20 +414,18 @@ export default {
             }
             this.config.columns = list.filter(item=>!arr.includes(item.id));
         }, 
-        initSortable(){
+        initSortable({className,data,key,tableRef}){
             this.$nextTick(() => {
-					const xTable = this.$refs.table
-					this.sortable1 = Sortable.create(xTable.$el.querySelector('.body--wrapper>.vxe-table--body tbody'), {
-						handle: '.drag-btn',
+					this.sortable = Sortable.create( this.$refs[tableRef].$el.querySelector('.body--wrapper>.vxe-table--body tbody'), {
+						handle: '.' + className,
 						onEnd: ({
 							newIndex,
 							oldIndex
 						}) => {
-                            let config = this.$base.deepCopy(this.config);
-							let currRow = config.columns.splice(oldIndex, 1)[0]
-						    config.columns.splice(newIndex, 0, currRow)
-                            config.lastUpdateTime = new Date().getTime()
-                            Object.assign(this.config.columns,config.columns)
+                            let columns = this.$base.deepCopy(data[key]);
+							let currRow = columns.splice(oldIndex, 1)[0]
+						    columns.splice(newIndex, 0, currRow)
+                            Object.assign(data[key],columns)
                             this.$set(this.config,'lastUpdateTime',new Date().getTime())
 						}
 					})
@@ -437,7 +458,8 @@ export default {
     text-align: right;
     margin-bottom: 12px;
 }
-::v-deep .drag-btn{
+::v-deep .drag-btn , .drag-btn2{
     text-align: center;
+    cursor: move;
 }
 </style>
