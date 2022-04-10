@@ -401,6 +401,7 @@
                                         <el-option  label="接口取数" value="url"></el-option>
                                     </el-select>
                                 </el-form-item>
+                                todo:未完善
                                 <el-form-item label="编辑取数方式">
                                 </el-form-item>
                         </el-form>

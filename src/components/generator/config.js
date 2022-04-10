@@ -444,7 +444,7 @@ export const myComponents=[
                         label: '收货日期',                  //头部文字
                 },
             ],
-            afterSubmit: '',                     //提交完成之后执行todo:未编写规则
+            afterSubmit: '',                     //提交完成之后执行todo:提交完成未编写规则
             other: [
                 {
                         key: 'name',

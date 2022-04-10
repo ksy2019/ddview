@@ -17,9 +17,7 @@ function resolve(dir) {
 } 
 module.exports = { 
   lintOnSave: false,
-  publicPath: process.env.NODE_ENV === 'production'
-    ? '/form-generator/'
-    : '/',
+  publicPath: process.env.NODE_ENV === 'production'?'./':'./',
   pages: {
     index: {
       entry: 'main.js',
