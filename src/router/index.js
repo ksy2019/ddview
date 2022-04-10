@@ -21,13 +21,6 @@ const routes = [
     children: [
     ]
   },
-  {
-    path: '/apieditor',
-    name: 'menueditor',
-    component: ()=>import('@/views/apiEditor/index.vue' ),
-    children: [
-    ]
-  },
 ]
 
 const router = new VueRouter({
