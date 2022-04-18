@@ -1,8 +1,14 @@
 // axios.defaults.timeout=50*1000                  //设置默认超时时间为50s
 // 添加请求拦截器
 axios.interceptors.request.use(function (config) {
+        //todo: 测试代码
+        if(config.url.indexOf('/fc/getk')!==-1){
+            config.data.append('currentPage',config.data.get('pageindex'))
+            config.data.append('pageSize',config.data.get('pagesize'))
+        }
+
         //带有http头的不进行url转换
-        if(config.url.indexOf('http')===-1&&config.url!=='/getk'){
+        if(location.href.indexOf('menueditor')==-1&&window.mode!=='dev'&&config.url.indexOf('http')===-1){
             config.url=window.httpHeader+config.url
         }
         //添加token

@@ -279,9 +279,10 @@ export default {
         saveBtn(){                  //保存按钮设置
             if(this.addType == 'add'){
                 this.config.items.push(this.cacheBtn)
-            }
-            for(let item in this.cacheBtn){
-                this.cacheBtn[item]=this.indexBtn[item]
+            }else{
+                for(let item in this.cacheBtn){
+                    this.cacheBtn[item]=this.indexBtn[item]
+                }
             }
             this.showBtnSet=false;
         },

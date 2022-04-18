@@ -37,9 +37,15 @@ module.exports = {
   devServer: {
     overlay: false,
     proxy: {
+      '/fc/getk':{
+          target: 'http://110.42.239.195:8082/',
+          pathRewrite: {
+              '/fc/getk' : '/getk',
+          },
+      },
       '/getk':{
           target: 'https://www.ksy2019.top/'
-      }
+      },
     }
   },  
   productionSourceMap: false,

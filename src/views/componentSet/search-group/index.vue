@@ -55,13 +55,13 @@
                 </el-select>
             </div>
         </div>
-        <div class="set-row-between nos">
-            <span class="nos color1">附加参数</span>
-            <span @click="openOtherSet" class="primary">所有节点</span>
-        </div>
         <div  @click="openItemSet" class="set-row-between nos">
             <span class="nos color1">节点设置</span>
             <span class="primary">所有节点</span>
+        </div>
+        <div class="set-row-between nos">
+            <span class="nos color1">附加参数</span>
+            <span @click="openOtherSet" class="primary">所有节点</span>
         </div>
     <!-- //子节点设置窗口 -->
         <el-drawer
@@ -351,7 +351,7 @@
                                 <el-form-item v-if="typeof(indexOb.value)=='string'"  label="对应字段">
                                         <el-input v-model="indexOb.value"></el-input>
                                 </el-form-item>
-                                <div  v-if="typeof(indexOb.value)=='object'||indexOb.type === 'twoDate'" >
+                                <div  v-if="indexOb.type === 'twoDate'" >
                                     <el-form-item  label="开始字段">
                                             <el-input v-model="indexOb.value[0]"></el-input>
                                     </el-form-item>
@@ -371,7 +371,7 @@
                                 <el-form-item v-if="typeof(indexOb.defaultValue)=='string'"  label="默认数值">
                                         <el-input v-model="indexOb.defaultValue"></el-input>
                                 </el-form-item>
-                                <div  v-if="typeof(indexOb.defaultValue)=='object'||indexOb.type === 'twoDate'" >
+                                <div  v-if="indexOb.type === 'twoDate'" >
                                     <div>字段设置</div>
                                     <el-form-item  label="开始字段">
                                             <el-input v-model="indexOb.defaultValue[0]"></el-input>
@@ -441,14 +441,14 @@ export default {
             },
             showSelectOption: false,        //是否显示下拉框
             souceBtn: {                     //单个按钮的默认配置
-                type: 'twoDate',            //种类-双排时间选择器   
-                placeholder: '收货日期',     //提示文字
-                value: ['qsrq','jzrq'],     //对应关键字
-                defaultValue: ['YYYYMM01','YYYYMMDD'], //时间格式，YYYYMM01代表当月一号
-                width: '',                         //双排时间无效 
-                id: this.$base.guid(),
-                showLabel: false,                  //是否显示头部提示，优先级大于外层
-                label: '收货日期',    
+                "type": "input",
+                "placeholder": "关键字",
+                "value": "name",
+                "defaultValue": "",
+                "width": "",
+                "id": "0083c25ec4c1cfbda573ca8492fbcaf3",
+                "showLabel": false,
+                "label": "关键字",
             },
             indexGetListSet: {},            //当前获取列表
             showBtnSet: false,              //是否显示按钮设置
@@ -468,7 +468,7 @@ export default {
     },
     methods: {
         openGetList(row){                          //点击下拉框
-            this.indexOb = row;
+            this.indexOb = this.$base.deepCopy(row);
             console.log(this.indexOb)
             this.indexGetListSet = JSON.parse(JSON.stringify(row));
             this.showSelectOption = true;
@@ -496,7 +496,7 @@ export default {
             }
             this.config.other = list.filter(item=>!arr.includes(item.id));
         },
-        editGetSet(row){                       //编辑获取值的方式
+        editGetSet(row){                    //编辑获取值的方式
             console.log(row)
             if(row.type==='js'){
                 this.editJs(row,'value')
@@ -520,7 +520,7 @@ export default {
         openColSet(btn){                    //打开按钮设置
             this.addType = ''
             this.indexOb = this.$base.deepCopy(btn);
-            this.cacheOb=btn
+            this.cacheOb= btn;
             this.showBtnSet = true;
         },
         saveBtn(){                         //保存按钮设置
@@ -528,10 +528,11 @@ export default {
                 this.config.more.items.push(this.indexOb)
             }                 //保存按钮设置
             if(this.addType === 'add'){
-                this.config.items.push(this.indexOb)
-            }
-            for(let item in this.cacheOb){
-                this.cacheOb[item]=this.indexOb[item]
+                this.config.items.push(this.$base.deepCopy(this.indexOb))
+            }else{
+                for(let item in this.cacheOb){
+                    this.cacheOb[item]=this.indexOb[item]
+                }
             }
             this.showBtnSet=false;
         },

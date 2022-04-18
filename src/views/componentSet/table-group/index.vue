@@ -185,6 +185,9 @@
                                             <el-option label="无浮动" value=""></el-option>
                                         </el-select>
                                 </el-form-item> 
+                                 <el-form-item  label="列宽度">
+                                        <el-input v-model="indexOb.width" placeholder="请输入列宽度"></el-input>
+                                </el-form-item> 
                         </el-form>
                 </div>
                 <div class="flex-bet mt20" slot="footer">
@@ -378,15 +381,16 @@ export default {
         },
         openColSet(btn){                    //打开按钮设置
             this.indexOb = this.$base.deepCopy(btn);
-            this.cacheOb=btn
+            this.cacheOb= btn;
             this.showBtnSet = true;
         },
         saveBtn(){                          //保存按钮设置
             if(this.isAdd){
                 this.addItem();
-            }
-            for(let item in this.cacheOb){
-                this.cacheOb[item]=this.indexOb[item];
+            }else{
+                for(let item in this.cacheOb){
+                    this.cacheOb[item]=this.indexOb[item];
+                }
             }
             this.showBtnSet=false;
         },
