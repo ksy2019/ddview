@@ -1,7 +1,7 @@
 <!--
  * @Author: bluestar
  * @Date: 2021-10-27 09:01:53
- * @LastEditTime: 2022-04-07 17:58:23
+ * @LastEditTime: 2022-04-19 17:39:14
  * @子组件的渲染方法
 -->
 
@@ -53,19 +53,6 @@ function renderBody (h,currentItem){
 function clickActive(currentItem){                    //激活单元=点击事件之后触发一次
   this.$emit('clickActive',currentItem)
 }
-function copyItem(item,parent){         //复制组件
-    for(let x of parent){
-        if(x.id==item.id){
-            let temp=JSON.parse(JSON.stringify(item))
-            temp.id=item.tag.replace('-','')+ new Date().getTime()
-            parent.push(temp)
-            return null
-        }
-        if(x.children!==undefined&&x.children.length!=0){
-            deleteItem(item,x.children)
-        }
-    }
-}
 function deleteItem(item,parent) {      //删除组件
     let index=0
     for(let x of parent){
@@ -84,11 +71,6 @@ function deleteItem(item,parent) {      //删除组件
 const tools = {
   itemBtns(h, currentItem) {
     return [
-      <span class="drawing-item-copy" title="复制" onClick={event => {
-        copyItem.call(this,currentItem,this.list ); event.stopPropagation()
-      }}>
-        <i class="el-icon-copy-document" />
-      </span>,
       <span class="drawing-item-delete" title="删除" onClick={event => {
         deleteItem.call(this,currentItem,this.list); event.stopPropagation()
       }}>

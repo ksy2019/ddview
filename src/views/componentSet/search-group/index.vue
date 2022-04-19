@@ -79,101 +79,103 @@
                     <span @click="delItem" class="nos">删除</span>
                 </div>
             </div>
-            <vxe-table 
-                ref="table"
-                border
-                :checkbox-config="{highlight: true,range: true}"
-                :data="config.items"
-                style="width: 100%"
-                stripe
-                height="350px"
-                >
-                <vxe-table-column align="center" title="位置" width="60">
-		        	<template v-slot>
-		        		<div class="drag-btn">
-		        			<i class="vxe-icon--menu"></i>
-		        		</div>
-		        	</template> 
-		        </vxe-table-column>
-                <vxe-table-column
-                type="checkbox"
-                align="center"
-                width="55">
-                </vxe-table-column>
-                <vxe-table-column
-                title="序号"
-                type="seq"
-                align="center"
-                width="55">
-                </vxe-table-column>
-                <vxe-table-column 
-                header-align="center"
-                :formatter="$base.formatter"
-                align="left"
-                title="控件类型"
-                width="78">
-                    <div slot-scope="slot">{{inputType[slot.row.type]}}</div>
-                </vxe-table-column>
-                <vxe-table-column
-                field="label"
-                header-align="center"
-                :formatter="$base.formatter"
-                align="left"
-                title="标签名称"
-                width="100">
-                </vxe-table-column>
-                <vxe-table-column
-                field="width"
-                header-align="center"
-                :formatter="$base.formatter"
-                align="left"
-                title="宽度"
-                width="78">
-                </vxe-table-column>
-                <vxe-table-column
-                field="showLabel"
-                header-align="center"
-                :formatter="$base.formatter"
-                align="center"
-                title="显示标签"
-                width="78">
-                </vxe-table-column>
-                <vxe-table-column
-                field="field"
-                title="提示内容"
-                :formatter="$base.formatter"
-                header-align="center"
-                align="left"
-                min-width="90">
-                </vxe-table-column>
-                <vxe-table-column
-                field="value"
-                header-align="center"
-                :formatter="$base.formatter"
-                align="left"
-                title="对应字段"
-                min-width="100">
-                </vxe-table-column>
-                <vxe-table-column 
-                header-align="center"
-                align="left"
-                title="默认值"
-                :formatter="$base.formatter"
-                field="defaultValue"
-                min-width="100">
-                </vxe-table-column>
-                <vxe-table-column
-                field="main"
-                header-align="center"
-                align="center"
-                width="128"
-                title="操作">
-                    <div slot-scope="slot" >
-                        <span v-if="slot.row.type==='select'" class="main-color nos mr10" @click="openGetList(slot.row)" >数据设置</span>
-                        <span  class="main-color nos" @click="openColSet(slot.row)" >修改</span>
-                    </div>
-                </vxe-table-column>
-            </vxe-table>
+            <div class="node-table-con">
+                <vxe-table 
+                    ref="table"
+                    border
+                    :checkbox-config="{highlight: true,range: true}"
+                    :data="config.items"
+                    style="width: 100%"
+                    stripe
+                    height="100%"
+                    >
+                    <vxe-table-column align="center" title="位置" width="60">
+		            	<template v-slot>
+		            		<div class="drag-btn">
+		            			<i class="vxe-icon--menu"></i>
+		            		</div>
+		            	</template> 
+		            </vxe-table-column>
+                    <vxe-table-column
+                    type="checkbox"
+                    align="center"
+                    width="55">
+                    </vxe-table-column>
+                    <vxe-table-column
+                    title="序号"
+                    type="seq"
+                    align="center"
+                    width="55">
+                    </vxe-table-column>
+                    <vxe-table-column 
+                    header-align="center"
+                    :formatter="$base.formatter"
+                    align="left"
+                    title="控件类型"
+                    width="78">
+                        <div slot-scope="slot">{{inputType[slot.row.type]}}</div>
+                    </vxe-table-column>
+                    <vxe-table-column
+                    field="label"
+                    header-align="center"
+                    :formatter="$base.formatter"
+                    align="left"
+                    title="标签名称"
+                    width="100">
+                    </vxe-table-column>
+                    <vxe-table-column
+                    field="width"
+                    header-align="center"
+                    :formatter="$base.formatter"
+                    align="left"
+                    title="宽度"
+                    width="78">
+                    </vxe-table-column>
+                    <vxe-table-column
+                    field="showLabel"
+                    header-align="center"
+                    :formatter="$base.formatter"
+                    align="center"
+                    title="显示标签"
+                    width="78">
+                    </vxe-table-column>
+                    <vxe-table-column
+                    field="field"
+                    title="提示内容"
+                    :formatter="$base.formatter"
+                    header-align="center"
+                    align="left"
+                    min-width="90">
+                    </vxe-table-column>
+                    <vxe-table-column
+                    field="value"
+                    header-align="center"
+                    :formatter="$base.formatter"
+                    align="left"
+                    title="对应字段"
+                    min-width="100">
+                    </vxe-table-column>
+                    <vxe-table-column 
+                    header-align="center"
+                    align="left"
+                    title="默认值"
+                    :formatter="$base.formatter"
+                    field="defaultValue"
+                    min-width="100">
+                    </vxe-table-column>
+                    <vxe-table-column
+                    field="main"
+                    header-align="center"
+                    align="center"
+                    width="128"
+                    title="操作">
+                        <div slot-scope="slot" >
+                            <span v-if="slot.row.type==='select'" class="main-color nos mr10" @click="openGetList(slot.row)" >数据设置</span>
+                            <span  class="main-color nos" @click="openColSet(slot.row)" >修改</span>
+                        </div>
+                    </vxe-table-column>
+                </vxe-table>
+            </div>
             <div class="child-title">
                 <div class="left">
                     <span>子节点设置</span>
@@ -608,6 +610,9 @@ export default {
             color: gray;
         }
     }
+}
+.node-table-con{
+    height: calc(50vh - 30px);
 }
 .child-title{
     display: flex;

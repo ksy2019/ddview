@@ -37,7 +37,8 @@
                 </div>
                 <div>
                     <span @click="clickAdd" class="nos mr10">新增</span>
-                    <span @click="delItem" class="nos">删除</span>
+                    <span @click="delItem" class="nos mr10">删除</span>
+                    <span @click="showItemSet = false" class="nos">关闭</span>
                 </div>
             </div>
             <vxe-table
