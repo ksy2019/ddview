@@ -220,7 +220,6 @@
 
 <script>
 import javascriptDrawer from '../../index/JavaScriptDrawer.vue';
-import Sortable from 'sortablejs';
 export default {
     props: {
         config: Object,

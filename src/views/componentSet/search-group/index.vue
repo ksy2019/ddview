@@ -86,7 +86,7 @@
                 :data="config.items"
                 style="width: 100%"
                 stripe
-                height="500px"
+                height="350px"
                 >
                 <vxe-table-column align="center" title="位置" width="60">
 		        	<template v-slot>

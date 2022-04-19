@@ -141,53 +141,71 @@
         <!-- 初始化编辑器 -->
         <javascript-drawer  size="60%" :visible.sync="showJavaScriptEdit" v-model="javascript.ob[javascript.key]"/>
         <!-- //单个列设置 -->
-        <el-dialog v-dialogDrag title="列信息"  :close-on-click-modal="false" width="320px" top="14vh"  custom-class="item-set-dialog" :visible.sync="showBtnSet">
+        <el-dialog v-dialogDrag title="列信息"  :close-on-click-modal="false" width="680px" top="16vh"  custom-class="item-set-dialog" :visible.sync="showBtnSet">
                 <div class="form-con" style="margin-top: 38px;">
                         <el-form ref="form" label-position="left" :model="indexOb" label-width="86px" >
-                                <el-form-item  label="列类型">
-                                        <el-select v-model="indexOb.type">
-                                            <el-option label="普通列" value=""></el-option>
-                                            <el-option label="选择列" value="checkbox"></el-option>
-                                            <el-option label="序数列" value="seq"></el-option>
-                                        </el-select>
-                                </el-form-item>
-                                <el-form-item  label="列头名称">
-                                        <el-input v-model="indexOb.label"></el-input>
-                                </el-form-item>
-                                <el-form-item  label="对应字段">
-                                        <el-input v-model="indexOb.field"></el-input>
-                                </el-form-item>
-                                <el-form-item  label="表头居中">
-                                        <el-select v-model="indexOb.headalign">
-                                            <el-option label="居中" value="center"></el-option>
-                                            <el-option label="左对齐" value="left"></el-option>
-                                            <el-option label="右对齐" value="right"></el-option>
-                                        </el-select>
-                                </el-form-item>
-                                <el-form-item  label="表体剧中">
-                                        <el-select v-model="indexOb.align">
-                                            <el-option label="居中" value="center"></el-option>
-                                            <el-option label="左对齐" value="left"></el-option>
-                                            <el-option label="右对齐" value="right"></el-option>
-                                        </el-select> 
-                                </el-form-item>
-                                 <el-form-item  label="文字颜色">
-                                        <el-select v-model="indexOb.color">
-                                            <el-option label="蓝色" value="primary"></el-option>
-                                            <el-option label="橙色" value="warning"></el-option>
-                                            <el-option label="红色" value="danger"></el-option>
-                                        </el-select>
-                                </el-form-item> 
-                                 <el-form-item  label="列浮动">
-                                        <el-select v-model="indexOb.fixed">
-                                            <el-option label="left" value="left"></el-option>
-                                            <el-option label="right" value="right"></el-option>
-                                            <el-option label="无浮动" value=""></el-option>
-                                        </el-select>
-                                </el-form-item> 
-                                 <el-form-item  label="列宽度">
-                                        <el-input v-model="indexOb.width" placeholder="请输入列宽度"></el-input>
-                                </el-form-item> 
+                            <el-row :gutter="20">
+                                <el-col :style="{marginBottom: gutterY}" :span="12">
+                                    <el-form-item  label="列类型">
+                                            <el-select v-model="indexOb.type">
+                                                <el-option label="普通列" value=""></el-option>
+                                                <el-option label="选择列" value="checkbox"></el-option>
+                                                <el-option label="序数列" value="seq"></el-option>
+                                            </el-select>
+                                    </el-form-item>
+                                </el-col>
+                                <el-col :style="{marginBottom: gutterY}"  :span="12">
+                                    <el-form-item  label="列头名称">
+                                            <el-input v-model="indexOb.label"></el-input>
+                                    </el-form-item>
+                                </el-col>
+                                <el-col :style="{marginBottom: gutterY}"  :span="12">
+                                    <el-form-item  label="对应字段">
+                                            <el-input v-model="indexOb.field"></el-input>
+                                    </el-form-item>
+                                </el-col>
+                                <el-col :style="{marginBottom: gutterY}"  :span="12">
+                                    <el-form-item  label="表头居中">
+                                            <el-select v-model="indexOb.headalign">
+                                                <el-option label="居中" value="center"></el-option>
+                                                <el-option label="左对齐" value="left"></el-option>
+                                                <el-option label="右对齐" value="right"></el-option>
+                                            </el-select>
+                                    </el-form-item>
+                                </el-col>
+                                <el-col :style="{marginBottom: gutterY}"  :span="12">
+                                    <el-form-item  label="表体剧中">
+                                            <el-select v-model="indexOb.align">
+                                                <el-option label="居中" value="center"></el-option>
+                                                <el-option label="左对齐" value="left"></el-option>
+                                                <el-option label="右对齐" value="right"></el-option>
+                                            </el-select> 
+                                    </el-form-item>
+                                </el-col>
+                                <el-col  :style="{marginBottom: gutterY}" :span="12">
+                                    <el-form-item  label="文字颜色">
+                                           <el-select v-model="indexOb.color">
+                                               <el-option label="蓝色" value="primary"></el-option>
+                                               <el-option label="橙色" value="warning"></el-option>
+                                               <el-option label="红色" value="danger"></el-option>
+                                           </el-select>
+                                    </el-form-item> 
+                                </el-col>
+                                <el-col  :style="{marginBottom: gutterY}" :span="12">
+                                    <el-form-item  label="列浮动">
+                                            <el-select v-model="indexOb.fixed">
+                                                <el-option label="left" value="left"></el-option>
+                                                <el-option label="right" value="right"></el-option>
+                                                <el-option label="无浮动" value=""></el-option>
+                                            </el-select>
+                                    </el-form-item> 
+                                </el-col>
+                                <el-col :style="{marginBottom: gutterY}"  :span="12">
+                                    <el-form-item  label="列宽度">
+                                            <el-input v-model="indexOb.width" placeholder="请输入列宽度"></el-input>
+                                    </el-form-item> 
+                                </el-col>
+                            </el-row>
                         </el-form>
                 </div>
                 <div class="flex-bet mt20" slot="footer">
@@ -303,7 +321,7 @@ export default {
     props: {
         config: Object,
     },
-    model: {                                //自定义Model
+    model: {
         prop: 'config',
         event: 'change'
     },
@@ -312,6 +330,7 @@ export default {
     },
     data(){
         return {
+            gutterY: '15px',
             showChildrenItem: false,
             showChildrenSet: false,         //子节点设置
             itemSet: {                      //单个节点设置
@@ -453,5 +472,13 @@ export default {
 ::v-deep .drag-btn , .drag-btn2{
     text-align: center;
     cursor: move;
+}
+::v-deep .item-set-dialog{
+    .el-dialog__body{
+        padding: 0 20px;
+    }
+    .el-input__inner{
+        width: 220px;
+    }
 }
 </style>
