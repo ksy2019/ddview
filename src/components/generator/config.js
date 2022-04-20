@@ -313,10 +313,10 @@ export const myComponents=[
                         "type": "",
                         "align": "left",
                         "headalign": "center",
+                        sumcol: 'count',                //合计行
                         "color": "",
                         "id": guid(),
                         "xh": "5",
-                        "sumcol": "",
                         "fixed": "left"
                 },
                 {
