@@ -292,7 +292,8 @@ export const myComponents=[
                         "color": "",
                         "id": guid(),
                         "xh": "00",
-                        "fixed": "left"
+                        "fixed": "left",
+                        "sumcol": "",
                 },
                 {
                         "label": "",
@@ -304,6 +305,7 @@ export const myComponents=[
                         "color": "",
                         "id": guid(),
                         "xh": "00",
+                        "sumcol": "",
                         "fixed": "left"
                 }, 
                 {
@@ -325,6 +327,7 @@ export const myComponents=[
                         "width": "60",
                         "type": "",
                         "color": "",
+                        "sumcol": "",
                         id: guid(),
                         "children": [
                             {

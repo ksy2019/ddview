@@ -206,6 +206,17 @@
                                             <el-input v-model="indexOb.width" placeholder="请输入列宽度"></el-input>
                                     </el-form-item> 
                                 </el-col>
+                                <el-col :style="{marginBottom: gutterY}"  :span="12">
+                                    <el-form-item  label="合计列">
+                                            <el-select v-model="indexOb.sumcol">
+                                                <el-option label="累加" value="count"></el-option>
+                                                <el-option label="合计" value="sum"></el-option>
+                                                <el-option label="平均值" value="average"></el-option>
+                                                <!-- <el-option label="固定文字" value="这是合计信息"></el-option> -->
+                                                <el-option label="无合计" value=""></el-option>
+                                            </el-select>
+                                    </el-form-item> 
+                                </el-col> 
                             </el-row>
                         </el-form>
                 </div>
