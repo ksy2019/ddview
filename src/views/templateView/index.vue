@@ -1,7 +1,7 @@
 <!--
  * @Author: BlueStar
  * @Date: 2022-03-29 14:20:06
- * @LastEditTime: 2022-04-07 10:55:45
+ * @LastEditTime: 2022-05-05 15:05:16
  * @Description: 模板视图
 -->
 <!--
@@ -26,6 +26,7 @@ export default {
                 return{
                         superView: {},
                         loading: true,
+                        myheight: '200px',
                 }
         },
         methods: {
@@ -44,9 +45,13 @@ export default {
                 this.initPage();
         },
         mounted(){
+                
         }
 }
 </script>
 
 <style lang="less" scoped>
+.kpdd-container{
+        height: var(--body-height);
+}
 </style>
