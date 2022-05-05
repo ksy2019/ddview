@@ -1,0 +1,86 @@
+{
+  "name": "Dview-dev",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "serve": "vue-cli-service serve --open",
+    "build": "vue-cli-service build",
+    "build:superview": "vue-cli-service build --target lib --name superView --dest ./dist/super-view ./src/super-view/build.js",
+    "lint": "vue-cli-service lint",
+    "dev": "npm run serve --open",
+    "lib": "vue-cli-service build --target lib",
+    "analyze": "cross-env use_analyzer=true npm run serve"
+  },
+  "dependencies": {
+    "@popperjs/core": "^2.9.2",
+    "@tinymce/tinymce-vue": "^3.2.8",
+    "animate.css": "^4.1.1",
+    "ant-design-vue": "^1.7.4",
+    "axios": "^0.21.1",
+    "build": "^0.1.4",
+    "core-js": "^3.6.5",
+    "cross-env": "^7.0.3",
+    "echarts": "^5.1.2",
+    "element-ui": "^2.15.1",
+    "exceljs": "^4.2.1",
+    "hevue-img-preview": "^5.0.2",
+    "intro.js": "^3.3.1",
+    "jquery": "^3.5.1",
+    "js-base64": "^3.6.0",
+    "mini-css-extract-plugin": "^1.5.0",
+    "moment": "^2.29.1",
+    "qrcodejs2": "0.0.2",
+    "register-service-worker": "^1.7.1",
+    "tiny-vue": "^0.2.0",
+    "tinymce": "^5.10.2",
+    "vue": "^2.6.11",
+    "vue-draggable": "^2.0.6",
+    "vue-ripple-directive": "^2.0.1",
+    "vue-router": "^3.4.9",
+    "vuetify": "^2.4.11",
+    "vuex": "^3.6.0",
+    "vxe-table": "^3.3.6",
+    "vxe-table-plugin-export-xlsx": "^2.2.1",
+    "xe-utils": "^3.2.1"
+  },
+  "devDependencies": {
+    "@vue/cli-plugin-babel": "~4.5.0",
+    "@vue/cli-plugin-eslint": "~4.5.0",
+    "@vue/cli-service": "~4.5.0",
+    "babel-eslint": "^10.1.0",
+    "babel-plugin-component": "^1.1.1",
+    "babel-plugin-import": "^1.13.3",
+    "babel-plugin-syntax-jsx": "^6.18.0",
+    "babel-plugin-transform-imports": "^2.0.0",
+    "babel-plugin-transform-runtime": "^6.23.0",
+    "babel-plugin-transform-vue-jsx": "^3.7.0",
+    "compression-webpack-plugin": "^6.1.1",
+    "eslint": "^6.7.2",
+    "eslint-plugin-vue": "^6.2.2",
+    "less": "^4.0.0",
+    "less-loader": "^7.0.0",
+    "sass-loader": "^11.0.1",
+    "vue-cli-plugin-element-ui": "~1.1.4",
+    "vue-template-compiler": "^2.6.11",
+    "webpack-bundle-analyzer": "^4.4.2"
+  },
+  "eslintConfig": {
+    "root": true,
+    "env": {
+      "node": true
+    },
+    "extends": [
+      "plugin:vue/essential",
+      "eslint:recommended"
+    ],
+    "parserOptions": {
+      "parser": "babel-eslint"
+    },
+    "rules": {}
+  },
+  "browserslist": [
+    "> 1%",
+    "last 2 versions",
+    "not dead"
+  ]
+}
