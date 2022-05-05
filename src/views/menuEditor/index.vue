@@ -1,7 +1,7 @@
 <!--
  * @Author: BlueStar
  * @Date: 2022-03-29 09:15:18
- * @LastEditTime: 2022-04-10 00:04:39
+ * @LastEditTime: 2022-05-05 14:39:42
  * @Description: 菜单编辑页面
 -->
 <template>
@@ -13,7 +13,7 @@
                       <span class="text-con">设置</span>
                 </div>
                 <div class="right">
-                        <div class="preview-btn">
+                        <div @click="clickPriview" class="preview-btn">
                               <img src="./img/preview.svg" alt="">
                               预览
                         </div>
@@ -238,6 +238,9 @@ export default {
                         ...mapState([])
                 },
                 methods: {
+                        clickPriview(){                         //点击预览
+                                window.open('./productor/')
+                        },
                         editIndexPage(){
                                 window.open(location.origin+location.pathname+'#/pageeditor?pageid='+this.indexTab.id)
                                 // this.$router.push('/pageeditor?pageid='+this.indexTab.id)

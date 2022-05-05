@@ -2,7 +2,7 @@ const CP=require('compression-webpack-plugin')
 const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin;
 module.exports = {
   publicPath: './',
-  // outputDir: './dkkks',
+  outputDir: '../../public/productor',
   lintOnSave: false,
   devServer: {
     proxy: {
