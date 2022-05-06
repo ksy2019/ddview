@@ -9,7 +9,7 @@
                             <span class="logo-title">{{config.TITLE}}</span><span  class="title2">{{config.TITLE2}}</span>
                     </div>
             </div>
-            <div class="home-top-right"> 
+            <div class="home-top-right">
                     <img height="26px" class="user-icon nos" src="@/assets/img/user.png" alt="">
                     <span  class="user-name mr5">{{userName.CZYMC}}</span>
                     <img @click="updateYH({CZYID:''})" src="@/assets/img/changepw.png" height="20px" style="margin-left: 8px;" class="nos top-btn" alt="">
@@ -65,28 +65,21 @@
                         <el-button @click="showUpdateYH = false">取 消</el-button>
                         <el-button type="primary" @click="updateGXMM">确 定</el-button>
                 </div>
-      </el-dialog>
-<!-- 绑定二维码 -->
-        <el-dialog  width="350px" top="25vh" custom-class="qrcode-dialog" append-to-body :close-on-click-modal="false" title="绑定用户" :visible.sync="showQrcode">
-              <div ref="qrcode"></div>
-        </el-dialog>
-        
+      </el-dialog> 
   </div>
 </template>
 
-<script> 
-import interFace from '@/http/interFace'
+<script>
 import axios from 'axios'
 import {mapState} from 'vuex' 
-import qrcode from 'qrcodejs2'
 export default {
   computed: {
-      ...mapState(['userInfo','config','indexZD','zdList','allMenu']),
+      ...mapState(['config']),
       gssbSrc(){
-            if(this.token==''||this.httpHeader==''){
+            if(this.token==''||window.httpHeader==''){
                 return ''
             }
-            return encodeURIComponent(this.httpHeader+'/gssb/#/home?token='+this.token+'&ENTER=SHKJ&HIDEXFJLHIDEYHGL=1')
+            return encodeURIComponent(window.httpHeader+'/gssb/#/home?token='+this.token+'&ENTER=SHKJ&HIDEXFJLHIDEYHGL=1')
       },
       showSklb(){
               if(this.$route.path.toLowerCase().indexOf("gsmb")!==-1){
@@ -97,19 +90,9 @@ export default {
   },
   data(){
       return{ 
-            showQrcode: false,           //是否显示二维码
             showBody: false,             //是否显示路由，用于刷新数据
-            activeZD: {
-                    online: "离线",
-                    kpjh: '0',
-                    nsrmc: '',
-                    spid: '- - -',
-            },
-            httpHeader: '',
-            loadingRef: false,            
-            activeIndex: '/home/dashboard',
+            activeIndex: '/home/dashboard/',
             token: '',
-            FWQCQLIST: [],              //服务器抽取的数据列表  
             formData: {
                     qysh:   ""            
                     ,ssdq:  ""             //所属省份
@@ -124,94 +107,20 @@ export default {
             userName: {
                     CZYMC: '- - -',         //操作员名称
             },
-            dqdm: [{}],
-            dqList:[],
-            loading: false,   
             showUpdateYH: false,        //是否显示更新用户信息
             updateYhForm:{DLMM:'',DLMMM:'',old:''},
       }
   },
   watch: {
-           indexZD: {
-                   handler(data,old){ 
-                           if(old==null||(data.spid!=null&&data.spid!==old.spid&&data.spid!=undefined)){ 
-                                   this.activeZD=JSON.parse(JSON.stringify(data));
-                                   this.activeZD.loading=false 
-                                   if(Object.keys(old).length!==0){
-                                        this.showBody=false;
-                                        this.$nextTick(()=>{
-                                                this.showBody=true
-                                        })
-                                   }
-                           }
-                           this.$set(this,'activeZD',data)
-                   },
-                   deep: true
-           }
   },
-  beforeRouteEnter(to, from, next){
-        next(async vm => { 
-                if(from.path.toLowerCase().indexOf('login')!==-1){
-                        vm.getConfig()
-                        //载入内容
-                        vm.token=localStorage.getItem("token");
-                        let res = await axios.post('/SHKJ/YHXX/Username')
-                        if(res.Result==='1'){
-                                vm.userName=res; 
-                                vm.$store.commit("JSID",res.JSID)
-                        }
-                }
-        })
-  },
-  methods: { 
-        async sortUrl(url){
-            let res  = await axios.post('https://51dzfp.cn/WD/COMMON/SortURL',"URL=" +encodeURIComponent(url));
-            return res;
-        },
-        async linkMoblie(){
-                let code = 'https://open.weixin.qq.com/connect/oauth2/authorize?appid='+appid+'&redirect_uri='+encodeURIComponent(`https://51dzfp.cn/WD/WX/GetToken?CARD=&ly=bd&sj=wd&id=${this.userName.CZYID}`)+'&response_type=code&scope=snsapi_base&state=0&connect_redirect=1'
-                let mcode = await this.sortUrl(code)
-                mcode = mcode.URL;                              //todo: Result=0未处理
-                this.showQrcode = true;
-                this.$nextTick(()=>{
-                    if(!this.qr){
-                        this.qr = new qrcode( this.$refs.qrcode, {
-                            width: 300,
-                            height: 300,
-                            text: mcode
-                        })
-                    }else{
-                        this.qr.makeCode(mcode)
-                    }
-                })
-        },
-        selectTab(data){
-                this.showBody=false
-                this.token=localStorage.getItem("token"); 
-                if(data.search(/gssb/)!==-1){
-                        localStorage.setItem("home_indexTab",data.match(/.*(?=\?)/)) 
-                }else{
-                        localStorage.setItem("home_indexTab",data) 
-                }
-                setTimeout(() => {
-                      this.showBody=true  
-                }, 200);
-        },
+  methods: {
         goHome(){
                 this.showBody=false
                 this.$router.push('/home/dashboard/home')
                 setTimeout(() => {
                         this.showBody=true
                 }, 220);
-        }, 
-        changeSp(){                     //税控列表切换税盘
-                this.showBody=false
-                this.$store.commit("indexZD",{});
-                this.$router.push("/home/dashboard/home");
-                setTimeout(() => {
-                        this.showBody=true
-                }, 220);
-        }, 
+        },  
         updateYH(row){                  //更新用户信息
                 this.updateYhForm=JSON.parse(JSON.stringify(row)) 
                 this.showUpdateYH=true
@@ -221,7 +130,7 @@ export default {
                         this.$message.warning("两次输入的密码不一致，请检查输入")
                         return
                 }
-                axios.post('/SHKJ/Login/SetNewPassword',this.formD({
+                axios.post('/SHKJ/Login/SetNewPassword',this.$base.formD({
                         DLMM: this.updateYhForm.DLMM,
                         YDLMM: this.updateYhForm.old,
                         czyid: this.updateYhForm.CZYID
@@ -239,19 +148,6 @@ export default {
                                 this.$message.error(res.Message)
                         }
                 })
-        },
-        formD(obj){
-                const formData = new URLSearchParams();
-                Object.keys(obj).forEach((key) => {
-                if (obj[key] instanceof Array) {
-                    obj[key].forEach((item) => {
-                    formData.append(key, item);
-                    });
-                    return;
-                }
-                formData.append(key, obj[key]);
-                });
-                return formData;
         }, 
         exit(){
                 this.$confirm("确定注销登陆吗？", '温馨提示', {
@@ -263,35 +159,15 @@ export default {
                         this.$router.push('/login')
                 })
         },   
-        getdqlist(QYSH,msg){            //获取地区代码
-                return new Promise((res,rej)=>{
-                        axios.post('/TERM/GetDQ',"QYSH="+QYSH).then(data=>{
-                                res(data)
-                                if(!msg){
-                                this.dqdm=data.DQLIST
-                                this.formData.ssdq=data.DEFAULT
-                                }
-                        })
-                })
-        },  
-        async getConfig(){
-        }
   },
   async created(){
         this.showBody=true
-        await this.getConfig()
         //获取上一次的记录
         if(localStorage.getItem("indexSp")){
                 this.$store.commit("indexZD",JSON.parse(localStorage.getItem("indexSp")))
         }
-        if(localStorage.getItem('home_indexTab')!==null)this.activeIndex=localStorage.getItem('home_indexTab');
-        this.httpHeader=window.httpHeader;
+        if(localStorage.getItem('home_indexTab')!==null)this.activeIndex=localStorage.getItem('home_indexTab'); 
         this.token=localStorage.getItem("token");
-        let res = await axios.post('/SHKJ/YHXX/Username')
-        if(res.Result==='1'){
-                this.userName=res; 
-                this.$store.commit("JSID",res.JSID)
-        }
   },
   async mounted(){
   }
@@ -1028,23 +904,7 @@ export default {
         animation: rotate 1300ms infinite;
 }
 
-
-.changesp{
-        line-height: 25px;
-        height: 25px;
-        padding: 0 7px;
-        margin-right: -5px;
-        color: @SPBGCOLOR;
-        border-top-left-radius: 4px;
-        border-bottom-left-radius: 4px;
-        border: 1px solid @SPBG;
-        background: @SPBG;
-        font-size: 9pt;
-        i{
-                transition: all 1000ms; 
-                margin-right: 5px;
-        }
-}
+ 
 .select-container{
         display: flex;
         align-items: center;

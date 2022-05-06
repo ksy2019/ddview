@@ -2,7 +2,7 @@
   <div class="home-container">
         <!-- //主页的主要内容 -->
         <div  class="home-body">
-                      <!-- //过渡菜单 -->
+                      <!-- //展开按钮 -->
                       <transition enter-active-class="filpin" leave-active-class="filpout">
                               <div @click="isCollpse=!isCollpse" v-show="!isCollpse" class="showColl nos">
                                       <i  class="el-icon-caret-right"></i>
@@ -62,7 +62,6 @@
 </template>
 
 <script>
-import axios from 'axios';
 import {mapState} from 'vuex';
 import interFace from '@/http/interFace';
 import {Base64} from 'js-base64'
@@ -70,13 +69,7 @@ import myTab from '@/components/my-tab'
 export default {
                 data(){
                         return{
-                                loadingRef: false,
-                                showHelp: false,             //是否显示帮助文档
-                                menuData: [],
-                                editMenuData:[],             //编辑菜单的菜单
-                                showEditMenu: false,         //是否显示编辑菜单
-                                DQZD: "",   
-                                menuListEP:[], 
+                                menuListEP: [], 
                                 isCollpse: true,             //是否折叠左侧
                                 loadingOk: false,            //是否加载完成;加载完成之后再载入界面     
                                 showTabs: true,
@@ -89,9 +82,6 @@ export default {
                                                         ,icon: "el-icon-house"
                                                 }
                                         ]
-                                },
-                                defaultUserInfo: {           //默认用户信息,用于写入localstorage
-                                        hideScreenDialog: false,
                                 },
                         }
                 },
@@ -108,7 +98,7 @@ export default {
                                 },
                                 deep: true
                         },
-                        $route:{
+                        $route:{                                        //todo:等待优化
                                 handler(data){
                                         //监听当前路由
                                         if(!this.showTabs)return;
@@ -150,26 +140,10 @@ export default {
                                 deep: true
                         }, 
                 },
-                async sortUrl(url){
-                        let res  = await axios.post('https://51dzfp.cn/WD/COMMON/SortURL',"URL=" +encodeURIComponent(url))
-                        return res
-                },
                 computed: {
-                        ...mapState(['zdList','indexZD','config','UserInfo','TYPE','allConfig','allMenu'])
+                        ...mapState(['menuData'])
                 },
                 methods: {
-                        nodeDrop(Bnode,Node,type){ //拖动事件
-                                if(Node.childNodes.length==0&&Node.level=='1'&&type=='inner'){
-                                        return true
-                                }
-                                if(type==='inner'){
-                                        return false
-                                } 
-                                if(Bnode.level!=Node.level){
-                                        return false
-                                } 
-                                return type    
-                        },  
                         changeClick(node,data){    //树形框的选择框的选中事件，主要用全选功能
                                 if(node.level==1){
                                         data.children.forEach(item=>{
@@ -243,83 +217,13 @@ export default {
                         },
                         clickTab(tab){          //点击tab
                                 this.indexTab = tab;
-                                // return
                                 this.$router.push(tab.router+'?id='+tab.id)
-                        },
-                        routerMapper(row){                         //映射服务器字段
-                                for(let item of row){
-                                        item.id = item.ID;
-                                        item.label = item.CATPTION;
-                                        item.router = item.ROUTER;
-                                        item.icon = item.ICON
-                                        item.iscontainer = item.ISCONTAINER
-                                        item.children = item.CHILD
-                                        item.parentid = item.SJID;
-                                        if(item.CHILD&&item.CHILD.length!=0){
-                                                this.routerMapper(item.CHILD);
-                                        }
-                                }
-                        },
-                        async initRoutes(){        //初始化路由
-                                let res = await axios.post(this.$config.urlh+ '/NEWKP/DEV/GetMenu')
-                                if(res.Result=='1'){
-                                        //映射服务器字段
-                                        this.routerMapper(res.Rows)
-                                        this.menuData = res.Rows;
-                                }else{
-                                        this.$alert('获取路由信息失败'+ res.Message);
-                                }
-                                //注册路由
-                                for(let item of this.menuData){
-                                        if(item.ISCONTAINER=='1'){
-                                                for(let itemc of item.children){
-                                                        const routeObj = {
-                                                            path: '/home/dashboard/'+itemc.router,
-                                                            name: itemc.router,
-                                                            meta: {  },
-                                                            component: () =>  import('./children/template/index.vue')
-                                                        }
-                                                        this.$router.addRoute('dashboard',routeObj)
-                                                }
-                                        }else{
-                                                const routeObj = {
-                                                    path: '/home/dashboard/'+item.router,
-                                                    name: item.router,
-                                                    meta: {  },
-                                                    component: () =>  import('./children/template/index.vue')
-                                                }
-                                                this.$router.addRoute('dashboard',routeObj)
-                                        }
-                                }
                         },
                 },
                 async created(){
-                        this.initRoutes()
-                        if(localStorage.getItem("wdsk-mytabs")!==null){
-                                this.tabsData=JSON.parse(localStorage.getItem("wdsk-mytabs"));
-                                this.tabsData.indexTab = this.$route.path.replace('/home/dashboard/','')
-                        }
-                        //获取菜单配置
-                        // this.getMenuConfig();
+                        this.loadingOk=true
                 },
                 mounted(){
-                        console.log("dashborder载入成功")
-                        //获取本地配置信息提交之store
-                        this.loadingOk=true
-                        let myUserInfo
-                        try{
-                                myUserInfo=JSON.parse(localStorage.getItem("wdsk-UserInfo"))
-                        }catch(err){
-                                localStorage.setItem("wdsk-UserInfo",JSON.stringify(this.defaultUserInfo));
-                                myUserInfo=this.defaultUserInfo;
-                        }
-                        if(!myUserInfo)localStorage.setItem("wdsk-UserInfo",JSON.stringify(this.defaultUserInfo));
-                        this.$store.commit("UserInfo",myUserInfo===null?this.defaultUserInfo : myUserInfo);
-                        this.$nextTick(()=>{
-                                if(location.href.match(/#\/.*/).toString().substr(2)==''){
-                                        this.$router.push('index');
-                                }
-                        })
                 }, 
 }
 </script>

@@ -140,46 +140,10 @@ export default {
                                 })
                         })
                 },
-                login(){ 
-                        localStorage.setItem("LOGINQYSH",this.indexSSGS)
-                        for(let item of this.gsList){
-                                if(item.QYSH==this.indexSSGS){ 
-                                        localStorage.setItem("LOGINQYMC",item.QYMC)
-                                }
-                        }
-                        if(!localStorage.getItem("LOGINQYMC")){
-                                localStorage.setItem("LOGINQYMC","全部公司")
-                        }
-                        this.getRsa().then(()=>{
-                                let q={"UserName":this.UserName,"Password1":hex_md5(this.PassWord).toUpperCase()};
-                                setMaxDigits(129);
-                                let key = new RSAKeyPair(this.rsaInfo.Exponent, "", this.rsaInfo.Modulus);
-                                let encrypted = encryptedString(key, JSON.stringify(q));
-                                let data=[]
-                                data.push(encrypted)
-                                axios({
-                                        url: "/SHKJ/Login/WebLogin",
-                                        method: 'POST',
-                                        data: "MM="+data+'&JMID='+this.rsaInfo.JMID+"&SSGS=All&ENY=1",
-                                }).then(res=>{
-                                        if (res.Result=='1'){
-                                                this.$message.success('登陆成功，正在跳转中。。。')
-                                                localStorage.setItem('token',res.ID)
-                                                // localStorage.setItem('userName',res.CZYMC)
-                                                localStorage.setItem('CZYDM',res.CZYID)
-                                                // localStorage.setItem('JSID',res.JSID)
-                                                setTimeout(() => {
-                                                        this.$router.push('/home/dashboard/home')
-                                                }, 900);
-                                        }
-                                        else{
-                                                this.$message.error(res.Message)
-                                        }
-                                        if(res.Result=='2'){
-                                                //初始密码需要修改
-                                        }
-                                })
-                        })
+                login(){                               //登陆函数
+                        setTimeout(() => {
+                                this.$router.push('/home/dashboard/')
+                        }, 900);
                 }, 
                 newUser(){
                         if(this.createUser.CZYDM.match(/^[-_a-zA-Z0-9]{4,21}$/)==null){

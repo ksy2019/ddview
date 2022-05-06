@@ -1,7 +1,7 @@
 <!--
  * @Author: BlueStar
  * @Date: 2022-03-29 14:20:06
- * @LastEditTime: 2022-05-05 11:51:27
+ * @LastEditTime: 2022-05-05 16:04:33
  * @Description: 模板视图
 -->
 <template>
@@ -46,4 +46,7 @@ export default {
 </script>
 
 <style lang="less" scoped>
+.kpdd-container{
+        height: 100%;
+}
 </style>

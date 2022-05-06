@@ -5,7 +5,7 @@ const originalPush = VueRouter.prototype.push
 //解决router重复进入报错
 VueRouter.prototype.push = function push (location) {
         return originalPush.call(this, location).catch(err => err)
-} 
+}  
 export default new VueRouter({
     mode: 'hash'
     ,routes: [
@@ -35,7 +35,7 @@ export default new VueRouter({
                                         meta: {
                                             key: 'template'
                                         }
-                                    },
+                                    }
                                 ]
                             },
                     ]
@@ -48,7 +48,7 @@ export default new VueRouter({
                 {
                     path: '/test',
                     component: ()=>import('../pages/login')
-                },
+                }
                 
     ],
 })
