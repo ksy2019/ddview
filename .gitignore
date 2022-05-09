@@ -1,6 +1,8 @@
 .DS_Store
 node_modules
 dist
+productor
+super-view
 /dist
 /src/components/parser/lib
 /src/components/render/lib
