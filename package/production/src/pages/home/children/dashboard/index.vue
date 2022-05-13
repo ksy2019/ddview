@@ -71,7 +71,7 @@ export default {
                         return{
                                 menuListEP: [], 
                                 isCollpse: true,             //是否折叠左侧
-                                loadingOk: false,            //是否加载完成;加载完成之后再载入界面     
+                                loadingOk: false,            //是否加载完成;加载完成之后再载入界面  
                                 showTabs: true,
                                 tabsData: {
                                         indexTab: 'home',
@@ -98,7 +98,7 @@ export default {
                                 },
                                 deep: true
                         },
-                        $route:{                                        //todo:等待优化
+                        $route:{                                        //todo:等待优化，性能开销较大
                                 handler(data){
                                         //监听当前路由
                                         if(!this.showTabs)return;
@@ -144,65 +144,6 @@ export default {
                         ...mapState(['menuData'])
                 },
                 methods: {
-                        changeClick(node,data){    //树形框的选择框的选中事件，主要用全选功能
-                                if(node.level==1){
-                                        data.children.forEach(item=>{
-                                                item['show']=data.show 
-                                        }) 
-                                } 
-                        },
-                        getMenuConfig(){           //获取菜单config
-                                interFace.local("LX=GETCONFIGTGKP").then(res=>{
-                                        if (res.Result=='1'){
-                                                this.$store.commit("config",JSON.parse(Base64.decode(res.Data.replace(/ /g,'+'))))
-                                                this.setMenu()
-                                        }
-                                })
-                        },
-                        setMenu(){                 //设置菜单信息              
-                                // this.config.navMenu=JSON.parse(JSON.stringify(this.oldMenu))
-                                this.config.navMenu.forEach(item=>{
-                                //先添加父级菜单
-                                        let index=0
-                                        if(item.mode=='createParentNode'){
-                                                for(let row of this.menuData){
-                                                        if(row.router==item.appendNode){
-                                                                if(item.appendType=='append'){
-                                                                        this.menuData.splice(index,0,JSON.parse(JSON.stringify(item.body)))
-                                                                }else
-                                                                if(item.appendType=='preappend'){
-                                                                        this.menuData.splice(index+1,0,JSON.parse(JSON.stringify(item.body)))
-                                                                }
-                                                                break;
-                                                        }
-                                                        index++
-                                                }
-                                        }else{
-                                //之后添加子菜单
-                                                for(let row of this.menuData){
-                                                        if(row.router==item.parent){
-                                                                if(item.appendNode==''){
-                                                                        row.children.push(item.body)
-                                                                }else{
-                                                                        let x=0;
-                                                                        for(let c of row.children){
-                                                                                if(c.router===item.appendNode){
-                                                                                        if(item.appendType=='append'){
-                                                                                                row.children.splice(x,0,JSON.parse(JSON.stringify(item.body)) )
-                                                                                        }else
-                                                                                        if(item.appendType=='preappend'){
-                                                                                                row.children.splice(x+1,0,JSON.parse(JSON.stringify(item.body)) )
-                                                                                        }
-                                                                                        break
-                                                                                }
-                                                                                x++
-                                                                        }
-                                                                }
-                                                        }
-                                                }
-                                        }
-                                })
-                        },
                         createMenuEP(){
                                 this.menuData.forEach(item=>{
                                         if(item.children){
@@ -219,12 +160,19 @@ export default {
                                 this.indexTab = tab;
                                 this.$router.push(tab.router+'?id='+tab.id)
                         },
+                        checkUrl(){
+                                if(this.$route.path=='/home/dashboard/'){
+                                        let firstRouter = this.menuData[0]
+                                        this.$router.push(firstRouter.router+'?id=' + firstRouter.id);
+                                }
+                        }
                 },
                 async created(){
+                        this.checkUrl()
                         this.loadingOk=true
                 },
                 mounted(){
-                }, 
+                },
 }
 </script>
 
