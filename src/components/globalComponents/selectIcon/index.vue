@@ -1,7 +1,7 @@
 <!--
  * @Author: BlueStar
  * @Date: 2022-03-18 16:12:33
- * @LastEditTime: 2022-04-07 16:54:52
+ * @LastEditTime: 2022-05-13 14:21:03
  * @Description: 选择icon图标组件
 -->
 <template>
@@ -11,12 +11,17 @@
         </div>
         <div ref="tooltip"  v-if="showDialog" class="tooltip-con tooltip">
             <div class="arrow" data-popper-arrow></div>
-            <div class="scroll-con">
-                <el-scrollbar  wrap-class="select-con"  view-class=""  :native="false">
-                        <div @click="selectedIcon(item)" class="icon-item-con" v-for="item in iconList" :key="item">
-                            <i :class="item"></i>
-                        </div>
-                </el-scrollbar>
+            <div class="select-icon-body">
+                <div class="icon-search-container">
+                    <el-input v-model="searchVal" placeholder="输入类名关键字搜索"></el-input>
+                </div>
+                <div class="scroll-con">
+                    <el-scrollbar  wrap-class="select-con"  view-class=""  :native="false">
+                            <div @click="selectedIcon(item)" class="icon-item-con" v-for="item in filterList" :key="item">
+                                <i :class="item"></i>
+                            </div>
+                    </el-scrollbar>
+                </div>
             </div>
         </div>
     </div>
@@ -327,9 +332,15 @@ export default {
             ],
             showDialog: false,      //是否显示选择框
             indexIcon: '',          //当前图标
+            searchVal: '',          //搜索值
         }
     },
-    methods: {
+    computed: {
+        filterList(){
+            return this.iconList.filter(item=>item.indexOf(this.searchVal)!==-1)
+        },
+    },
+    methods: { 
         selectedIcon(icon){
             this.indexIcon = icon;
             this.$emit('changeIcon',icon);
@@ -366,7 +377,7 @@ export default {
 }
 </script>
 
-<style lang="scss" scoped>
+<style lang="less" scoped>
 .item-style{
         display: flex;
         align-items: center;
@@ -382,14 +393,21 @@ export default {
 .select-icon-container{
     .index-icon{
         background: #fff;
-        @extend .item-style;
+        .item-style;
     }
 }
-.scroll-con{
-    max-height: 360px;
+.select-icon-body{
+    height: 360px;
     z-index: 99;
     border-radius: 8px;
     overflow: hidden;
+    background: #fff;
+    .scroll-con{
+
+    }
+    .icon-search-container{
+        padding: 12px 10px;
+    }
 }
 .tooltip-con{
     border-radius: 8px;
@@ -398,15 +416,15 @@ export default {
     box-shadow: 0 2px 12px 0 rgb(0 0 0 / 10%);
     // overflow: hidden;
 }
-::v-deep .select-con{
-    max-height: 360px;
+/deep/ .select-con{
+    height: 300px;
     background: #fff;
     width: 233px;
     z-index: 99;
     padding: 0 10px 0 9px;
     box-sizing: content-box;
     .icon-item-con{
-        @extend .item-style;
+        .item-style;
         margin: 10px;
         display: inline-block;
         width: 32px;
@@ -448,5 +466,9 @@ export default {
 .tooltip[data-popper-placement^='right'] > .arrow {
   left: -4px;
 }
-
+/deep/.icon-search-container{
+    .el-input .el-input__inner{
+        width: 100% !important;
+    }
+}
 </style>
