@@ -244,7 +244,7 @@ export default {
             indexBtn: {},                   //保存当前编辑的按钮的指针
             cacheBtn: {},                   //copy的对象，用于编辑上
             sourceBtn: {                    //初始控件的值
-                "label": "发票作废",
+                "label": "按钮1",
                 "onClick": "",
                 "color": "primary",
                 "icon": "el-icon-medal",
