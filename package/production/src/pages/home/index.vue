@@ -3,7 +3,7 @@
 <!-- ///顶部用户信息 -->
       <div class="home-top pd12 ">
             <div class="home-top-left">
-                    <div class="logo nos" ><img :src="config.LOGOSRC" alt=""></div>
+                    <!-- <div class="logo nos" ><img :src="config.LOGOSRC" alt=""></div> -->
                     <!-- <span class="span-sqc"></span> -->
                     <div style="margin-right: 30px;" class="nos" @click="goHome">
                             <span class="logo-title">{{config.TITLE}}</span><span  class="title2">{{config.TITLE2}}</span>
@@ -801,7 +801,7 @@ export default {
                                  .logo-title{
                                          font-size: 14pt;
                                          font-weight: 500;
-                                         color: @mainColor;
+                                         color: #0b5c93;
                                  }
                                  .title2{
                                         font-size: 300;
