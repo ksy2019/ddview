@@ -262,7 +262,9 @@ export default {
             this.$globjs.initSortable.call(this,{className: 'drag-btn2',data: row,key:'children',tableRef: 'table2'});
         },
         clickEdit(row){                //点击按钮的修改事件
-            this.indexBtn = row;           
+            this.addType = '';
+            this.indexBtn = this.$base.deepCopy(row);  
+            this.cacheBtn = row;         
             this.showBtnSet = true;
         },
         openItemSet(){              //点击全部节点设置
