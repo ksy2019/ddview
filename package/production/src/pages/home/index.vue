@@ -11,7 +11,7 @@
             </div>
             <div class="home-top-right">
                     <img height="26px" class="user-icon nos" src="@/assets/img/user.png" alt="">
-                    <span  class="user-name mr5">{{userInfo.userName}}</span>
+                    <span  class="user-name mr5">{{userName.CZYMC}}</span>
                     <img @click="updateYH({CZYID:''})" src="@/assets/img/changepw.png" height="20px" style="margin-left: 8px;" class="nos top-btn" alt="">
                     <img  @click="exit" src="@/assets/img/exit.png" class="exit-icon nos top-btn" height="20px" alt="">
             </div>
@@ -74,7 +74,7 @@ import axios from 'axios'
 import {mapState} from 'vuex' 
 export default {
   computed: {
-      ...mapState(['config','menuData']),
+      ...mapState(['config']),
       gssbSrc(){
             if(this.token==''||window.httpHeader==''){
                 return ''
@@ -92,9 +92,20 @@ export default {
       return{ 
             showBody: false,             //是否显示路由，用于刷新数据
             activeIndex: '/home/dashboard/',
-            token: '', 
-            userInfo: {
-                    userName: '- - -',         //操作员名称
+            token: '',
+            formData: {
+                    qysh:   ""            
+                    ,ssdq:  ""             //所属省份
+                    ,zdbh:   ""             //终端编号
+                    ,zdlx:  ""              //终端类型
+                    ,fhr:    ""             //复核人
+                    ,skr:    ""             //收款人
+                    ,kpr:    ""             //开票人
+                    ,dzdh:   ""             //地址电弧
+                    ,yhzh:   ""             //银行帐号 
+            },
+            userName: {
+                    CZYMC: '- - -',         //操作员名称
             },
             showUpdateYH: false,        //是否显示更新用户信息
             updateYhForm:{DLMM:'',DLMMM:'',old:''},
