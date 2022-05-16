@@ -25,6 +25,14 @@ export default {
             scrollIcon: false,           //tabs滚动条按钮是否显示
         }
     },
+    watch: {
+            tabsData: {
+                    handler(){
+                        this.eventTabContainer();
+                    },
+                    deep: true
+            }
+    },
     model: {
             event: 'change',
             prop: 'tabsData'
@@ -58,7 +66,11 @@ export default {
                             })
                     }
             },
-            clickTab(tab){          //点击tab，进行跳转操作
+            clickTab(tab){            //点击tab，进行跳转操作
+                    if(tab.router=='home'){                             //todo: home暂时关闭
+                            this.$message.warning('暂未开放')
+                            return
+                    }
                     if(this.$route.path.replace('/home/dashboard/home','')==tab.router){
                             return
                     }
@@ -67,31 +79,23 @@ export default {
                     localStorage.setItem(locName + 'tabData',JSON.stringify(this.tabsData));
                     this.$router.push(tab.router+'?id='+tab.id)
             },
-            eventTabContainer(){    //监听就tabsContainer的溢出事件来控制是否显示i滚动按钮,todo: 未进行优化
-                    setTimeout(() => {
-                            let innerWidth=0
-                            if(document.getElementsByClassName("sh-tabs-container").length!=0){
-                                    let conWidth=document.getElementsByClassName("sh-tabs-container")[0].clientWidth
-                                    for(let item of document.getElementsByClassName("sh-tabs-item")){
-                                            innerWidth+=item.clientWidth+5
-                                            if(innerWidth>conWidth){
-                                                    this.scrollIcon=true
-                                                    return
-                                            }
+            eventTabContainer(){       //判断栏目是否溢出
+                    let innerWidth=0
+                    //判断tab是否溢出
+                    if(document.getElementsByClassName("my-tab-container").length!=0){
+                            let conWidth=document.getElementsByClassName("my-tab-container")[0].clientWidth
+                            for(let item of document.getElementsByClassName("sh-tabs-item")){
+                                    innerWidth+=item.clientWidth+5
+                                    if(innerWidth>conWidth){
+                                            this.scrollIcon = true
+                                            return
                                     }
-                                    this.scrollIcon=false
-                            }else{
-                                    setTimeout(() => {
-                                          this.eventTabContainer();
-                                    }, 200);
                             }
-                    },220)
+                            this.scrollIcon = false
+                    }
             },
     },
     mounted(){
-            this.$nextTick(()=>{
-                    this.eventTabContainer();
-            })
     }
 }
 </script>

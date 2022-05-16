@@ -93,7 +93,7 @@
                 <vxe-table-column 
                 header-align="center"
                 align="center"
-                title="表头对齐"
+                title="标头对齐"
                 field="headalign"
                 :formatter="$base.formatter"
                 min-width="100">
@@ -166,7 +166,7 @@
                                     </el-form-item>
                                 </el-col>
                                 <el-col :style="{marginBottom: gutterY}"  :span="12">
-                                    <el-form-item  label="表头居中">
+                                    <el-form-item  label="表头剧中">
                                             <el-select v-model="indexOb.headalign">
                                                 <el-option label="居中" value="center"></el-option>
                                                 <el-option label="左对齐" value="left"></el-option>
@@ -425,9 +425,7 @@ export default {
             if(this.isAdd){
                 this.addItem();
             }else{
-                for(let item in this.cacheOb){
-                    this.cacheOb[item]=this.indexOb[item];
-                }
+                Object.assign(this.cacheOb,this.indexOb)
             }
             this.showBtnSet=false;
         },
