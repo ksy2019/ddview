@@ -1,7 +1,7 @@
 <!--
  * @Author: BlueStar
  * @Date: 2021-10-27 09:01:53
- * @LastEditTime: 2022-03-30 18:47:53
+ * @LastEditTime: 2022-05-16 14:14:23
  * @Description: JSON代码编辑器
 -->
 <template>
@@ -65,7 +65,7 @@ export default {
       text: trigger => {
         this.$notify({
           title: '成功',
-          message: '代码已复制到剪切板，可粘贴。',
+          message: '代码已复制到剪切板，可黏贴。',
           type: 'success'
         })
         return this.beautifierJson

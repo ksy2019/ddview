@@ -46,7 +46,7 @@
                       <!-- //右边的内容 -->
                       <div v-loading="!loadingOk" class="home-body-right">
                               <div v-show="showTabs" class="sh-tabs-container">
-                                      <my-tab :tabsData="tabsData"  />
+                                      <my-tab v-model="tabsData"  />
                               </div>
                               <!-- <div :style="{'transform': showTabs?'rotateX(0deg) translateY(-36px)':'rotate(180deg) translateY(18px)'}" @click="showTabs=!showTabs" class="hide-btn">
                                         <i class="el-icon-arrow-down"></i>
@@ -92,45 +92,6 @@ export default {
                         isCollpse(){
                                 localStorage.setItem('wdsk-isCollpseGS',this.isCollpse)
                         },
-                        tabsData: {
-                                handler(){
-                                        localStorage.setItem("wdsk-mytabs",JSON.stringify(this.tabsData))
-                                },
-                                deep: true
-                        },
-                        $route:{                                        //todo:等待优化，性能开销较大
-                                handler(data){
-                                        //监听当前路由
-                                        if(!this.showTabs)return;
-                                        if(this.tabsData.list.filter(tab=>{
-                                                if(tab.router==data.path.replace('/home/dashboard/','')){
-                                                        return  tab
-                                                }
-                                        }).length===0){
-                                                for(let x of this.menuListEP){
-                                                        if(x.rou22ter===this.$route.path.replace('/home/dashboard/','')){
-                                                                this.tabsData.indexTab=data.path.replace('/home/dashboard/','')
-                                                                this.tabsData.list.push(x)
-                                                                this.eventTabContainer()
-                                                                this.$nextTick(()=>{
-                                                                        this.$refs[this.tabsData.indexTab][0].scrollIntoView({behavior: 'smooth'})
-                                                                })
-                                                                return
-                                                        }
-                                                }
-                                        }else{
-                                                this.tabsData.indexTab=data.path.replace('/home/dashboard/','');
-                                                this.$nextTick(()=>{
-                                                        try{
-                                                                this.$refs[this.tabsData.indexTab][0].scrollIntoView({behavior: 'smooth'});
-                                                        }catch(err){
-                                                                console.log("调整位置失败...");
-                                                        }
-                                                })
-                                        }
-                                },
-                                deep: true
-                        },
                         menuData: {
                                 handler(){
                                         this.menuListEP=[]
@@ -157,8 +118,19 @@ export default {
                                 })
                         },
                         clickTab(tab){          //点击tab
-                                this.indexTab = tab;
+                                this.tabsData.indexTab = tab.router;
+                                this.tabsData.indexId = tab.id;
                                 this.$router.push(tab.router+'?id='+tab.id)
+                                localStorage.setItem(locName + 'tabData',JSON.stringify(this.tabsData));
+                                for(let item of this.tabsData.list){
+                                        if(item.id == tab.id){
+                                                return
+                                        }
+                                }
+                                this.tabsData.list.push(tab);
+                                this.$nextTick(()=>{
+                                        this.$refs[this.tabsData.indexTab][0].scrollIntoView({behavior: 'smooth'});
+                                })
                         },
                         checkUrl(){
                                 if(this.$route.path=='/home/dashboard/'){
@@ -168,8 +140,13 @@ export default {
                         }
                 },
                 async created(){
-                        this.checkUrl()
-                        this.loadingOk=true
+                        this.checkUrl();
+                        let locTab = localStorage.getItem(locName+'tabData');
+                        if(locTab){
+                                this.tabsData = JSON.parse(locTab);
+                                this.$router.push(this.tabsData.indexTab+'?id='+this.tabsData.indexId)
+                        }
+                        this.loadingOk=true;
                 },
                 mounted(){
                 },
@@ -183,11 +160,6 @@ export default {
 .router-enter{
         animation: fadeInRight .32s;
 }  
-.index-tab{
-    background: #1e78ff !important;
-    color: #FFE !important;
-    box-shadow: 0 0 5px -2px #293551 !important;
-}
 .hide-btn{
         display: inline-block;
         position: absolute;

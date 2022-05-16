@@ -193,7 +193,7 @@ export const myComponents=[
                 }
             ]
           },
-          // table组件  tablej-group
+          // table组件  table-group
           {
             name: "table组件",
             tag: "table-group",
@@ -223,6 +223,7 @@ export const myComponents=[
                         "align": "center",
                         "headalign": "center",
                         "color": "",
+                        "minWidth": "",
                         "id": guid(),
                         "xh": "00",
                         "fixed": "left",
@@ -233,6 +234,7 @@ export const myComponents=[
                         "field": "",
                         "type": "checkbox",
                         "width": "55",
+                        "minWidth": "",
                         "align": "center",
                         "headalign": "center",
                         "color": "",
@@ -245,6 +247,7 @@ export const myComponents=[
                         "label": "名称",
                         "field": "name",
                         "width": "100",
+                        "minWidth": "",
                         "type": "",
                         "align": "left",
                         "headalign": "center",
@@ -258,6 +261,7 @@ export const myComponents=[
                         "fixed": "right",
                         "label": "操作",
                         "width": "60",
+                        "minWidth": "",
                         "type": "",
                         "color": "",
                         "sumcol": "",

@@ -207,6 +207,11 @@
                                     </el-form-item> 
                                 </el-col>
                                 <el-col :style="{marginBottom: gutterY}"  :span="12">
+                                    <el-form-item  label="最小宽度">
+                                            <el-input v-model="indexOb.minWidth" placeholder="请输入最小宽度"></el-input>
+                                    </el-form-item> 
+                                </el-col>
+                                <el-col :style="{marginBottom: gutterY}"  :span="12">
                                     <el-form-item  label="合计列">
                                             <el-select v-model="indexOb.sumcol">
                                                 <el-option label="累加" value="count"></el-option>
@@ -410,12 +415,13 @@ export default {
             this.showItemSet=true;
             this.$globjs.initSortable.call(this,{className: 'drag-btn',data: this.config,key:'columns',tableRef: 'table'});
         },
-        openColSet(btn){                    //打开按钮设置
+        openColSet(btn){                    //打开列设置
+            this.isAdd = false;
             this.indexOb = this.$base.deepCopy(btn);
             this.cacheOb= btn;
             this.showBtnSet = true;
         },
-        saveBtn(){                          //保存按钮设置
+        saveBtn(){                          //保存列设置
             if(this.isAdd){
                 this.addItem();
             }else{
@@ -438,7 +444,6 @@ export default {
             this.showBtnSet = true;
         },
         addItem(){                          //增加节点
-            this.isAdd = false;
             let list = this.$base.deepCopy(this.config.columns);
             list.push({
                 ...this.indexOb,

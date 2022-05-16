@@ -25,17 +25,21 @@ export default {
             scrollIcon: false,           //tabs滚动条按钮是否显示
         }
     },
+    model: {
+            event: 'change',
+            prop: 'tabsData'
+    },
     methods: {
-            closeTab(tab){             //关闭tab
+            closeTab(tab){             //关闭单个tab
                     this.tabsData.list=this.tabsData.list.filter(item=>item.router!=tab.router)
                     if(this.tabsData.list[this.tabsData.list.length-1].router!==this.$route.path.replace('/','')){
-                            this.$router.push(this.tabsData.list[this.tabsData.list.length-1].router) 
+                            this.$router.push(this.tabsData.list[this.tabsData.list.length-1].router)
                     }
                     this.$nextTick(()=>{
                             this.eventTabContainer()
                     })
             },
-            scrollTo(type){                                 //点击滚动条
+            scrollTo(type){            //点击滚动条
                     if(type=='left'){
                             this.$emit('leftEvent')
                             this.$nextTick(()=>{
@@ -58,7 +62,10 @@ export default {
                     if(this.$route.path.replace('/home/dashboard/home','')==tab.router){
                             return
                     }
-                    this.$router.push(tab.router)
+                    this.tabsData.indexTab = tab.router;
+                    this.tabsData.indexId = tab.id;
+                    localStorage.setItem(locName + 'tabData',JSON.stringify(this.tabsData));
+                    this.$router.push(tab.router+'?id='+tab.id)
             },
             eventTabContainer(){    //监听就tabsContainer的溢出事件来控制是否显示i滚动按钮,todo: 未进行优化
                     setTimeout(() => {
@@ -150,6 +157,11 @@ export default {
                         margin-right: 1px;
                 }
         } 
+        .index-tab{
+            background: #1e78ff !important;
+            color: #FFE !important;
+            box-shadow: 0 0 5px -2px #293551 !important;
+        }
 }
 
 </style>
