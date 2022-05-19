@@ -221,7 +221,7 @@
                                                 <el-option label="无合计" value=""></el-option>
                                             </el-select>
                                     </el-form-item> 
-                                </el-col> 
+                                </el-col>
                             </el-row>
                         </el-form>
                 </div>

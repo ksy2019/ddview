@@ -1,3 +1,5 @@
+import axios from 'axios'
+
 // axios.defaults.timeout=50*1000                  //设置默认超时时间为50s
 // 添加请求拦截器
 axios.interceptors.request.use(function (config) {

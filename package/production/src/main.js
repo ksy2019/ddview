@@ -5,9 +5,17 @@ import App from './App.vue'
 import store from './store'
 import router from './router'
 import './assets/css/global.less'
+import axios from 'axios'
 import './assets/css/myElement.css'
+import moment from 'moment'
 import '@/assets/theme/index.css'
 import applicationConfig from '../config/applicationConfig'
+import ELEMENT from 'element-ui'
+import VXETable from 'vxe-table'
+import VXETablePluginExportXLSX  from 'vxe-table-plugin-export-xlsx'
+import 'element-ui/lib/theme-chalk/index.css';
+import 'vxe-table/lib/style.css'
+
 Vue.use(ELEMENT,{size: 'small'})
 
 //全局注册自定义组件
@@ -32,6 +40,7 @@ Vue.prototype.$moment = moment
 Vue.use(dirctives)
 Vue.use(superView)
 import '@/http/axiosDefault.js'
+window.axios = axios;
 
 import { Loading } from 'element-ui';
 Vue.prototype.$loading = Loading;

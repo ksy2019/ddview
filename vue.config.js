@@ -52,7 +52,7 @@ module.exports = {
   configureWebpack: {
     externals: {
       vue: 'Vue',
-      'element-ui': 'ELEMENT'
+      // 'element-ui': 'ELEMENT'
     },
     plugins: [ new CP({
       test: /\.js$|\.css$|\.html/,

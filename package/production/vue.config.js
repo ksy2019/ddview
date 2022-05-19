@@ -39,13 +39,7 @@ module.exports = {
             // new BundleAnalyzerPlugin()
           ],
           externals: {
-            'element-ui': 'ELEMENT',
-            'vue': 'Vue',
-            'echarts': 'echarts',
-            'xe-utils': 'XEUtils',
-            'vxe-table': 'VXETable',
-            'vxe-table-plugin-export-xlsx': 'VXETablePluginExportXLSX',
-            'axios': 'axios',
+            'vue': 'Vue', 
           }
        }
     }else{
@@ -55,13 +49,7 @@ module.exports = {
                 // new BundleAnalyzerPlugin()
             ],
             externals: {
-              'element-ui': 'ELEMENT',
-              'vue': 'Vue',
-              'echarts': 'echarts',
-              'xe-utils': 'XEUtils',
-              'vxe-table': 'VXETable',
-              'vxe-table-plugin-export-xlsx': 'VXETablePluginExportXLSX',
-              'axios': 'axios',
+              'vue': 'Vue', 
             }
         }
     }
