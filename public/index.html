@@ -81,7 +81,7 @@
     }
   </style>
   <link rel="stylesheet" href="./css/css-var.css">
-  <script src="./libs/vue.runtime.min.js"></script>
+  <script src="<%= NODE_ENV==='production' ? './libs/vue.runtime.min.js' : './libs/vue.js'%>"></script>
   <script  src="./super-view/superView.umd.js"></script> 
 </head>
 

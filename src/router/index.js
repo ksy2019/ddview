@@ -7,7 +7,8 @@ const routes = [
     name: 'all',
     component: ()=>import('@/views/menuEditor/index.vue' ),
     children: [
-    ]
+    ],                          //首页进入重定向
+    redirect: '/menueditor/'
   },
   {
     path: '/pageeditor',

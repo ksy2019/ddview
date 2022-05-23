@@ -26,6 +26,8 @@ import '@/http/axiosDefault'
 
 //注册全局组件
 Vue.component('select-icon',()=>import('./src/components/globalComponents/selectIcon'));
+Vue.component('http-other-set',()=>import('./src/components/globalComponents/httpOtherSet'));
+
 
 //引入全局设置
 import globjs from '@/utils/global'

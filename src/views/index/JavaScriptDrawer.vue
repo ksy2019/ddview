@@ -7,6 +7,10 @@
             JavaScript编辑器
         </div>
         <div class="right">
+            <span v-if="templateCode&&templateCode!=''" @click="clickTemplate" class="bar-btn">
+                <i class="el-icon-document-copy"/>
+                示例代码
+            </span>
             <span class="bar-btn copy-js-btn">
                 <i class="el-icon-document-copy"/>
                 复制代码
@@ -143,7 +147,8 @@ export default {
     tree,
   },
   props: {
-      javascript: String,
+      'javascript': String,
+      'template-code': String
   },
   computed: {
       ...mapState(['drawingList','drawingListDeeps'])
@@ -182,6 +187,9 @@ export default {
     window.removeEventListener('keydown', this.preventDefaultSave)
   },
   methods: {
+    clickTemplate(){                  //示例代码
+        this.setValue(this.templateCode,'string');
+    },
     copyText(text){                  //复制选中的应用引用
         this.$base.copyT(text)
     },
@@ -198,19 +206,27 @@ export default {
       }
     },
     onOpen() {                      //初始化函数
-      loadBeautifier(btf => {
-        beautifier = btf
-        this.beautifierJs = beautifier.js(Base64.decode(this.javascript), beautifierConf.js)
-        loadMonaco(val => {
-            monaco = val
-            this.setEditorValue('editorJson', this.beautifierJs)
+        this.setValue(this.javascript)
+    },
+    setValue(javascriptCode,codeType){
+        let code = javascriptCode;
+        if(!codeType || codeType!=='string'){
+            code = Base64.decode(javascriptCode)
+        }
+        loadBeautifier(btf => {
+          beautifier = btf
+          this.beautifierJs = beautifier.js(code, beautifierConf.js)
+          loadMonaco(val => {
+              monaco = val
+              this.setEditorValue('editorJson', this.beautifierJs)
+          })
         })
-      })
     },
     setEditorValue(id, codeStr) {     //设置编辑器的值
       if (this.javaScriptEditor) {
         this.javaScriptEditor.setValue(codeStr)
-      } else {
+      } else{
+         if(codeStr.indexOf('当前在函数内')===-1){
         codeStr=
 `/**
 *
@@ -219,6 +235,7 @@ export default {
 *
 */
 `+codeStr
+         }
         //实例化moncao编辑器
         this.javaScriptEditor = monaco.editor.create(document.getElementById(id), {
           value: codeStr,

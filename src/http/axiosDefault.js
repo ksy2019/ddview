@@ -9,10 +9,10 @@ axios.interceptors.request.use(function (config) {
             config.data.append('pageSize',config.data.get('pagesize'))
         }
 
-        //带有http头的不进行url转换
-        if(location.href.indexOf('menueditor')==-1&&window.mode!=='dev'&&config.url.indexOf('http')===-1){
-            config.url=window.httpHeader+config.url
-        }
+        // //带有http头的不进行url转换
+        // if(location.href.indexOf('menueditor')==-1&&window.mode!=='dev'&&config.url.indexOf('http')===-1){
+        //     config.url=window.httpHeader+config.url
+        // }
         //添加token
         try{
             config.data.append('token',localStorage.getItem('token'))

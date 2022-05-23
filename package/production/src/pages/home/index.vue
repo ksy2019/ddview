@@ -76,7 +76,7 @@ export default {
   computed: {
       ...mapState(['config']),
       gssbSrc(){
-            if(this.token==''||window.httpHeader==''){
+            if(this.token=='' || window.httpHeader==''){
                 return ''
             }
             return encodeURIComponent(window.httpHeader+'/gssb/#/home?token='+this.token+'&ENTER=SHKJ&HIDEXFJLHIDEYHGL=1')
@@ -93,17 +93,6 @@ export default {
             showBody: false,             //是否显示路由，用于刷新数据
             activeIndex: '/home/dashboard/',
             token: '',
-            formData: {
-                    qysh:   ""            
-                    ,ssdq:  ""             //所属省份
-                    ,zdbh:   ""             //终端编号
-                    ,zdlx:  ""              //终端类型
-                    ,fhr:    ""             //复核人
-                    ,skr:    ""             //收款人
-                    ,kpr:    ""             //开票人
-                    ,dzdh:   ""             //地址电弧
-                    ,yhzh:   ""             //银行帐号 
-            },
             userName: {
                     CZYMC: '- - -',         //操作员名称
             },
@@ -150,7 +139,7 @@ export default {
                 })
         }, 
         exit(){
-                this.$confirm("确定注销登陆吗？", '温馨提示', {
+                this.$confirm("确定注销登录吗？", '温馨提示', {
                         confirmButtonText: '确定',
                         cancelButtonText: '取消',
                         type: 'warning'

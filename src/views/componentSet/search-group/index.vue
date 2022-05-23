@@ -60,8 +60,9 @@
             <span class="primary">所有节点</span>
         </div>
         <div class="set-row-between nos">
-            <span class="nos color1">附加参数</span>
-            <span @click="openOtherSet" class="primary">所有节点</span>
+            <http-other-set v-model="config.other">
+                <div class="main-color">ajax附加参数</div>
+            </http-other-set>
         </div>
     <!-- //子节点设置窗口 -->
         <el-drawer
@@ -270,72 +271,6 @@
                 </vxe-table-column>
             </vxe-table>
         </el-drawer>
-    <!-- //其他参数设置 -->
-        <el-drawer
-        :visible.sync="showOtherSet"
-        :show-close="false"
-        :withHeader="false"
-        size="62%"
-        >
-            <div class="drawer-header">
-                <div>
-                    <span class="nos" @click="openItemSet">节点设置</span>
-                </div>
-                <div>
-                    <span @click="addOtherItem" class="nos mr10">新增</span>
-                    <span @click="delOtherItem" class="nos">删除</span>
-                </div>
-            </div>
-            <vxe-table
-                border
-                ref="tableOther"
-                :data="config.other"
-                style="width: 100%"
-                :checkbox-config="{highlight: true,range: true}"
-                stripe
-                height="500px"
-                >
-                <vxe-table-column
-                type="checkbox"
-                align="center"
-                width="55">
-                </vxe-table-column>
-                <vxe-table-column
-                title="序号"
-                type="seq"
-                align="center"
-                width="55">
-                </vxe-table-column>
-                <vxe-table-column
-                field="key"
-                header-align="center"
-                align="left"
-                :formatter="$base.formatter"
-                title="键名"
-                min-width="100">
-                    <el-input class="input-t" slot-scope="slot" v-model="slot.row.key"></el-input>
-                </vxe-table-column>
-                <vxe-table-column
-                field="type"
-                title="取值方式"
-                header-align="center"
-                :formatter="$base.formatter"
-                align="left"
-                min-width="90">
-                    <el-select class="input-t" slot-scope="slot" v-model="slot.row.type">
-                        <el-option value="static" label="固定值"> </el-option>
-                        <el-option value="js" label="脚本"> </el-option>
-                    </el-select>
-                </vxe-table-column>
-                <vxe-table-column
-                header-align="center"
-                align="center"
-                min-width="120px"
-                title="值或脚本">
-                    <div slot-scope="slot" @click="editGetSet(slot.row)" class="main-color nos">{{slot.row.type==='static'?'修改值':'修改脚本'}}</div>
-                </vxe-table-column>
-            </vxe-table>
-        </el-drawer>
     <!-- 初始化编辑器 -->
         <javascript-drawer  size="60%" :visible.sync="showJavaScriptEdit" v-model="javascript.ob[javascript.key]"/>
     <!-- //单个按钮的属性编辑器 -->
@@ -426,7 +361,7 @@ export default {
     props: {
         config: Object,
     },
-    model: {                                //自定义Model
+    model: {                                //自定义model
         prop: 'config',
         event: 'changeConfig'
     },
@@ -481,36 +416,6 @@ export default {
             this.indexOb = this.$base.deepCopy(this.souceBtn);
             this.indexOb.id = this.$base.guid();
             this.showBtnSet = true;
-        },
-        addOtherItem(){                         //新增附加节点
-            this.config.other.push({
-                key: '',
-                type: 'static',
-                value: '',
-                id: this.$base.guid()
-            })
-        },
-        delOtherItem(){                         //删除附件字段
-            let list = JSON.parse(JSON.stringify(this.config.other));
-            let arr= [];
-            for(let item of this.$refs.tableOther.selection){
-                arr.push(item.id);
-            }
-            this.config.other = list.filter(item=>!arr.includes(item.id));
-        },
-        editGetSet(row){                    //编辑获取值的方式
-            console.log(row)
-            if(row.type==='js'){
-                this.editJs(row,'value')
-            }else{
-                this.$prompt('请输入key对应的值', '提示', {
-                    confirmButtonText: '确定',
-                    inputValue: row.value,
-                    cancelButtonText: '取消',
-                }).then(({ value }) => {
-                    row.value =value
-                })
-            }
         },
         openOtherSet(){                     //打开其他设置
             this.showOtherSet = true;
