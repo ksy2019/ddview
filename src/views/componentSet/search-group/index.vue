@@ -338,8 +338,8 @@
                                         <el-option  label="接口取数" value="url"></el-option>
                                     </el-select>
                                 </el-form-item>
-                                todo:未完善
-                                <el-form-item label="编辑取数方式">
+                                <!-- todo:未完善 -->
+                                <el-form-item label="取数方式">
                                 </el-form-item>
                         </el-form>
                 </div>
@@ -471,7 +471,7 @@ export default {
             }
             this.config.items=list;
         },
-        delItemMore(){                      //删除更多的元素
+        delItemMore(){                      //删除更多元素
             let checks=[],list = []
             for(let item of this.$refs.moreTable.selection){
                 checks.push(item._XID)

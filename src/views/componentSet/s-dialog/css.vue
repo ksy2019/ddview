@@ -1,7 +1,7 @@
 <!--
  * @Author: BlueStar
  * @Date: 2021-11-05 15:52:38
- * @LastEditTime: 2022-04-08 18:29:27
+ * @LastEditTime: 2022-05-24 09:06:49
  * @Description: 组件的css样
 -->
 <template>
@@ -72,7 +72,7 @@
                 <div class="set-row-between nos">
                     <span class="nos color1">背景颜色</span>
                     <div>
-                        <el-input v-model="cache.css.background"></el-input>
+                        <el-color-picker v-model="cache.css.background"></el-color-picker>
                     </div>
                 </div>
             </div>
