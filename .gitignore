@@ -7,7 +7,7 @@ super-view
 /src/components/render/lib
 /src/components/tinymce/lib
 /public/super-view/
-/pulic/productor
+/public/productor/
 
 
 # local env files

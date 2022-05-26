@@ -96,8 +96,8 @@ export const myComponents=[
                 background: '',
                 boxSizing: ''
             },                            
-            searchText: '搜索',                     //搜索按钮的文字
-            serachIcon: 'el-icon-search',                     //搜索按钮的icon
+            searchText: '搜索',                 //搜索按钮的文字
+            serachIcon: 'el-icon-search',       //搜索按钮的icon
             url: '/getk',                       //接口地址
             method: 'post',                     //请求方式
             formType: 'form',                   //参数格式     form =form-urlencode  或 json 
@@ -121,6 +121,25 @@ export const myComponents=[
                         label: '关键字段',                  //头部文字
                         id: guid(),
                 },
+                //{
+                //        type: 'select',                    //种类-下拉框
+                //        placeholder: '请选择发票种类',      //提示文字
+                //        value: 'fpzl',                     //对应关键字
+                //        width: '',                    //宽度， 这个节点可以没有,单位px
+                //        showLabel: false,                  //是否显示头部提示，优先级大于外层
+                //        label: '发票种类',                  //头部文字
+                //        getDataType: '',
+                //        url: '',
+                //        defaultValue: '026',
+                //        keys: {
+                //                label: 'label',
+                //                value: 'value'
+                //        },
+                //        children: [
+                //                {label: '电子发票',value: '026'},
+                //                {label: '专用发票',value: '004'}
+                //        ]
+                //},
                 // {
                 //         type: 'date',                    //种类-时间选择器
                 //         placeholder: '请选择开票时间',    //提示文字
@@ -361,6 +380,10 @@ export const myComponents=[
                         getDataType: '',
                         url: '',
                         defaultValue: '026',
+                        keys: {
+                                label: 'label',
+                                value: 'value'
+                        },
                         children: [
                                 {label: '电子发票',value: '026'},
                                 {label: '专用发票',value: '004'}

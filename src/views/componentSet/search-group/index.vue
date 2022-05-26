@@ -2,7 +2,7 @@
     <!-- //table-group组件设置 -->
     <div class="set-con">
         <div class="set-row">
-            <span class="mr5">组件名称</span>
+            <span class="mr5">组件ID</span>
             {{config.id}}
         </div>
         <div class="set-row-between nos">
@@ -329,17 +329,28 @@
                 </div>
         </el-dialog>
     <!-- //单个按钮的属性编辑器 -->
-        <el-dialog v-dialogDrag title="下拉数据设置"  :close-on-click-modal="false" width="320px" top="14vh"  custom-class="item-set-dialog" :visible.sync="showSelectOption">
+        <el-dialog v-dialogDrag title="下拉数据设置"  :close-on-click-modal="false" width="640px" top="14vh"  custom-class="item-set-dialog" :visible.sync="showSelectOption">
                 <div v-if="showSelectOption" class="form-con" style="margin-top: 38px;">
-                        <el-form ref="form" label-position="left" :model="indexGetListSet" label-width="86px" >
+                        <el-form ref="form" label-position="left" :model="indexOb" label-width="86px" >
                                 <el-form-item  label="取数方式">
-                                    <el-select v-model="indexGetListSet.getDataType">
-                                        <el-option  label="固定值" value="static"></el-option>
-                                        <el-option  label="接口取数" value="url"></el-option>
+                                    <el-select v-model="indexOb.getDataType">
+                                        <el-option label="固定值" value="static"></el-option>
+                                        <el-option label="接口取数" value="url"></el-option>
                                     </el-select>
                                 </el-form-item>
-                                <!-- todo:未完善 -->
-                                <el-form-item label="取数方式">
+                                <!-- todo:需要增加取数地址设置 -->
+                                <el-form-item v-show="indexOb.getDataType =='url'" label="取数地址">
+                                    <el-input placeholder="请输入url地址" v-model="indexOb.url"></el-input>
+                                </el-form-item>
+                                <!-- //增加节点设置 -->
+                                <div v-show="indexOb.getDataType !=='url'">
+                                    <el-button type="primary">增加节点</el-button>
+                                </div>
+                                <el-form-item v-show="indexOb.getDataType !=='url'" label="label">
+                                    <el-input placeholder="请输入节点标签" v-model="indexOb.url"></el-input>
+                                </el-form-item>
+                                <el-form-item v-show="indexOb.getDataType !=='url'" label="value">
+                                    <el-input placeholder="请输入节点值" v-model="indexOb.url"></el-input>
                                 </el-form-item>
                         </el-form>
                 </div>
@@ -387,10 +398,9 @@ export default {
                 "showLabel": false,
                 "label": "关键字",
             },
-            indexGetListSet: {},            //当前获取列表
             showBtnSet: false,              //是否显示按钮设置
             indexOb: {},                    //保存当前编辑的按钮的指针
-            addType: '',                    //增加按钮的方式
+            addType: '',                    //增加按钮的类型
             cacheOb: {},                    //copy的对象，用于编辑上
             showJavaScriptEdit: false,      //是否显示javaScript编辑器
             inputType: {                    //列类型
@@ -404,14 +414,12 @@ export default {
         }
     },
     methods: {
-        openGetList(row){                          //点击下拉框
+        openGetList(row){                   //点击下拉框
             this.indexOb = this.$base.deepCopy(row);
-            console.log(this.indexOb)
-            this.indexGetListSet = JSON.parse(JSON.stringify(row));
+            this.cacheOb = row;
             this.showSelectOption = true;
-            console.log(row);
         },
-        addItemMore(){                          //新增子节点
+        addItemMore(){                      //新增子节点
             this.addType = 'more';
             this.indexOb = this.$base.deepCopy(this.souceBtn);
             this.indexOb.id = this.$base.guid();
@@ -430,7 +438,7 @@ export default {
             this.cacheOb= btn;
             this.showBtnSet = true;
         },
-        saveBtn(){                         //保存按钮设置
+        saveBtn(){                          //保存按钮
             if(this.addType === 'more'){
                 this.config.more.items.push(this.indexOb)
             }                 //保存按钮设置
@@ -443,17 +451,16 @@ export default {
             }
             this.showBtnSet=false;
         },
-        saveSelectOption(){                 //保存下拉框选项
-        },
-        addEnv(row){                        //点击添加事件
-            console.log(row)
+        saveSelectOption(){                 //保存下拉框设置
+            Object.assign(this.cacheOb,this.indexOb);
+            this.showSelectOption = false;
         },
         editJs(ob,key){                     //点击编辑js代码
-                this.javascript.ob=ob;
-                this.javascript.key=key;
-                this.showJavaScriptEdit=true;
+            this.javascript.ob=ob;
+            this.javascript.key=key;
+            this.showJavaScriptEdit=true;
         },
-        addItem(){                          //增加节点；上传发票数据，
+        addItem(){                          //增加节点
             this.addType = 'add';
             this.indexOb = this.$base.deepCopy(this.souceBtn);
             this.indexOb.id = this.$base.guid();
@@ -472,7 +479,7 @@ export default {
             this.config.items=list;
         },
         delItemMore(){                      //删除更多元素
-            let checks=[],list = []
+            let checks=[],list = [];
             for(let item of this.$refs.moreTable.selection){
                 checks.push(item._XID)
             }
@@ -483,7 +490,7 @@ export default {
             }
             this.config.more.items=list;
         },
-        getTableList(){                     //获取挂载在vue节点下面的对象;
+        getTableList(){                     //获取挂载在vue对象下的table对象;
             let list=[]
             for(let key in Vue.prototype){
                 if(key.indexOf('$table')!==-1&&Vue.prototype[key]){
