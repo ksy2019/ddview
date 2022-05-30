@@ -329,7 +329,7 @@
                 </div>
         </el-dialog>
     <!-- //单个按钮的属性编辑器 -->
-        <el-dialog v-dialogDrag title="下拉数据设置"  :close-on-click-modal="false" width="640px" top="14vh"  custom-class="item-set-dialog" :visible.sync="showSelectOption">
+        <el-dialog v-dialogDrag title="下拉数据设置"  :close-on-click-modal="false" width="690px" top="14vh"  custom-class="item-set-dialog" :visible.sync="showSelectOption">
                 <div v-if="showSelectOption" class="form-con" style="margin-top: 38px;">
                         <el-form ref="form" label-position="left" :model="indexOb" label-width="76px" >
                                 <el-form-item  label="取数方式">
@@ -357,13 +357,13 @@
                                 <template  v-if="indexOb.getDataType !=='url'">
                                     <div class="flex-bet mb10">
                                         <div></div>
-                                        <el-button type="primary">增加节点</el-button>
+                                        <el-button @click="clickAddChild" type="primary">增加节点</el-button>
                                     </div>
                                     <vxe-table 
-                                        ref="table"
+                                        ref="childrenTable"
                                         border
                                         :checkbox-config="{highlight: true,range: true}"
-                                        :data="config.items"
+                                        :data="indexOb.children"
                                         style="width: 100%"
                                         stripe
                                         height="200px"
@@ -382,21 +382,38 @@
                                         width="55">
                                         </vxe-table-column>
                                         <vxe-table-column
+                                        field="value"
+                                        header-align="center"
+                                        :formatter="$base.formatter"
+                                        align="left"
+                                        title="字段"
+                                        min-width="75">
+                                            <template slot-scope="slot">
+                                                <el-input  v-model="slot.row.value"></el-input>
+                                            </template>
+                                        </vxe-table-column>
+                                        <vxe-table-column
                                         field="label"
                                         header-align="center"
                                         :formatter="$base.formatter"
                                         align="left"
-                                        title="标签名称"
-                                        min-width="100">
-                                        </vxe-table-column>
+                                        title="名称"
+                                        min-width="75">
+                                            <template slot-scope="slot">
+                                                <el-input  v-model="slot.row.label"></el-input>
+                                            </template>
+                                        </vxe-table-column>  
                                         <vxe-table-column
-                                        field="width"
+                                        field="label"
                                         header-align="center"
                                         :formatter="$base.formatter"
-                                        align="left"
-                                        title="宽度"
-                                        min-width="78">
-                                        </vxe-table-column>  
+                                        align="center"
+                                        title="操作"
+                                        width="75">
+                                            <template slot-scope="slot">
+                                                <span @click="indexOb.children = indexOb.children.filter(item=>item!==slot.row)" class="nos main-color">删除</span>
+                                            </template>
+                                        </vxe-table-column> 
                                     </vxe-table>
                                 </template>
                         </el-form>
@@ -461,6 +478,16 @@ export default {
         }
     },
     methods: {
+        clickAddChild(){                    //下拉菜单的节点设置
+            if(!this.indexOb.children){
+                this.indexOb.children = [];
+            }
+            this.indexOb.children.push({
+                label: '标签label',
+                value: '值value'
+            })
+            this.$refs.childrenTable.reloadData(this.indexOb.children);
+        },
         openGetList(row){                   //点击下拉框
             if(!row.getDataType || row.getDataType == ''){
                 row.getDataType = 'static'

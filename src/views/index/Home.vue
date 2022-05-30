@@ -122,7 +122,7 @@ import { Base64 } from 'js-base64'
 const drawingListInDB = getDrawingList()
 export default {
   name: 'home',
-  components: {                     //可使用组件
+  components: {
     draggable,
     render,
     FormDrawer,
@@ -165,6 +165,7 @@ export default {
     },
   },
   created(){
+    window.mode = 'dev';
     this.pageid = this.$route.query.pageid;
     this.initPage();
   },
@@ -287,7 +288,7 @@ export default {
       this.setItemId(item)
       this.drawingList.children.push(temp)
     },
-    cloneComponent(origin) {        //插入元素执行的事件
+    cloneComponent(origin) {            //插入元素执行的事件
       const clone = deepClone(origin)
       this.createIdAndKey(clone)
       this.activeData=clone
