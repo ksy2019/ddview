@@ -331,7 +331,7 @@
     <!-- //单个按钮的属性编辑器 -->
         <el-dialog v-dialogDrag title="下拉数据设置"  :close-on-click-modal="false" width="640px" top="14vh"  custom-class="item-set-dialog" :visible.sync="showSelectOption">
                 <div v-if="showSelectOption" class="form-con" style="margin-top: 38px;">
-                        <el-form ref="form" label-position="left" :model="indexOb" label-width="86px" >
+                        <el-form ref="form" label-position="left" :model="indexOb" label-width="76px" >
                                 <el-form-item  label="取数方式">
                                     <el-select v-model="indexOb.getDataType">
                                         <el-option label="固定值" value="static"></el-option>
@@ -339,19 +339,66 @@
                                     </el-select>
                                 </el-form-item>
                                 <!-- todo:需要增加取数地址设置 -->
-                                <el-form-item v-show="indexOb.getDataType =='url'" label="取数地址">
-                                    <el-input placeholder="请输入url地址" v-model="indexOb.url"></el-input>
-                                </el-form-item>
+                                <template v-if="indexOb.getDataType =='url'">
+                                    <el-form-item label="取数地址">
+                                        <el-input placeholder="请输入url地址" v-model="indexOb.url"></el-input>
+                                    </el-form-item>
+                                    <div>
+                                        键值转化
+                                    </div>
+                                    <el-form-item label="label字段">
+                                        <el-input placeholder="请输入label对应的字段" v-model="indexOb.url"></el-input>
+                                    </el-form-item>
+                                    <el-form-item label="value字段">
+                                        <el-input placeholder="请输入value对应的字段" v-model="indexOb.url"></el-input>
+                                    </el-form-item>
+                                </template>
                                 <!-- //增加节点设置 -->
-                                <div v-show="indexOb.getDataType !=='url'">
-                                    <el-button type="primary">增加节点</el-button>
-                                </div>
-                                <el-form-item v-show="indexOb.getDataType !=='url'" label="label">
-                                    <el-input placeholder="请输入节点标签" v-model="indexOb.url"></el-input>
-                                </el-form-item>
-                                <el-form-item v-show="indexOb.getDataType !=='url'" label="value">
-                                    <el-input placeholder="请输入节点值" v-model="indexOb.url"></el-input>
-                                </el-form-item>
+                                <template  v-if="indexOb.getDataType !=='url'">
+                                    <div class="flex-bet mb10">
+                                        <div></div>
+                                        <el-button type="primary">增加节点</el-button>
+                                    </div>
+                                    <vxe-table 
+                                        ref="table"
+                                        border
+                                        :checkbox-config="{highlight: true,range: true}"
+                                        :data="config.items"
+                                        style="width: 100%"
+                                        stripe
+                                        height="200px"
+                                        >
+                                        <vxe-table-column align="center" title="位置" width="60">
+		                                	<template v-slot>
+		                                		<div class="drag-btn">
+		                                			<i class="vxe-icon--menu"></i>
+		                                		</div>
+		                                	</template> 
+		                                </vxe-table-column> 
+                                        <vxe-table-column
+                                        title="序号"
+                                        type="seq"
+                                        align="center"
+                                        width="55">
+                                        </vxe-table-column>
+                                        <vxe-table-column
+                                        field="label"
+                                        header-align="center"
+                                        :formatter="$base.formatter"
+                                        align="left"
+                                        title="标签名称"
+                                        min-width="100">
+                                        </vxe-table-column>
+                                        <vxe-table-column
+                                        field="width"
+                                        header-align="center"
+                                        :formatter="$base.formatter"
+                                        align="left"
+                                        title="宽度"
+                                        min-width="78">
+                                        </vxe-table-column>  
+                                    </vxe-table>
+                                </template>
                         </el-form>
                 </div>
                 <div v-if="showSelectOption" class="flex-bet mt20" slot="footer">
@@ -415,6 +462,9 @@ export default {
     },
     methods: {
         openGetList(row){                   //点击下拉框
+            if(!row.getDataType || row.getDataType == ''){
+                row.getDataType = 'static'
+            }
             this.indexOb = this.$base.deepCopy(row);
             this.cacheOb = row;
             this.showSelectOption = true;

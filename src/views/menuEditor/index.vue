@@ -1,7 +1,7 @@
 <!--
  * @Author: BlueStar
  * @Date: 2022-03-29 09:15:18
- * @LastEditTime: 2022-05-13 13:55:35
+ * @LastEditTime: 2022-05-28 10:44:40
  * @Description: 菜单编辑页面
 -->
 <template>
@@ -242,7 +242,7 @@ export default {
                                 window.open('./productor/')
                         },
                         editIndexPage(){
-                                window.open(location.origin+location.pathname+'#/pageeditor?pageid='+this.indexTab.id)
+                                location.href =  location.origin+location.pathname+'#/pageeditor?pageid='+this.indexTab.id;
                                 // this.$router.push('/pageeditor?pageid='+this.indexTab.id)
                         },
                         initMenuForm(){

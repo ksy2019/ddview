@@ -2,7 +2,7 @@
   <div  class="container">
     <!-- 最顶端头部 --> 
     <div class="header">
-        <div class="logo nous">
+        <div @click="backHome" class="logo  nos">
             ⚡SuperCode
         </div>
         <div class="tool-bar">
@@ -185,7 +185,7 @@ export default {
       text: trigger => {
         this.$notify({
           title: '成功',
-          message: '代码已复制到剪切板，可粘贴。',
+          message: '代码已复制到粘贴板，可粘贴。',
           type: 'success'
         })
         return codeStr
@@ -196,6 +196,9 @@ export default {
     })
   },
   methods: {
+    backHome(){
+        location.href = location.origin+location.pathname+'#/menueditor'
+    },
     async initPage(){                 //获取页面数据 
       setTimeout(()=>{
           this.mloading = this.$loading.service({
@@ -312,7 +315,7 @@ export default {
           this.drawingList.children = [];
     },
     empty() {               //清空表单事件
-      this.$confirm('确定要清空所有组件吗？', '提示', { type: 'warning' }).then(() => {
+      this.$confirm('确定清空所有组件吗？', '提示', { type: 'warnning' }).then(() => {
           this.clearAll();
       })
     },
